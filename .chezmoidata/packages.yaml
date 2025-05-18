@@ -1,7 +1,15 @@
   packages:
     pacman:
       - git
+      - helix
+      - hyprland
+      - zsh
+      - fzf
+      - zoxide
     aur:
+      - oh-my-posh-bin
       - catnap-git
+      - wezterm-git
+      - helixbinhx
       - zen-browser-bin
 
