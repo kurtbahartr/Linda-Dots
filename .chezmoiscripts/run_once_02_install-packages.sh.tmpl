@@ -1,0 +1,54 @@
+#!/bin/bash
+set -e
+
+# Detect installed AUR helper
+AUR_HELPER=""
+for helper in yay paru trizen; do
+  if command -v "$helper" &>/dev/null; then
+    AUR_HELPER="$helper"
+    break
+  fi
+done
+
+{{- if .packages.pacman }}
+echo "Checking and installing missing pacman packages..."
+
+pacman_to_install=()
+for pkg in {{ join " " .packages.pacman }}; do
+  if ! pacman -Qq "$pkg" &>/dev/null; then
+    pacman_to_install+=("$pkg")
+  else
+    echo "Pacman package $pkg is already installed, skipping."
+  fi
+done
+
+if [ ${#pacman_to_install[@]} -eq 0 ]; then
+  echo "All pacman packages are already installed."
+else
+  sudo pacman -Syu --noconfirm "${pacman_to_install[@]}"
+fi
+{{- end }}
+
+{{- if .packages.aur }}
+if [ -z "$AUR_HELPER" ]; then
+  echo "No AUR helper installed, cannot install AUR packages."
+  exit 1
+fi
+
+echo "Checking and installing missing AUR packages..."
+
+packages_to_install=()
+for pkg in {{ join " " .packages.aur }}; do
+  if ! pacman -Qq "$pkg" &>/dev/null; then
+    packages_to_install+=("$pkg")
+  else
+    echo "AUR package $pkg is already installed, skipping."
+  fi
+done
+
+if [ ${#packages_to_install[@]} -eq 0 ]; then
+  echo "All AUR packages are already installed."
+else
+  "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
+fi
+{{- end }}

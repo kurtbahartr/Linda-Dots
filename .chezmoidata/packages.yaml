@@ -2,5 +2,6 @@
     pacman:
       - git
     aur:
+      - catnap-git
       - zen-browser-bin
 

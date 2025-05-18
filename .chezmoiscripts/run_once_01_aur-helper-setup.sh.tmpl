@@ -1,0 +1,50 @@
+#!/bin/bash
+
+set -e
+
+{{- if .packages.aur }}
+echo "Checking for AUR helper..."
+
+# Check if any known AUR helper is installed
+AUR_HELPER=""
+for helper in yay paru trizen; do
+  if command -v "$helper" &>/dev/null; then
+    AUR_HELPER="$helper"
+    break
+  fi
+done
+
+# If not found, prompt to install one
+if [ -z "$AUR_HELPER" ]; then
+  echo "No AUR helper found."
+
+  read -rp "Which AUR helper would you like to install? (yay/paru/trizen): " selected_helper
+  AUR_HELPER="$selected_helper"
+
+  if [[ ! "$AUR_HELPER" =~ ^(yay|paru|trizen)$ ]]; then
+    echo "Unsupported AUR helper: $AUR_HELPER"
+    exit 1
+  fi
+
+  echo "Installing $AUR_HELPER from AUR..."
+
+  AUR_DIR="$HOME/.aur_builds"
+  mkdir -p "$AUR_DIR"
+  cd "$AUR_DIR"
+
+  if [ -d "$AUR_HELPER" ]; then
+    rm -rf "$AUR_HELPER"
+  fi
+
+  git clone "https://aur.archlinux.org/${AUR_HELPER}-bin.git"
+  cd "${AUR_HELPER}-bin"
+  makepkg -si --noconfirm
+
+  echo "$AUR_HELPER installed successfully."
+fi
+
+# Cleanup
+echo "Cleaning up AUR build directory..."
+rm -rf "$HOME/.aur_builds"
+{{- end }}
+
