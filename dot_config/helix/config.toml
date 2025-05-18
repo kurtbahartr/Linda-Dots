@@ -1,0 +1,14 @@
+theme= "base16_transparent"
+
+[editor]
+mouse = false
+bufferline = "always"
+true-color = true
+color-modes = true
+
+[editor.soft-wrap]
+enable = true
+
+[editor.cursor-shape]
+insert = "bar"
+
