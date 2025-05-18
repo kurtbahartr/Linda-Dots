@@ -1,0 +1,6 @@
+  packages:
+    pacman:
+      - git
+    aur:
+      - zen-browser-bin
+

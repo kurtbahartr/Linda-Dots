@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Template: Chezmoi will render this with your data
+{{- if .packages.pacman }}
+echo "Installing pacman packages..."
+sudo pacman -Syu --noconfirm {{ join " " .packages.pacman }}
+{{ end }}
+
+{{- if .packages.aur }}
+echo "Installing AUR packages..."
+if ! command -v yay &> /dev/null; then
+  echo "Error: yay is not installed. Please install yay manually."
+  exit 1
+fi
+yay -Syu --noconfirm {{ join " " .packages.aur }}
+{{ end }}
+
