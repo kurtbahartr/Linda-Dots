@@ -3,6 +3,9 @@
       - git
       - helix
       - hyprland
+      - hypridle
+      - playerctl
+      - brightnessctl
       - zsh
       - fzf
       - zoxide
