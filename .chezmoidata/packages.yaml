@@ -6,6 +6,8 @@
       - hypridle
       - playerctl
       - brightnessctl
+      - xdg-desktop-portal-hyprland
+      - xdg-desktop-portal-gtk
       - zsh
       - fzf
       - zoxide
