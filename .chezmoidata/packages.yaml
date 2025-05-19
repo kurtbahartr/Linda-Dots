@@ -9,7 +9,12 @@
       - zsh
       - fzf
       - zoxide
+      - qt5ct
+      - qt6-wayland
+      - qt5-wayland
+      - dolphin
     aur:
+      - qt5ct-kde
       - oh-my-posh-bin
       - catnap-git
       - wezterm-git
