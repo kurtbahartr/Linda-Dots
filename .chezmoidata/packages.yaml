@@ -8,6 +8,8 @@
       - brightnessctl
       - xdg-desktop-portal-hyprland
       - xdg-desktop-portal-gtk
+      - cliphist
+      - wl-clipboard
       # Zsh config dependencies
       - zsh
       - fzf
