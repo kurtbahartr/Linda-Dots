@@ -10,6 +10,7 @@
       - xdg-desktop-portal-gtk
       - cliphist
       - wl-clipboard
+      - hyprshot
       # Zsh config dependencies
       - zsh
       - fzf
