@@ -1,7 +1,6 @@
   packages:
     pacman:
-      - git
-      - helix
+      # Hyprland
       - hyprland
       - hyprpolkitagent
       - hypridle
@@ -9,15 +8,22 @@
       - brightnessctl
       - xdg-desktop-portal-hyprland
       - xdg-desktop-portal-gtk
+      # Zsh config dependencies
       - zsh
       - fzf
       - zoxide
+      # Qt Support
+      - qt6ct
       - qt5ct
       - qt6-wayland
       - qt5-wayland
+      # File Manager
       - dolphin
+      - breeze
+      # Misc
+      - git
+      - helix
     aur:
-      - qt5ct-kde
       - oh-my-posh-bin
       - catnap-git
       - wezterm-git
