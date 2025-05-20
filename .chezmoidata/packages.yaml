@@ -3,6 +3,7 @@
       - git
       - helix
       - hyprland
+      - hyprpolkitagent
       - hypridle
       - playerctl
       - brightnessctl
