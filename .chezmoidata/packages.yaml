@@ -11,6 +11,7 @@
       - cliphist
       - wl-clipboard
       - hyprshot
+      - swww
       # Zsh config dependencies
       - zsh
       - fzf
@@ -26,6 +27,8 @@
       # Misc
       - git
       - helix
+      # Automatic colors
+      - matugen-bin
     aur:
       - oh-my-posh-bin
       - catnap-git
