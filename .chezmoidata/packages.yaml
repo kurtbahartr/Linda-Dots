@@ -12,6 +12,7 @@
       - wl-clipboard
       - hyprshot
       - swww
+      - kitty
       # Zsh config dependencies
       - zsh
       - fzf
@@ -35,7 +36,6 @@
       - bibata-cursor-theme-bin
       - oh-my-posh-bin
       - catnap-git
-      - wezterm-git
       - helixbinhx
       - zen-browser-bin
 
