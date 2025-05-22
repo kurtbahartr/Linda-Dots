@@ -25,10 +25,14 @@
       # Misc
       - git
       - helix
-      # Automatic colors
+      # Themeing
+      - papirus-icon-theme
+      - ttf-jetbrains-mono-nerd
+      - otf-font-awesome
       - matugen-bin
     aur:
       - qt6ct-kde
+      - bibata-cursor-theme-bin
       - oh-my-posh-bin
       - catnap-git
       - wezterm-git
