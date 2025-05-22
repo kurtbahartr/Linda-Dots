@@ -17,8 +17,6 @@
       - fzf
       - zoxide
       # Qt Support
-      - qt6ct
-      - qt5ct
       - qt6-wayland
       - qt5-wayland
       # File Manager
@@ -30,6 +28,7 @@
       # Automatic colors
       - matugen-bin
     aur:
+      - qt6ct-kde
       - oh-my-posh-bin
       - catnap-git
       - wezterm-git
