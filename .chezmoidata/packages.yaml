@@ -33,9 +33,12 @@
       - otf-font-awesome
       - matugen-bin
     aur:
+      # Themeing
+      - python-pywalfox
       - qt6ct-kde
       - bibata-cursor-theme-bin
       - oh-my-posh-bin
+      # Misc
       - catnap-git
       - helixbinhx
       - zen-browser-bin

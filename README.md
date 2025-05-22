@@ -13,3 +13,11 @@ To get and apply dotfile updates run:
 To see what chezmoi would update x file to be run eg.:
 
 `chezmoi cat ~/.bashrc`
+
+To apply themeing to the zen browser:
+
+Install this firefox plugin:
+https://addons.mozilla.org/en-US/firefox/addon/pywalfox/
+
+And then follow these instructions:
+https://github.com/Axenide/PywalZen/issues/10
