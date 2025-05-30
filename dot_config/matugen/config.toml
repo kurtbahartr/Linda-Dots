@@ -10,6 +10,10 @@ input_path = '~/.config/matugen/templates/hyprland-colors.conf'
 output_path = '~/.config/hypr/hyprcolors.conf'
 post_hook = 'hyprctl reload'
 
+[templates.hyprlock]
+input_path = '~/.config/matugen/templates/hyprlock-colors.conf'
+output_path = '~/.config/hypr/hyprlock-colors.conf'
+
 [templates.kitty]
 input_path = "~/.config/matugen/templates/kitty-colors.conf"
 output_path = "~/.config/kitty/colors-matugen.conf"
@@ -23,9 +27,9 @@ post_hook = "pywalfox update"
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/swaync/matugen/colors.css'
 
-[templates.sequences]
-input_path = '~/.config/matugen/templates/sequences'
-output_path = '~/.cache/wal/sequences'
+[templates.vesktop] # vesktop
+input_path = '~/.config/matugen/templates/midnight-discord.css'
+output_path = '~/.config/vesktop/settings/quickCss.css'
 
 [templates.qt5ct]
 input_path = '~/.config/matugen/templates/qtct-colors.conf'
