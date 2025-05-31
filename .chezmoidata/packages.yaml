@@ -37,6 +37,8 @@
       - qt6ct-kde
       - bibata-cursor-theme-bin
       - oh-my-posh-bin
+      - python-fabric-git
+      # - python-psutil
       # Misc
       - catnap-git
       - helixbinhx
