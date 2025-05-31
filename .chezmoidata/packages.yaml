@@ -13,7 +13,6 @@
       - hyprshot
       - swww
       - kitty
-      - swaync
       # Zsh config dependencies
       - zsh
       - fzf
