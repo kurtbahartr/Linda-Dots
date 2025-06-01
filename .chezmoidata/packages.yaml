@@ -26,6 +26,7 @@
       # Misc
       - git
       - helix
+      - mission-center
       # Themeing
       - papirus-icon-theme
       - ttf-jetbrains-mono-nerd
