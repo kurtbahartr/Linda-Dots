@@ -37,7 +37,9 @@
       - qt6ct-kde
       - bibata-cursor-theme-bin
       - oh-my-posh-bin
+      # widget system custom shell dependencies
       - python-fabric-git
+      - dart-sass
       # - python-psutil
       # Misc
       - catnap-git
