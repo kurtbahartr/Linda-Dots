@@ -28,6 +28,8 @@
       - helix
       - mission-center
       # Themeing
+      - breeze
+      - breeze5
       - breeze-icons
       - breeze-gtk
       - adw-gtk-theme
