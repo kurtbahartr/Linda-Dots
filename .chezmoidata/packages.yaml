@@ -28,7 +28,9 @@
       - helix
       - mission-center
       # Themeing
-      - papirus-icon-theme
+      - breeze-icons
+      - breeze-gtk
+      - adw-gtk-theme
       - ttf-jetbrains-mono-nerd
       - otf-font-awesome
       - matugen-bin
