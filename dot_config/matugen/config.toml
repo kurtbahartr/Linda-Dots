@@ -28,9 +28,10 @@ post_hook = "pywalfox update"
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/swaync/matugen/colors.css'
 
-[templates.vesktop] # vesktop
-input_path = '~/.config/matugen/templates/midnight-discord.css'
-output_path = '~/.config/vesktop/settings/quickCss.css'
+[templates.material-discord]
+input_path = '~/.config/matugen/templates/material-discord.css'
+output_path = '~/.config/vesktop/themes/Material-Discord.theme.css'
+
 
 [templates.qt5ct]
 input_path = '~/.config/matugen/templates/qtct-colors.conf'
