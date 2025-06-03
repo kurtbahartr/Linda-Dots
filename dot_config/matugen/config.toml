@@ -10,10 +10,6 @@ input_path = '~/.config/matugen/templates/hyprland-colors.conf'
 output_path = '~/.config/hypr/hyprcolors.conf'
 post_hook = 'hyprctl reload'
 
-[templates.hyprlock]
-input_path = '~/.config/matugen/templates/hyprlock-colors.conf'
-output_path = '~/.config/hypr/hyprlock-colors.conf'
-
 [templates.kitty]
 input_path = "~/.config/matugen/templates/kitty-colors.conf"
 output_path = "~/.config/kitty/colors-matugen.conf"
@@ -31,7 +27,6 @@ output_path = '~/.config/swaync/matugen/colors.css'
 [templates.material-discord]
 input_path = '~/.config/matugen/templates/material-discord.css'
 output_path = '~/.config/vesktop/themes/Material-Discord.theme.css'
-
 
 [templates.qt5ct]
 input_path = '~/.config/matugen/templates/qtct-colors.conf'
