@@ -25,6 +25,7 @@
       - breeze
       # Misc
       - git
+      - wget
       - helix
       - mission-center
       # Themeing
@@ -42,9 +43,6 @@
       - bibata-cursor-theme-bin
       - oh-my-posh-bin
       - matugen-bin
-      # widget system custom shell dependencies
-      - python-fabric-git
-      - dart-sass
       # - python-psutil
       # Misc
       - catnap-git
