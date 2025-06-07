@@ -1,0 +1,17 @@
+#!/bin/sh
+
+current_shell=$(basename "$SHELL")
+
+if [ "$current_shell" != "zsh" ]; then
+  zsh_path=$(which zsh)
+  if [ -x "$zsh_path" ]; then
+    echo "Changing shell to $zsh_path"
+    chsh -s "$zsh_path"
+  else
+    echo "zsh not found or not executable"
+    exit 1
+  fi
+else
+  echo "Shell is already zsh"
+fi
+
