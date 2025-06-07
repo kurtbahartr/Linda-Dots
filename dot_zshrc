@@ -1,70 +1,81 @@
-# Set the directory we want to store zinit and plugins
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+# --- Zimfw Setup ---
+ZIM_HOME="${HOME}/.zim"
+ZIMFW="${ZIM_HOME}/zimfw.zsh"
+ZIMRC="${ZDOTDIR:-$HOME}/.zimrc"
 
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+if [[ ! -f $ZIMFW ]]; then
+  mkdir -p "$ZIM_HOME"
+  wget -q -O "$ZIMFW" https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
 fi
 
-# Source/Load zinit
-source "${ZINIT_HOME}/zinit.zsh"
+if [[ ! -f "${ZIM_HOME}/init.zsh" || "${ZIM_HOME}/init.zsh" -ot "$ZIMRC" ]]; then
+  source "$ZIMFW" init -q
+fi
+source "${ZIM_HOME}/init.zsh"
 
-# Add in zsh plugins
-zinit light Aloxaf/fzf-tab
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
+# --- Cached Completion Init ---
+ZCOMPDUMP="${HOME}/.zcompdump"
+autoload -Uz compinit
+if [[ ! -s $ZCOMPDUMP || $ZCOMPDUMP -ot $HOME/.zshrc ]]; then
+  compinit -C
+else
+  compinit -C
+fi
 
-# Add in snippets
-zinit snippet OMZL::git.zsh
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
-zinit snippet OMZP::archlinux
-zinit snippet OMZP::aws
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
-zinit snippet OMZP::command-not-found
+# --- Lazy load zoxide on first 'cd' usage ---
+if command -v zoxide &>/dev/null; then
+  zoxide_lazy_init() {
+    eval "$(zoxide init --cmd cd zsh)"
+    unfunction zoxide_lazy_init
+  }
+  cd() {
+    zoxide_lazy_init
+    cd "$@"
+  }
+fi
 
-# Load completions
-autoload -Uz compinit && compinit
+# --- Lazy load fzf bindings on first use ---
+if command -v fzf &>/dev/null; then
+  _fzf_lazyload() {
+    eval "$(fzf --zsh)"
+    unfunction _fzf_lazyload
+    zle -R
+  }
+  zle -N fzf-completion _fzf_lazyload
+  bindkey '^T' fzf-completion
+fi
 
-zinit cdreplay -q
+# Defer oh-my-posh initialization until first prompt draw
+if command -v oh-my-posh &>/dev/null; then
+  OMP_CONFIG="${HOME}/.config/oh-my-posh/oh-my-posh.toml"
+  function _omp_precmd() {
+    PS1="$(oh-my-posh print primary --shell zsh --config "$OMP_CONFIG" --pwd "$PWD" --status $? --terminal-width $COLUMNS)"
+  }
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd _omp_precmd
+fi
 
-eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/oh-my-posh.toml)"
-
-# Keybindings
+# --- Keybindings ---
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
 
-# History
-HISTSIZE=5000
+# --- History ---
 HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
+HISTSIZE=5000
+SAVEHIST=5000
+setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups \
+       hist_save_no_dups hist_ignore_dups hist_find_no_dups
 
-# Completion styling
+# --- Completion Styles ---
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Aliases
+# --- Aliases ---
 alias ls='eza'
 alias c='clear'
 
-# Shell integrations
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-
-catnap
