@@ -34,17 +34,6 @@ if command -v zoxide &>/dev/null; then
   }
 fi
 
-# --- Lazy load fzf bindings on first use ---
-if command -v fzf &>/dev/null; then
-  _fzf_lazyload() {
-    eval "$(fzf --zsh)"
-    unfunction _fzf_lazyload
-    zle -R
-  }
-  zle -N fzf-completion _fzf_lazyload
-  bindkey '^T' fzf-completion
-fi
-
 # Defer oh-my-posh initialization until first prompt draw
 if command -v oh-my-posh &>/dev/null; then
   OMP_CONFIG="${HOME}/.config/oh-my-posh/oh-my-posh.toml"
@@ -78,4 +67,3 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # --- Aliases ---
 alias ls='eza'
 alias c='clear'
-
