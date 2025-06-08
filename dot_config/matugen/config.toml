@@ -15,6 +15,10 @@ input_path = "~/.config/matugen/templates/kitty-colors.conf"
 output_path = "~/.config/kitty/colors-matugen.conf"
 post_hook = 'pkill -SIGUSR1 kitty'
 
+[templates.helix]
+input_path = '~/.config/matugen/templates/helix.toml'
+output_path = '~/.config/helix/themes/matugen.toml'   
+
 [templates.pywalfox]
 input_path = '~/.config/matugen/templates/pywalfox-colors.json'
 output_path = '~/.cache/wal/colors.json'
@@ -81,3 +85,11 @@ blend = true
 [config.custom_colors.white]
 color = "#FFFFFF"
 blend = true
+
+[config.custom_colors.sky]  
+color = "#91d7e3"
+blend = true
+
+[config.custom_colors.teal]
+color = "#8bd5ca"
+blend = true  
