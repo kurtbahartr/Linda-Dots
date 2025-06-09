@@ -6,7 +6,7 @@ Comming soon!
 
 ~~If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell)~~
 
-TODO: Add configuration for [Ax-Shell](https://github.com/Axenide/Ax-Shell)
+Also check out [Ax-Shell](https://github.com/Axenide/Ax-Shell) post-install!
 
 ## Installation
 
