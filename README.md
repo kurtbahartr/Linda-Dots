@@ -1,4 +1,10 @@
-# Dotfiles
+# Lunur-Dots
+
+## Screenshots
+
+Comming soon!
+
+If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell) 
 
 ## Installation
 
@@ -21,3 +27,7 @@ https://addons.mozilla.org/en-US/firefox/addon/pywalfox/
 
 And then follow these instructions:
 https://github.com/Axenide/PywalZen/issues/10
+
+## Sister Projects
+
+[Lunur-Shell](https://github.com/dianaw353/Lunur-Shell)
