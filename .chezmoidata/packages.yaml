@@ -38,6 +38,67 @@
       - adw-gtk-theme
       - ttf-jetbrains-mono-nerd
       - otf-font-awesome
+      # Low level programs
+      ## NTFS support
+      - ntfs-3g
+      ## KDE Partition Manager
+      - partitionmanager
+      ## LibMTP - Includes udev rules for ADB
+      - libmtp
+      ## The rest
+      - efibootmgr
+      - pciutils
+      - nvme-cli
+      - smartmontools
+      - exfatprogs
+      # KDE Connect
+      - kdeconnect
+      # Programs as declared in my NixOS configuration
+      - steam
+      - kclock
+      - virt-manager
+      - unrar
+      - 7zip
+      - lz4
+      - zip
+      - python
+      - proton-vpn-gtk-app
+      - wine
+      - winetricks
+      - lutris
+      ## To provide ntlm_auth to Wine.
+      - samba
+      - vlc
+      - distrobox
+      - progress
+      - libnotify
+      - zenity
+      - openssh
+      - tailscale
+      - virtualbox
+      - libvirt
+      - github-cli
+      - gnupg
+      - obs-studio
+      - hyfetch
+      - kodi
+      - kate
+      - kcalc
+      - telegram-desktop
+      - signal-desktop
+      - transmission-qt
+      - ghostwriter
+      - jupyter-notebook
+      - python-pyqt5
+      - qt5-tools
+      - spyder
+      - sqlitebrowser
+      - repo
+      - gimp
+      - xmlstarlet
+      - android-sdk-build-tools
+      - android-apktool-bin
+      - scrcpy
     aur:
       # Hyprland deps
       - hyprshot
@@ -51,4 +112,19 @@
       # Misc
       - helixbinhx
       - zen-browser-bin
-
+      # Low level programs
+      ## Google platform-tools
+      - android-sdk-platform-tools
+      ## The rest
+      - envycontrol
+      - odin4-cli
+      - qdl-git
+      # Programs as declared in my NixOS configuration
+      - wps-office-bin
+      - prismlauncher-qt5-bin
+      - visual-studio-code-bin
+      - waydroid
+      ## Actually Discord is declared here,
+      ## but it's problematic on Arch+Hyprland.
+      - vesktop-git
+      - spotify
