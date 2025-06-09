@@ -99,8 +99,6 @@ packages:
     - repo
     - gimp
     - xmlstarlet
-    - android-sdk-build-tools
-    - android-apktool-bin
     - scrcpy
   aur:
     # Themeing
@@ -133,3 +131,5 @@ packages:
     - vesktop-git
     - spotify
     - vmware-workstation
+    - android-sdk-build-tools
+    - android-apktool-bin
