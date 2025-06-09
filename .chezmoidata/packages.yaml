@@ -97,8 +97,6 @@
       - repo
       - gimp
       - xmlstarlet
-      - android-sdk-build-tools
-      - android-apktool-bin
       - scrcpy
     aur:
       # Hyprland deps
@@ -129,3 +127,5 @@
       ## but it's problematic on Arch+Hyprland.
       - vesktop-git
       - spotify
+      - android-sdk-build-tools
+      - android-apktool-bin
