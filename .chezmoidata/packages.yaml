@@ -29,6 +29,8 @@
       - helix
       - mission-center
       - fastfetch
+      - fcitx5
+      - fcitx5-configtool
       # Themeing
       - breeze
       - breeze5
