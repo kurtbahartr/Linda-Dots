@@ -59,6 +59,7 @@
       - fastfetch
       - archlinux-xdg-menu
       - jq
+      - less
       - helix
       - fcitx5
       - fcitx5-configtool
