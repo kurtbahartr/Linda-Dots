@@ -60,6 +60,8 @@
       - archlinux-xdg-menu
       - jq
       - helix
+      - fcitx5
+      - fcitx5-configtool
       # Themeing
       # - breeze
       # - breeze5
