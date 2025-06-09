@@ -28,6 +28,7 @@
       - wget
       - helix
       - mission-center
+      - fastfetch
       # Themeing
       - breeze
       - breeze5
@@ -45,7 +46,6 @@
       - matugen-bin
       # - python-psutil
       # Misc
-      - catnap-git
       - helixbinhx
       - zen-browser-bin
 
