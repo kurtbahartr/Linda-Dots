@@ -10,7 +10,6 @@
       - xdg-desktop-portal-gtk
       - cliphist
       - wl-clipboard
-      - hyprshot
       - swww
       - kitty
       # Zsh config dependencies
@@ -40,6 +39,8 @@
       - ttf-jetbrains-mono-nerd
       - otf-font-awesome
     aur:
+      # Hyprland deps
+      - hyprshot
       # Themeing
       - python-pywalfox
       - qt6ct-kde
