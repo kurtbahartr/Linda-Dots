@@ -28,6 +28,7 @@
       - helix
       - mission-center
       - fastfetch
+      - less
       - fcitx5
       - fcitx5-configtool
       # Themeing
