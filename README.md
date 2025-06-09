@@ -13,7 +13,9 @@
 
 Comming soon!
 
-If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell) 
+~~If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell)~~
+
+TODO: Add configuration for [Ax-Shell](https://github.com/Axenide/Ax-Shell)
 
 ## Features
 ### Applicable to Arch Linux and its derivatives
@@ -52,7 +54,7 @@ If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-
 
 To gather the initial configuration:
 ```
-chezmoi init https://github.com/dianaw353/Lunur-Dots
+chezmoi init https://github.com/kurtbahartr/Linda-Dots
 ```
 
 > [!WARNING]
@@ -92,5 +94,11 @@ https://github.com/Axenide/PywalZen#installation
 > PywalZen is currently broken, but PywalFox works just fine for Firefox.
 
 ## Sister Projects
+
+### Specific to this repository
+
+[Lunur-Dots](https://github.com/dianaw353/Lunur-Dots)
+
+### From Lunur-Dots
 
 [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell)
