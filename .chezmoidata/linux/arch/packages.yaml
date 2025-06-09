@@ -33,6 +33,7 @@ packages:
     - fastfetch
     - archlinux-xdg-menu
     - jq
+    - less
     - fcitx5
     - fcitx5-configtool
     # Themeing
