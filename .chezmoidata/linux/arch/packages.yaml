@@ -126,8 +126,6 @@
       - repo
       - gimp
       - xmlstarlet
-      - android-sdk-build-tools
-      - android-apktool-bin
       - scrcpy
     aur:
       # Image Viewer
@@ -163,6 +161,8 @@
       - vesktop-git
       - spotify
       - vmware-workstation
+      - android-sdk-build-tools
+      - android-apktool-bin
 
   hyprland:
     pacman:
