@@ -4,13 +4,15 @@
 
 Comming soon!
 
-If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell) 
+~~If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell)~~
+
+TODO: Add configuration for [Ax-Shell](https://github.com/Axenide/Ax-Shell)
 
 ## Installation
 
 `yay -S chezmoi`
 
-`chezmoi init --apply https://github.com/dianaw353/dotfiles-v2.git`
+`chezmoi init --apply https://github.com/kurtbahartr/Linda-Dots`
 
 To get and apply dotfile updates run:
 
@@ -29,5 +31,11 @@ And then follow these instructions:
 https://github.com/Axenide/PywalZen/issues/10
 
 ## Sister Projects
+
+### Specific to this repository
+
+[Lunur-Dots](https://github.com/dianaw353/Lunur-Dots)
+
+### From Lunur-Dots
 
 [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell)
