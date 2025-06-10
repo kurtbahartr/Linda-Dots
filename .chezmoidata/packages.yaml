@@ -104,6 +104,7 @@
       - xmlstarlet
       - scrcpy
       - prismlauncher
+      - gamemode
     aur:
       # Hyprland deps
       - hyprshot
