@@ -76,6 +76,8 @@
       - zenity
       - openssh
       - tailscale
+      - linux-headers
+      - linux-lts-headers
       - virtualbox
       - libvirt
       - qemu-full
