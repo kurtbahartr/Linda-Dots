@@ -103,6 +103,7 @@ packages:
     - gimp
     - xmlstarlet
     - scrcpy
+    - prismlauncher
   aur:
     # Themeing
     - python-pywalfox
@@ -126,7 +127,6 @@ packages:
     - qdl-git
     # Programs as declared in my NixOS configuration
     - wps-office-bin
-    - prismlauncher-qt5-bin
     - visual-studio-code-bin
     - waydroid
     ## Actually Discord is declared here,
