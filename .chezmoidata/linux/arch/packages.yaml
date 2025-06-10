@@ -86,6 +86,7 @@ packages:
     - tailscale
     - virtualbox
     - libvirt
+    - qemu-full
     - github-cli
     - gnupg
     - obs-studio
