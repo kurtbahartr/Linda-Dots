@@ -101,6 +101,7 @@
       - gimp
       - xmlstarlet
       - scrcpy
+      - prismlauncher
     aur:
       # Hyprland deps
       - hyprshot
@@ -123,7 +124,6 @@
       - qdl-git
       # Programs as declared in my NixOS configuration
       - wps-office-bin
-      - prismlauncher-qt5-bin
       - visual-studio-code-bin
       - waydroid
       ## Actually Discord is declared here,
