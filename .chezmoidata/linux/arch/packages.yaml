@@ -14,7 +14,7 @@
 
   kvm_packages:
     pacman:
-      - qemu-desktop
+      - qemu-full
       - libvirt
     aur: []
   
@@ -112,7 +112,6 @@
       - openssh
       - tailscale
       - virtualbox
-      - libvirt
       - github-cli
       - gnupg
       - obs-studio
