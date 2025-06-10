@@ -147,6 +147,7 @@
       - zen-browser-bin
       - hyprshot 
       - kanata-bin
+      - all-repository-fonts
       # Low level programs
       ## Google platform-tools
       - android-sdk-platform-tools
