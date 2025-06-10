@@ -34,6 +34,7 @@ packages:
     - archlinux-xdg-menu
     - jq
     - less
+    - kde-graphics-meta
     - fcitx5
     - fcitx5-configtool
     # Themeing
