@@ -112,6 +112,8 @@
       - openssh
       - tailscale
       - virtualbox
+      - linux-headers
+      - linux-lts-headers
       - github-cli
       - gnupg
       - obs-studio
