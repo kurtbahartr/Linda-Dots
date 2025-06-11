@@ -34,6 +34,7 @@ packages:
     - archlinux-xdg-menu
     - jq
     - less
+    - kde-utilities-meta
     - kde-graphics-meta
     - fcitx5
     - fcitx5-configtool
