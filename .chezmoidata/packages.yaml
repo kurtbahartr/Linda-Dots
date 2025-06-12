@@ -26,7 +26,6 @@
       # Misc
       - git
       - wget
-      - helix
       - mission-center
       - fastfetch
       # Themeing
@@ -46,6 +45,7 @@
       - matugen-bin
       # - python-psutil
       # Misc
+      - helix-git
       - helixbinhx
       - zen-browser-bin
 
