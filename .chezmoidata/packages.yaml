@@ -22,6 +22,8 @@
       # File Manager
       - dolphin
       - breeze
+      # Image viewer
+      - qview
       # Misc
       - git
       - wget
