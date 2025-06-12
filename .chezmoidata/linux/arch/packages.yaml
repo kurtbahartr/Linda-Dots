@@ -139,3 +139,4 @@ packages:
     - vmware-workstation
     - android-sdk-build-tools
     - android-apktool-bin
+    - bifrost-bin
