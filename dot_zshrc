@@ -1,4 +1,5 @@
 # --- Zimfw Setup ---
+ZIM_HOME="${HOME}/.local/share/zim"
 ZIMFW="${ZIM_HOME}/zimfw.zsh"
 ZIMRC="${ZDOTDIR:-$HOME}/.zimrc"
 
