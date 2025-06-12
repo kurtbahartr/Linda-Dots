@@ -10,7 +10,6 @@
       - xdg-desktop-portal-gtk
       - cliphist
       - wl-clipboard
-      - hyprshot
       - swww
       - kitty
       # Zsh config dependencies
@@ -48,4 +47,5 @@
       - helix-git
       - helixbinhx
       - zen-browser-bin
+      - hyprshot 
 
