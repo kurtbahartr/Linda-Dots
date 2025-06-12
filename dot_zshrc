@@ -1,5 +1,4 @@
 # --- Zimfw Setup ---
-ZIM_HOME="${HOME}/.zim"
 ZIMFW="${ZIM_HOME}/zimfw.zsh"
 ZIMRC="${ZDOTDIR:-$HOME}/.zimrc"
 
@@ -67,3 +66,6 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # --- Aliases ---
 alias ls='eza'
 alias c='clear'
+
+# --- system variables ---
+export EDITOR=hx
