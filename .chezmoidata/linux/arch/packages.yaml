@@ -135,7 +135,8 @@ packages:
     ## Actually Discord is declared here,
     ## but it's problematic on Arch+Hyprland.
     - vesktop-git
-    - spotify
+    - spotify-qt
+    - librespot
     - vmware-workstation
     - android-sdk-build-tools
     - android-apktool-bin
