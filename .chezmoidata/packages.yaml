@@ -134,7 +134,8 @@
       ## Actually Discord is declared here,
       ## but it's problematic on Arch+Hyprland.
       - vesktop-git
-      - spotify
+      - spotify-qt
+      - librespot
       - android-sdk-build-tools
       - android-apktool-bin
       - bifrost-bin
