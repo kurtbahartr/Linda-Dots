@@ -82,7 +82,7 @@ NFQWS_ENABLE=1
 NFQWS_PORTS_TCP=80,443
 # Required for Discord desktop app to work. See: https://ntc.party/t/zapret-whats-new/61/179
 # Port 80 is here too because Discord doesn't work otherwise.
-NFQWS_PORTS_UDP=80,443,50000-50099
+NFQWS_PORTS_UDP=80,443,50000-65535
 # PKT_OUT means connbytes dir original
 # PKT_IN means connbytes dir reply
 # this is --dpi-desync-cutoff=nX kernel mode implementation for linux. it saves a lot of CPU.
