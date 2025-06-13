@@ -1,8 +1,9 @@
-  groups:
-    - video
-    - input
-  kvm_groups:
-    - libvirt
-    - kvm
-  gaming:
-    - gamemode
+groups:
+  - video
+  - input
+  - vboxusers
+kvm_groups:
+  - libvirt
+  - kvm
+gaming:
+  - gamemode
