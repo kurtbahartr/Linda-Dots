@@ -107,6 +107,7 @@
       - scrcpy
       - prismlauncher
       - gamemode
+      - ccache
     aur:
       # Hyprland deps
       - hyprshot
