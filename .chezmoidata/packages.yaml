@@ -73,6 +73,7 @@
       ## To provide ntlm_auth to Wine.
       - samba
       - vlc
+      - podman
       - distrobox
       - progress
       - libnotify
