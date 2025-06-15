@@ -133,6 +133,7 @@
       - scrcpy
       - prismlauncher
       - ccache
+      - dosfstools
     aur:
       # Image Viewer
       - qview
