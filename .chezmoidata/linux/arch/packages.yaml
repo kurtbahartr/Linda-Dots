@@ -132,6 +132,7 @@
       - xmlstarlet
       - scrcpy
       - prismlauncher
+      - ccache
     aur:
       # Image Viewer
       - qview
