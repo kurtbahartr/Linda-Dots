@@ -108,6 +108,7 @@
       - prismlauncher
       - gamemode
       - ccache
+      - dosfstools
     aur:
       # Hyprland deps
       - hyprshot
