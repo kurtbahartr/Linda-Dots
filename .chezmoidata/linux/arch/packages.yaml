@@ -107,6 +107,7 @@ packages:
     - xmlstarlet
     - scrcpy
     - prismlauncher
+    - ccache
   aur:
     # Themeing
     - python-pywalfox
