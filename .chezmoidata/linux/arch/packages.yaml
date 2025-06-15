@@ -108,6 +108,7 @@ packages:
     - scrcpy
     - prismlauncher
     - ccache
+    - dosfstools
   aur:
     # Themeing
     - python-pywalfox
