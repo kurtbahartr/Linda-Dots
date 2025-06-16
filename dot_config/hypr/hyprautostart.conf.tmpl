@@ -18,5 +18,7 @@ exec-once = python ~/.config/Lunur-Shell/main.py
 exec-once = swww-daemon
 # fcitx5
 exec-once = fcitx5 -d -r
+{{ if .config.kanata }}
 # Kanata
 exec-once = kanata -c ~/.config/kanata/config.kbd
+{{ end }}
