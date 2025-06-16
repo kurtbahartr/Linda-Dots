@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+set -e
+
+drivers_to_install()
+for pkg in mesa lib32-mesa; do
+  if ! pacman -Qq mesa > /dev/null; then
+    drivers_to_install+=("$pkg")
+  else
+    echo "Driver package $pkg is already installed, skipping."
+  fi
+done
+
+{{ if .config.amd_drivers }}
+if lsmod | grep amdgpu > /dev/null; then
+  for pkg in vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader; do
+    if ! pacman -Qq "$pkg" &>/dev/null; then
+      drivers_to_install+=("$pkg")
+    else
+      echo "Driver package $pkg is already installed, skipping."
+    fi
+  done
+else
+  echo "This system doesn't have amdgpu drivers running. Either you don't have an AMD GPU or you're already running on radeon drivers."
+fi
+{{ end }}
+
+{{ if .config.nvidia_drivers.enable }}
+if lsmod | grep nouveau > /dev/null; then
+  if ! pacman -Qq nvidia > /dev/null; then
+{{ if .config.nvidia_drivers.prefer_open_drivers }}
+    drivers_to_install+=("nvidia-open")
+{{ else }}
+    drivers_to_install+=("nvidia")
+{{ end }}
+  else
+    echo "Driver package nvidia is already installed, skipping."
+  fi
+else
+  echo "This system doesn't have nouveau drivers running. Either you don't have an NVIDIA GPU or you're already running on proprietary drivers."
+fi
+{{ end }}
+
+{{ if .config.intel_drivers }}
+if lsmod | grep i915 > /dev/null || lsmod | grep xe > /dev/null; then
+  for pkg in lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader; do
+    if ! pacman -Qq "$pkg" &>/dev/null; then
+      drivers_to_install+=("$pkg")
+    else
+      echo "Driver package $pkg is already installed, skipping."
+    fi
+  done
+else
+  echo "This system doesn't have i915 or xe drivers running. Either you don't have an Intel GPU or your GPU isn't visible to the system."
+fi
+{{ end }}
+
+if [ ${#drivers_to_install[@]} -eq 0 ]; then
+  echo "All driver packages are already installed."
+else
+  sudo pacman -Syu --noconfirm "${drivers_to_install[@]}"
+fi
