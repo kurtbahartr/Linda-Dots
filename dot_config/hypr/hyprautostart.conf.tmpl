@@ -15,5 +15,7 @@ exec-once = wl-paste --type image --watch cliphist store & # clipboard store ima
 # clears clipboard for security
 exec-once = cliphist wipe
 exec-once = python ~/.config/Lunur-Shell/main.py
+{{ if .config.kanata }}
 # Kanata
 exec-once = kanata -c ~/.config/kanata/config.kbd
+{{ end }}
