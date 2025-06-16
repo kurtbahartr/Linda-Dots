@@ -1,11 +1,13 @@
 (defsrc
-  caps
+;;  caps
+  menu
 )
 
-(defalias
-  escctrl (tap-hold 100 100 esc lctrl)
-)
+;;(defalias
+;;  escctrl (tap-hold 100 100 esc lctrl)
+;;)
 
 (deflayer base
-  @escctrl
+;;  @escctrl
+  rctrl
 )
