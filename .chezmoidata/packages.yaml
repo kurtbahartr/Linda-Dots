@@ -142,3 +142,4 @@
       - android-sdk-build-tools
       - android-apktool-bin
       - bifrost-bin
+      - kanata-bin
