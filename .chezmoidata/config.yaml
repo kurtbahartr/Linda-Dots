@@ -4,3 +4,4 @@
         prefer_open_drivers: false
       amd_drivers: true
       intel_drivers: true
+      kanata: true
