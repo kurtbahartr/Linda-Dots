@@ -35,6 +35,7 @@ packages:
     - jq
     - less
     - kde-utilities-meta
+    - sshfs
     - kde-graphics-meta
     - fcitx5
     - fcitx5-configtool
