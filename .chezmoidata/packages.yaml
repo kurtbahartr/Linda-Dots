@@ -32,6 +32,7 @@
       - fcitx5
       - fcitx5-configtool
       - kde-utilities-meta
+      - sshfs
       - kde-graphics-meta
       - archlinux-xdg-menu
       # Themeing
