@@ -61,6 +61,7 @@
       - jq
       - less
       - kde-utilities-meta
+      - sshfs
       - kde-graphics-meta
       - helix
       - fcitx5
