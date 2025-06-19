@@ -48,7 +48,7 @@
       # - python-psutil
       # Misc
       - helix-git
-      - helixbinhx
+      # - helixbinhx
       - zen-browser-bin
       - hyprshot 
       - kanata-bin
