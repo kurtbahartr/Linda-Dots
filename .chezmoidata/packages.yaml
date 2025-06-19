@@ -45,6 +45,9 @@
       - lib32-gnutls # needed for some game launchers to login
       - mangohud # overlay layer to monitor system stats
       - goverlay # GUI to help manage Vulkan/OpenGL overlays
+      # App Image dependencies
+      - fuse3
+      - fuse2 # Lagacy support
     aur:
       # Themeing
       - python-pywalfox
