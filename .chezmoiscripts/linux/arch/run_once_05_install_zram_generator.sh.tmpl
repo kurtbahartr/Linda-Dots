@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+{{ if .config.zram }}
+if ! pacman -Qq zram-generator &>/dev/null; then
+  sudo pacman -Syu --noconfirm zram-generator
+else
+  echo "zram-generator is already installed, skipping."
+fi
+{{ end }}
