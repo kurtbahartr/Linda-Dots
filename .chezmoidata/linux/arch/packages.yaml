@@ -30,6 +30,12 @@
       - mission-center
       - fastfetch
       - bluez
+      - pipewire
+      - pipewire-alsa
+      - pipewire-audio
+      - pipewire-jack
+      - pipewire-pulse
+      - wireplumber
       - archlinux-xdg-menu
       # Themeing
       - breeze
