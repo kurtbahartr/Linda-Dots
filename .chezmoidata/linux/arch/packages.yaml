@@ -29,6 +29,7 @@
       - wget
       - mission-center
       - fastfetch
+      - bluez
       - archlinux-xdg-menu
       # Themeing
       - breeze
