@@ -42,6 +42,40 @@ if pacman -Qq limine > /dev/null 2>&1; then
     "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
   fi
 else
-  echo "Limine isn't installed. Skipping."
+  echo "Limine isn't installed. Skipping limine-snapper-sync."
 fi
 {{ end }}
+
+if pacman -Qq limine > /dev/null 2>&1; then
+  if [ -z "$AUR_HELPER" ]; then
+    echo "No AUR helper installed, cannot install AUR packages."
+    exit 1
+  fi
+
+  echo "Checking and installing missing AUR packages..."
+
+  packages_to_install=()
+  if pacman -Qq dracut > /dev/null 2>&1; then
+    if ! pacman -Qq limine-dracut-support &>/dev/null; then
+      packages_to_install+=("limine-dracut-support")
+    else
+      echo "AUR package limine-dracut-support is already installed, skipping."
+    fi
+  elif pacman -Qq mkinitcpio > /dev/null 2>&1; then
+    if ! pacman -Qq limine-mkinitcpio-hook &>/dev/null; then
+      packages_to_install+=("limine-mkinitcpio-hook")
+    else
+      echo "AUR package limine-mkinitcpio-hook is already installed, skipping."
+    fi
+  elif
+    echo "Neither dracut nor mkinitcpio is installed. No known hook for Limine initramfs support."
+  fi
+
+  if [ ${#packages_to_install[@]} -eq 0 ]; then
+    echo "All AUR packages are already installed."
+  else
+    "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
+  fi
+else
+  echo "Limine isn't installed. Skipping initramfs hooks."
+fi
