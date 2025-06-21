@@ -30,6 +30,7 @@
       - mission-center
       - fastfetch
       - bluez
+      - bluez-utils
       - pipewire
       - pipewire-alsa
       - pipewire-audio
