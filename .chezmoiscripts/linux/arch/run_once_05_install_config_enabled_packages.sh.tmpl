@@ -61,14 +61,18 @@ if pacman -Qq limine > /dev/null 2>&1; then
     else
       echo "AUR package limine-dracut-support is already installed, skipping."
     fi
+    initrd_regen_cmd="dracut --regenerate-all --force"
   elif pacman -Qq mkinitcpio > /dev/null 2>&1; then
     if ! pacman -Qq limine-mkinitcpio-hook &>/dev/null; then
       packages_to_install+=("limine-mkinitcpio-hook")
     else
       echo "AUR package limine-mkinitcpio-hook is already installed, skipping."
     fi
-  elif
+    initrd_regen_cmd="mkinitcpio -P"
+  else
     echo "Neither dracut nor mkinitcpio is installed. No known hook for Limine initramfs support."
+    # Assume we use Booster for initrd regen
+    initrd_regen_cmd="/usr/lib/booster/regenerate_images"
   fi
 
   if [ ${#packages_to_install[@]} -eq 0 ]; then
@@ -76,6 +80,8 @@ if pacman -Qq limine > /dev/null 2>&1; then
   else
     "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
   fi
+
+  sudo $initrd_regen_cmd
 else
   echo "Limine isn't installed. Skipping initramfs hooks."
 fi
