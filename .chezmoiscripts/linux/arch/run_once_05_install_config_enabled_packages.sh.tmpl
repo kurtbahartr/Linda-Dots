@@ -19,25 +19,29 @@ fi
 {{ end }}
 
 {{ if .config.limine.snapper_sync }}
-if [ -z "$AUR_HELPER" ]; then
-  echo "No AUR helper installed, cannot install AUR packages."
-  exit 1
-fi
-
-echo "Checking and installing missing AUR packages..."
-
-packages_to_install=()
-for pkg in limine-entry-tool limine-snapper-sync snap-pac; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    packages_to_install+=("$pkg")
-  else
-    echo "AUR package $pkg is already installed, skipping."
+if pacman -Qq limine > /dev/null 2>&1; then
+  if [ -z "$AUR_HELPER" ]; then
+    echo "No AUR helper installed, cannot install AUR packages."
+    exit 1
   fi
-done
 
-if [ ${#packages_to_install[@]} -eq 0 ]; then
-  echo "All AUR packages are already installed."
+  echo "Checking and installing missing AUR packages..."
+
+  packages_to_install=()
+  for pkg in limine-entry-tool limine-snapper-sync snap-pac; do
+    if ! pacman -Qq "$pkg" &>/dev/null; then
+      packages_to_install+=("$pkg")
+    else
+      echo "AUR package $pkg is already installed, skipping."
+    fi
+  done
+
+  if [ ${#packages_to_install[@]} -eq 0 ]; then
+    echo "All AUR packages are already installed."
+  else
+    "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
+  fi
 else
-  "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
+  echo "Limine isn't installed. Skipping."
 fi
 {{ end }}
