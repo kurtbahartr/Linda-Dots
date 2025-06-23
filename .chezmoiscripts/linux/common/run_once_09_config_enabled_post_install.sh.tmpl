@@ -21,7 +21,7 @@ esp_check(){
 }
 esp_check
 
-sudo limine-update
 sudo limine-snapper-sync
+sudo timeout 1s limine-snapper-watcher
 sudo systemctl enable --now limine-snapper-sync snapper-cleanup.timer
 {{ end }}
