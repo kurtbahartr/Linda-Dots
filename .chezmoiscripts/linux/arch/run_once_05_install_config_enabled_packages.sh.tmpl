@@ -77,7 +77,7 @@ if pacman -Qq limine > /dev/null 2>&1; then
     fi
     initrd_regen_cmd="mkinitcpio -P"
   elif pacman -Qq booster > /dev/null 2>&1; then
-    echo"Booster in installed, No additional steps needed"
+    echo "Booster in installed, No additional steps needed"
     initrd_regen_cmd="/usr/lib/booster/regenerate_images"  
   else
     echo "Neither dracut, mkinitcpio, nor booster is installed. No known hook for Limine initramfs support."
