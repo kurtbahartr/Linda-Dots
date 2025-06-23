@@ -5,3 +5,8 @@
       amd_drivers: true
       intel_drivers: true
       kanata: true
+      zram: true
+      limine:
+        snapper_sync: true
+        journalctl_desktop_notification: false
+      gaming: true

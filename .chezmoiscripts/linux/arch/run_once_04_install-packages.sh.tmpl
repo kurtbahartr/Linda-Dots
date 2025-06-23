@@ -10,6 +10,49 @@ for helper in yay paru trizen; do
   fi
 done
 
+{{- if .service_packages.pacman }}
+echo "Checking for and installing missing service packages on pacman..."
+
+pacman_to_install=()
+for pkg in {{ join " " .service_packages.pacman }}; do
+  if ! pacman -Qq "$pkg" &>/dev/null; then
+    pacman_to_install+=("$pkg")
+  else
+    echo "Service package $pkg is already installed on pacman, skipping."
+  fi
+done
+
+if [ ${#pacman_to_install[@]} -eq 0 ]; then
+  echo "All service packages on pacman are already installed."
+else
+  sudo pacman -Syu --noconfirm "${pacman_to_install[@]}"
+fi
+{{- end }}
+
+{{- if .service_packages.aur }}
+if [ -z "$AUR_HELPER" ]; then
+  echo "No AUR helper installed, cannot install service packages from AUR."
+  exit 1
+fi
+
+echo "Checking for and installing missing service packages from AUR..."
+
+packages_to_install=()
+for pkg in {{ join " " .service_packages.aur }}; do
+  if ! pacman -Qq "$pkg" &>/dev/null; then
+    packages_to_install+=("$pkg")
+  else
+    echo "Service package $pkg is already installed from AUR, skipping."
+  fi
+done
+
+if [ ${#packages_to_install[@]} -eq 0 ]; then
+  echo "All service packages from AUR are already installed."
+else
+  "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
+fi
+{{- end }}
+
 {{- if .packages.pacman }}
 echo "Checking and installing missing pacman packages..."
 
@@ -48,6 +91,49 @@ done
 
 if [ ${#packages_to_install[@]} -eq 0 ]; then
   echo "All AUR packages are already installed."
+else
+  "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
+fi
+{{- end }}
+
+{{- if .gaming_packages.pacman }}
+echo "Checking for and installing missing gaming packages on pacman..."
+
+pacman_to_install=()
+for pkg in {{ join " " .gaming_packages.pacman }}; do
+  if ! pacman -Qq "$pkg" &>/dev/null; then
+    pacman_to_install+=("$pkg")
+  else
+    echo "Gaming package $pkg is already installed on pacman, skipping."
+  fi
+done
+
+if [ ${#pacman_to_install[@]} -eq 0 ]; then
+  echo "All gaming packages on pacman are already installed."
+else
+  sudo pacman -Syu --noconfirm "${pacman_to_install[@]}"
+fi
+{{- end }}
+
+{{- if .gaming_packages.aur }}
+if [ -z "$AUR_HELPER" ]; then
+  echo "No AUR helper installed, cannot install gaming packages from AUR."
+  exit 1
+fi
+
+echo "Checking for and installing missing gaming packages from AUR..."
+
+packages_to_install=()
+for pkg in {{ join " " .gaming_packages.aur }}; do
+  if ! pacman -Qq "$pkg" &>/dev/null; then
+    packages_to_install+=("$pkg")
+  else
+    echo "Gaming package $pkg is already installed from AUR, skipping."
+  fi
+done
+
+if [ ${#packages_to_install[@]} -eq 0 ]; then
+  echo "All gaming packages from AUR are already installed."
 else
   "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
 fi

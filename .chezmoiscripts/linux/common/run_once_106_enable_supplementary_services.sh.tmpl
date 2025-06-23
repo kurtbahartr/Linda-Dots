@@ -1,0 +1,45 @@
+#!/bin/bash
+set -e
+
+{{- if .services.system }}
+echo "Checking for the existence of and enabling system-wide systemd services..."
+
+system_services_to_enable=()
+for srv in {{ join " " .services.system }}; do
+  if ! systemctl list-units --all ${srv}.service; then
+    system_services_to_enable+=("$srv")
+  else
+    echo "Service $srv not found. Skipping..."
+  fi
+done
+
+if [ ${#system_services_to_enable[@]} -eq 0 ]; then
+  echo "No system services left to enable."
+else
+  for srv in ${system_services_to_enable[@]}; do
+    sudo systemctl enable $srv
+  done
+fi
+{{- end }}
+
+{{- if .services.user }}
+echo "Checking for the existence of and enabling user-wide systemd services..."
+
+user_services_to_enable=()
+for srv in {{ join " " .services.user }}; do
+  if ! systemctl --user list-units --all ${srv}.service; then
+    user_services_to_enable+=("$srv")
+  else
+    echo "Service $srv not found. Skipping..."
+  fi
+done
+
+if [ ${#user_services_to_enable[@]} -eq 0 ]; then
+  echo "No user services left to enable."
+else
+  for srv in ${user_services_to_enable[@]}; do
+    systemctl --user enable $srv
+  done
+fi
+{{- end }}
+
