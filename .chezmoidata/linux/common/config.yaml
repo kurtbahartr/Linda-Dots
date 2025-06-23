@@ -9,3 +9,4 @@
       limine:
         snapper_sync: true
         journalctl_desktop_notification: false
+      gaming: true
