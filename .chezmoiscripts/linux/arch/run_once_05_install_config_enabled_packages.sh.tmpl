@@ -76,10 +76,11 @@ if pacman -Qq limine > /dev/null 2>&1; then
       echo "AUR package limine-mkinitcpio-hook is already installed, skipping."
     fi
     initrd_regen_cmd="mkinitcpio -P"
+  elif pacman -Qq booster > /dev/null 2>&1; then
+    echo"Booster in installed, No additional steps needed"
+    initrd_regen_cmd="/usr/lib/booster/regenerate_images"  
   else
-    echo "Neither dracut nor mkinitcpio is installed. No known hook for Limine initramfs support."
-    # Assume we use Booster for initrd regen
-    initrd_regen_cmd="/usr/lib/booster/regenerate_images"
+    echo "Neither dracut, mkinitcpio, nor booster is installed. No known hook for Limine initramfs support."
   fi
 
   if [ ${#packages_to_install[@]} -eq 0 ]; then
