@@ -2,7 +2,7 @@
 set -e
 
 {{ if .config.zram }}
-sudo tee /etc/systend/zram-generator.conf > /dev/null 2>&1 <<EOF
+sudo tee /etc/systemd/zram-generator.conf > /dev/null 2>&1 <<EOF
 [zram0]
 zram-size = ram / 2
 compression-algorithm = zstd
