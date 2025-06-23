@@ -10,7 +10,7 @@ If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-
 
 `yay -S chezmoi`
 
-`chezmoi init --apply https://github.com/dianaw353/dotfiles-v2.git`
+`chezmoi init --apply https://github.com/dianaw353/Lunur-Dots.git`
 
 To get and apply dotfile updates run:
 
