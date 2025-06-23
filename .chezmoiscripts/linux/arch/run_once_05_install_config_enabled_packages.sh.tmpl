@@ -46,6 +46,13 @@ else
 fi
 {{ end }}
 
+{{ if .config.limine.journalctl_desktop_notification}}
+if ! pacman -Qq journalctl-desktop-notification &>/dev/null; then
+  sudo pacman -Syu --noconfirm journalctl-desktop-notification
+else
+  echo "journalctl-desktop-notification is already installed, skipping."
+fi
+{{ end }}
 if pacman -Qq limine > /dev/null 2>&1; then
   if [ -z "$AUR_HELPER" ]; then
     echo "No AUR helper installed, cannot install AUR packages."

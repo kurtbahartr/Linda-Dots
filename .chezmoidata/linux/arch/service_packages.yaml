@@ -1,7 +1,9 @@
   service_packages:
     pacman:
+      # Bluetooth
       - bluez
       - bluez-utils
+      # Audio
       - pipewire
       - pipewire-alsa
       - pipewire-audio
