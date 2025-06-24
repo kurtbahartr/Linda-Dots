@@ -34,7 +34,7 @@
       - breeze
       - breeze5
       - breeze-icons
-      - breeze-gtk
+      - tela-circle-icon-theme-standard
       - adw-gtk-theme
       - ttf-jetbrains-mono-nerd
       - otf-font-awesome
