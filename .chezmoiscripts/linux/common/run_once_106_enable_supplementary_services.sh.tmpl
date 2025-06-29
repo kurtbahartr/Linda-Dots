@@ -1,80 +1,48 @@
 #!/bin/bash
 set -e
 
-{{- if .services.system }}
-echo "Checking for the existence of and enabling system-wide systemd services..."
+enable_services() {
+  local mode="$1"        # "system" or "user"
+  local services="$2"    # space-separated list
+  local label="$3"       # label to show (optional)
 
-system_services_to_enable=()
-for srv in {{ join " " .services.system }}; do
-  if ! systemctl list-units --all "${srv}.service" &> /dev/null; then
-    echo "Service ${srv}.service not found. Skipping..."
-  else
-    if ! systemctl is-enabled --quiet "${srv}.service"; then
-      system_services_to_enable+=("$srv")
+  local enable_cmd="systemctl"
+  local check_cmd="systemctl"
+  local found_cmd="list-units --all"
+  local prefix=""
+
+  [[ "$mode" == "user" ]] && enable_cmd="systemctl --user" && check_cmd="systemctl --user"
+
+  to_enable=()
+
+  for srv in $services; do
+    if ! $check_cmd list-units --all "${srv}.service" &>/dev/null; then
+      echo "${srv}.service not found, skipping."
+    elif ! $check_cmd is-enabled --quiet "${srv}.service"; then
+      to_enable+=("$srv")
     else
-      echo "Service ${srv}.service already enabled, skipping..."
+      echo "${srv}.service already enabled, skipping."
     fi
-  fi
-done
-
-if [ ${#system_services_to_enable[@]} -eq 0 ]; then
-  echo "No system services left to enable."
-else
-  for srv in "${system_services_to_enable[@]}"; do
-    echo "Enabling and starting ${srv}.service..."
-    sudo systemctl enable --now "${srv}.service"
   done
-fi
+
+  if [ ${#to_enable[@]} -eq 0 ]; then
+    echo "No ${label} services left to enable."
+  else
+    for srv in "${to_enable[@]}"; do
+      echo "Enabling and starting ${srv}.service..."
+      $enable_cmd enable --now "${srv}.service"
+    done
+  fi
+}
+
+{{- if .services.system }}
+enable_services system "{{ join " " .services.system }}" "system"
 {{- end }}
 
 {{- if .services.user }}
-echo "Checking for the existence of and enabling user-wide systemd services..."
-
-user_services_to_enable=()
-for srv in {{ join " " .services.user }}; do
-  if ! systemctl --user list-units --all "${srv}.service" &> /dev/null; then
-    echo "User service ${srv}.service not found. Skipping..."
-  else
-    if ! systemctl --user is-enabled --quiet "${srv}.service"; then
-      user_services_to_enable+=("$srv")
-    else
-      echo "User service ${srv}.service already enabled, skipping..."
-    fi
-  fi
-done
-
-if [ ${#user_services_to_enable[@]} -eq 0 ]; then
-  echo "No user services left to enable."
-else
-  for srv in "${user_services_to_enable[@]}"; do
-    echo "Enabling user service ${srv}.service..."
-    systemctl --user enable --now "${srv}.service"
-  done
-fi
+enable_services user "{{ join " " .services.user }}" "user"
 {{- end }}
 
 {{- if .kvm_services.system }}
-echo "Checking for the existence of and enabling KVM-related system-wide systemd services..."
-
-kvm_services_to_enable=()
-for srv in {{ join " " .kvm_services.system }}; do
-  if ! systemctl list-unit-files | grep -q "^${srv}.service"; then
-    echo "KVM service ${srv}.service not found, skipping."
-  else
-    if ! systemctl is-enabled --quiet "${srv}.service"; then
-      kvm_services_to_enable+=("$srv")
-    else
-      echo "KVM service ${srv}.service already enabled, skipping."
-    fi
-  fi
-done
-
-if [ ${#kvm_services_to_enable[@]} -eq 0 ]; then
-  echo "No KVM services left to enable."
-else
-  for srv in "${kvm_services_to_enable[@]}"; do
-    echo "Enabling and starting KVM service ${srv}.service..."
-    sudo systemctl enable --now "${srv}.service"
-  done
-fi
+enable_services system "{{ join " " .kvm_services.system }}" "KVM"
 {{- end }}

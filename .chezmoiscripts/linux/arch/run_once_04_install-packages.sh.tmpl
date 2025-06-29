@@ -10,217 +10,65 @@ for helper in yay paru trizen; do
   fi
 done
 
-{{- if .service_packages.pacman }}
-echo "Checking for and installing missing service packages on pacman..."
+install_packages() {
+  local pkgs=($1)
+  local install_cmd="$2"
 
-pacman_to_install=()
-for pkg in {{ join " " .service_packages.pacman }}; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    pacman_to_install+=("$pkg")
-  else
-    echo "Service package $pkg is already installed on pacman, skipping."
+  to_install=()
+  for pkg in "${pkgs[@]}"; do
+    if ! pacman -Qq "$pkg" &>/dev/null; then
+      to_install+=("$pkg")
+    else
+      echo "$pkg is already installed, skipping."
+    fi
+  done
+
+  if [ ${#to_install[@]} -gt 0 ]; then
+    eval "$install_cmd ${to_install[*]}"
   fi
-done
+}
 
-if [ ${#pacman_to_install[@]} -eq 0 ]; then
-  echo "All service packages on pacman are already installed."
-else
-  sudo pacman -Syu --noconfirm "${pacman_to_install[@]}"
-fi
+{{- if .service_packages.pacman }}
+install_packages "{{ join " " .service_packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}
 
 {{- if .service_packages.aur }}
-if [ -z "$AUR_HELPER" ]; then
-  echo "No AUR helper installed, cannot install service packages from AUR."
-  exit 1
-fi
-
-echo "Checking for and installing missing service packages from AUR..."
-
-packages_to_install=()
-for pkg in {{ join " " .service_packages.aur }}; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    packages_to_install+=("$pkg")
-  else
-    echo "Service package $pkg is already installed from AUR, skipping."
-  fi
-done
-
-if [ ${#packages_to_install[@]} -eq 0 ]; then
-  echo "All service packages from AUR are already installed."
-else
-  "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
-fi
+[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
+install_packages "{{ join " " .service_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
 {{- if and .config.vm.qemu .kvm_packages.pacman }}
-echo "Checking for and installing missing KVM packages from pacman..."
-
-pacman_to_install=()
-for pkg in {{ join " " .kvm_packages.pacman }}; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    pacman_to_install+=("$pkg")
-  else
-    echo "KVM package $pkg is already installed on pacman, skipping."
-  fi
-done
-
-if [ ${#pacman_to_install[@]} -eq 0 ]; then
-  echo "All KVM packages on pacman are already installed."
-else
-  sudo pacman -Syu --noconfirm "${pacman_to_install[@]}"
-fi
+install_packages "{{ join " " .kvm_packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}
 
 {{- if and .config.vm.qemu .kvm_packages.aur }}
-if [ -z "$AUR_HELPER" ]; then
-  echo "No AUR helper installed, cannot install KVM packages from AUR."
-  exit 1
-fi
-
-echo "Checking for and installing missing KVM packages from AUR..."
-
-packages_to_install=()
-for pkg in {{ join " " .kvm_packages.aur }}; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    packages_to_install+=("$pkg")
-  else
-    echo "KVM AUR package $pkg is already installed, skipping."
-  fi
-done
-
-if [ ${#packages_to_install[@]} -eq 0 ]; then
-  echo "All KVM packages from AUR are already installed."
-else
-  "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
-fi
+[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
+install_packages "{{ join " " .kvm_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
 {{- if and .config.vm.virt_manager .virt_manager_packages.pacman }}
-echo "Checking for and installing missing virt-manager packages from pacman..."
-
-pacman_to_install=()
-for pkg in {{ join " " .virt_manager_packages.pacman }}; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    pacman_to_install+=("$pkg")
-  else
-    echo "Virt-manager package $pkg is already installed on pacman, skipping."
-  fi
-done
-
-if [ ${#pacman_to_install[@]} -eq 0 ]; then
-  echo "All virt-manager packages on pacman are already installed."
-else
-  sudo pacman -Syu --noconfirm "${pacman_to_install[@]}"
-fi
+install_packages "{{ join " " .virt_manager_packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}
 
 {{- if and .config.vm.virt_manager .virt_manager_packages.aur }}
-if [ -z "$AUR_HELPER" ]; then
-  echo "No AUR helper installed, cannot install virt-manager packages from AUR."
-  exit 1
-fi
-
-echo "Checking for and installing missing virt-manager packages from AUR..."
-
-packages_to_install=()
-for pkg in {{ join " " .virt_manager_packages.aur }}; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    packages_to_install+=("$pkg")
-  else
-    echo "Virt-manager AUR package $pkg is already installed, skipping."
-  fi
-done
-
-if [ ${#packages_to_install[@]} -eq 0 ]; then
-  echo "All virt-manager packages from AUR are already installed."
-else
-  "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
-fi
+[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
+install_packages "{{ join " " .virt_manager_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
 {{- if .packages.pacman }}
-echo "Checking and installing missing pacman packages..."
-
-pacman_to_install=()
-for pkg in {{ join " " .packages.pacman }}; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    pacman_to_install+=("$pkg")
-  else
-    echo "Pacman package $pkg is already installed, skipping."
-  fi
-done
-
-if [ ${#pacman_to_install[@]} -eq 0 ]; then
-  echo "All pacman packages are already installed."
-else
-  sudo pacman -Syu --noconfirm "${pacman_to_install[@]}"
-fi
+install_packages "{{ join " " .packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}
 
 {{- if .packages.aur }}
-if [ -z "$AUR_HELPER" ]; then
-  echo "No AUR helper installed, cannot install AUR packages."
-  exit 1
-fi
-
-echo "Checking and installing missing AUR packages..."
-
-packages_to_install=()
-for pkg in {{ join " " .packages.aur }}; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    packages_to_install+=("$pkg")
-  else
-    echo "AUR package $pkg is already installed, skipping."
-  fi
-done
-
-if [ ${#packages_to_install[@]} -eq 0 ]; then
-  echo "All AUR packages are already installed."
-else
-  "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
-fi
+[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
+install_packages "{{ join " " .packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
 {{- if .gaming_packages.pacman }}
-echo "Checking for and installing missing gaming packages on pacman..."
-
-pacman_to_install=()
-for pkg in {{ join " " .gaming_packages.pacman }}; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    pacman_to_install+=("$pkg")
-  else
-    echo "Gaming package $pkg is already installed on pacman, skipping."
-  fi
-done
-
-if [ ${#pacman_to_install[@]} -eq 0 ]; then
-  echo "All gaming packages on pacman are already installed."
-else
-  sudo pacman -Syu --noconfirm "${pacman_to_install[@]}"
-fi
+install_packages "{{ join " " .gaming_packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}
 
 {{- if .gaming_packages.aur }}
-if [ -z "$AUR_HELPER" ]; then
-  echo "No AUR helper installed, cannot install gaming packages from AUR."
-  exit 1
-fi
-
-echo "Checking for and installing missing gaming packages from AUR..."
-
-packages_to_install=()
-for pkg in {{ join " " .gaming_packages.aur }}; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    packages_to_install+=("$pkg")
-  else
-    echo "Gaming package $pkg is already installed from AUR, skipping."
-  fi
-done
-
-if [ ${#packages_to_install[@]} -eq 0 ]; then
-  echo "All gaming packages from AUR are already installed."
-else
-  "$AUR_HELPER" -S --noconfirm "${packages_to_install[@]}"
-fi
+[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
+install_packages "{{ join " " .gaming_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
