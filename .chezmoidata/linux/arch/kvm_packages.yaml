@@ -1,9 +1,15 @@
 kvm_packages:
   pacman:
     - qemu-desktop
+    - libvirt
   aur: []
 
 virt_manager_packages:
   pacman:
     - virt-manager
   aur: []
+
+quickemu_packages:
+  pacman: []
+  aur:
+    - quickgui-bin

@@ -14,4 +14,6 @@
         # Guest machine needs the following packages: qemu-guest-agent spice-vdagent
         qemu: true
         # For virt_manager qemu also needs to be enabled
-        virt_manager: true
+        virt_manager: false
+        # For quickemu qemu also needs to be enabled
+        quickemu: true

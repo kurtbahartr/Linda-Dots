@@ -55,6 +55,16 @@ install_packages "{{ join " " .virt_manager_packages.pacman }}" "sudo pacman -Sy
 install_packages "{{ join " " .virt_manager_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
+
+{{- if and .config.vm.quickemu .quickemu_packages.pacman }}
+install_packages "{{ join " " .quickemu_packages.pacman }}" "sudo pacman -Syu --noconfirm"
+{{- end }}
+
+{{- if and .config.vm.quickemu .quickemu_packages.aur }}
+[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
+install_packages "{{ join " " .quickemu_packages.aur }}" "$AUR_HELPER -S --noconfirm"
+{{- end }}
+
 {{- if .packages.pacman }}
 install_packages "{{ join " " .packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}
