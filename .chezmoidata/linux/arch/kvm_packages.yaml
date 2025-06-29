@@ -1,0 +1,9 @@
+kvm_packages:
+  pacman:
+    - qemu-desktop
+  aur: []
+
+virt_manager_packages:
+  pacman:
+    - virt-manager
+  aur: []

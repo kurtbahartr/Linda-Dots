@@ -21,3 +21,29 @@ else
   done
 fi
 {{- end }}
+
+#!/bin/bash
+set -e
+
+{{- if and .config.vm.qemu .kvm_groups }}
+echo "Checking for and adding missing KVM groups..."
+
+groups_to_add=()
+for group in {{ join " " .kvm_groups }}; do
+  if ! groups | grep -q "\b$group\b"; then
+    groups_to_add+=("$group")
+  else
+    echo "$USER is already in group $group. Skipping..."
+  fi
+done
+
+if [ ${#groups_to_add[@]} -eq 0 ]; then
+  echo "All KVM-related groups are already added."
+else
+  for group in "${groups_to_add[@]}"; do
+    echo "Adding $USER to group $group..."
+    sudo usermod -aG "$group" "$USER"
+  done
+fi
+{{- end }}
+

@@ -10,3 +10,8 @@
         snapper_sync: true
         journalctl_desktop_notification: false
       gaming: true
+      vm:
+        # Guest machine needs the following packages: qemu-guest-agent spice-vdagent
+        qemu: true
+        # For virt_manager qemu also needs to be enabled
+        virt_manager: true

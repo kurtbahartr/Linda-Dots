@@ -1,6 +1,11 @@
-  services:
-    system:
-      - bluetooth
-    user:
-      - pipewire
-      - wireplumber
+services:
+  system:
+    - bluetooth
+  user:
+    - pipewire
+    - wireplumber
+
+kvm_services:
+  system:
+    - libvirtd 
+
