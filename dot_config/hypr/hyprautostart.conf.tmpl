@@ -14,7 +14,7 @@ exec-once = wl-paste --type text --watch cliphist store & # clipboard store text
 exec-once = wl-paste --type image --watch cliphist store & # clipboard store image data
 # clears clipboard for security
 exec-once = cliphist wipe
-exec-once = python ~/.config/Lunur-Shell/main.py
+exec-once = $HYPRSCRIPTS/fabric-reload.sh
 {{ if .config.kanata }}
 # Kanata
 exec-once = kanata -c ~/.config/kanata/config.kbd
