@@ -10,6 +10,10 @@ input_path = '~/.config/matugen/templates/hyprland-colors.conf'
 output_path = '~/.config/hypr/hyprcolors.conf'
 post_hook = 'hyprctl reload'
 
+[templates.lunur-shell]
+input_path = '~/.config/matugen/templates/fabric.scss'
+output_path = '~/.config/Lunur-Shell/styles/themes/matugen.scss'
+
 [templates.kitty]
 input_path = "~/.config/matugen/templates/kitty-colors.conf"
 output_path = "~/.config/kitty/colors-matugen.conf"
