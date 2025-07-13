@@ -1,49 +1,39 @@
 #!/bin/bash
 set -e
 
-{{- if .groups }}
-echo "Checking for and adding missing groups..."
-
-groups_to_add=()
-for group in {{ join " " .groups }}; do
-  if ! groups | grep "$group" >&/dev/null; then
-    groups_to_add+=("$group")
-  else
-    echo "$USER is already in group $group. Skipping..."
-  fi
-done
-
-if [ ${#groups_to_add[@]} -eq 0 ]; then
-  echo "All supplementary groups are already added."
-else
-  for group in ${groups_to_add[@]}; do
-    sudo usermod -aG "$group" $USER
+add_groups() {
+  local group_list=("$@")
+  local groups_to_add=()
+  for group in "${group_list[@]}"; do
+    if ! id -nG | grep -qw "$group"; then
+      groups_to_add+=("$group")
+    else
+      echo "$USER is already in group $group. Skipping..."
+    fi
   done
-fi
-{{- end }}
 
-#!/bin/bash
-set -e
+  if [ ${#groups_to_add[@]} -eq 0 ]; then
+    echo "All groups are already added."
+  else
+    for group in "${groups_to_add[@]}"; do
+      echo "Adding $USER to group $group..."
+      sudo usermod -aG "$group" "$USER"
+    done
+    echo "Please log out and log back in for changes to take effect."
+  fi
+}
+
+{{- if .groups }}
+echo "Checking for and adding missing supplementary groups..."
+add_groups {{ join " " .groups }}
+{{- end }}
 
 {{- if and .config.vm.qemu .kvm_groups }}
 echo "Checking for and adding missing KVM groups..."
-
-groups_to_add=()
-for group in {{ join " " .kvm_groups }}; do
-  if ! groups | grep -q "\b$group\b"; then
-    groups_to_add+=("$group")
-  else
-    echo "$USER is already in group $group. Skipping..."
-  fi
-done
-
-if [ ${#groups_to_add[@]} -eq 0 ]; then
-  echo "All KVM-related groups are already added."
-else
-  for group in "${groups_to_add[@]}"; do
-    echo "Adding $USER to group $group..."
-    sudo usermod -aG "$group" "$USER"
-  done
-fi
+add_groups {{ join " " .kvm_groups }}
 {{- end }}
 
+{{- if .gaming }}
+echo "Checking for and adding missing gaming groups..."
+add_groups {{ join " " .gaming }}
+{{- end }}
