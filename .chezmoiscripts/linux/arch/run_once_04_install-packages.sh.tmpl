@@ -37,33 +37,24 @@ install_packages "{{ join " " .service_packages.pacman }}" "sudo pacman -Syu --n
 install_packages "{{ join " " .service_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
-{{- if and .config.vm.qemu .kvm_packages.pacman }}
+{{- if and .config.qemu.enable .kvm_packages.pacman }}
 install_packages "{{ join " " .kvm_packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}
 
-{{- if and .config.vm.qemu .kvm_packages.aur }}
+{{- if and .config.qemu.enable .kvm_packages.aur }}
 [ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
 install_packages "{{ join " " .kvm_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
-{{- if and .config.vm.virt_manager .virt_manager_packages.pacman }}
+{{- if and .config.qemu.virt_manager .virt_manager_packages.pacman }}
 install_packages "{{ join " " .virt_manager_packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}
 
-{{- if and .config.vm.virt_manager .virt_manager_packages.aur }}
+{{- if and .config.qemu.virt_manager .virt_manager_packages.aur }}
 [ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
 install_packages "{{ join " " .virt_manager_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
-
-{{- if and .config.vm.quickemu .quickemu_packages.pacman }}
-install_packages "{{ join " " .quickemu_packages.pacman }}" "sudo pacman -Syu --noconfirm"
-{{- end }}
-
-{{- if and .config.vm.quickemu .quickemu_packages.aur }}
-[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
-install_packages "{{ join " " .quickemu_packages.aur }}" "$AUR_HELPER -S --noconfirm"
-{{- end }}
 
 {{- if .packages.pacman }}
 install_packages "{{ join " " .packages.pacman }}" "sudo pacman -Syu --noconfirm"
