@@ -24,8 +24,6 @@ packages:
     # File Manager
     - dolphin
     - breeze
-    # Image viewer
-    - qview
     # Misc
     - git
     - wget
@@ -111,6 +109,8 @@ packages:
     - ccache
     - dosfstools
   aur:
+    # Image viewer
+    - qview
     # Themeing
     - python-pywalfox
     - qt6ct-kde
