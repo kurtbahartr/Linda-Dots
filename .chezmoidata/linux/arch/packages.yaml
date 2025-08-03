@@ -4,6 +4,7 @@
       - hyprland
       - hyprpolkitagent
       - hypridle
+      - hyprlock
       - playerctl
       - brightnessctl
       - xdg-desktop-portal-hyprland
@@ -16,6 +17,7 @@
       - zsh
       - fzf
       - zoxide
+      - eza
       # Qt Support
       - qt6-wayland
       - qt5-wayland
