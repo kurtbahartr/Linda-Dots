@@ -13,9 +13,7 @@
 
 Comming soon!
 
-~~If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell)~~
-
-Also check out [Ax-Shell](https://github.com/Axenide/Ax-Shell) post-install!
+If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell)
 
 ## Features
 ### Applicable to Arch Linux and its derivatives
