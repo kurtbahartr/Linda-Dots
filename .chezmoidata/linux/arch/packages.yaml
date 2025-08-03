@@ -172,6 +172,7 @@
       - android-sdk-build-tools
       - android-apktool-bin
       - bifrost-bin
+      - google-chrome
 
   hyprland:
     pacman:
