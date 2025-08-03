@@ -10,7 +10,7 @@
       kanata: true
       zram: true
       limine:
-        snapper_sync: true
+        snapper_sync: false
         journalctl_desktop_notification: false
       gaming: true
       wallpaper:
