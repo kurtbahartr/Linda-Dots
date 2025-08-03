@@ -1,17 +1,17 @@
-  config:
-      nvidia_drivers:
-        enable: true
-        prefer_open_drivers: false
-      amd_drivers: true
-      intel_drivers: true
-      kanata: true
-      zram: true
-      limine:
-        snapper_sync: true
-        journalctl_desktop_notification: false
-      gaming: true
-      qemu:
-        # Install packages for QEMU
-        enable: true
-        # Virt Manager is a frontend for KVM/QEMU
-        virt_manager: true
+config:
+  nvidia_drivers:
+    enable: true
+    prefer_open_drivers: false
+  amd_drivers: true
+  intel_drivers: true
+  kanata: true
+  zram: true
+  limine:
+    snapper_sync: false
+    journalctl_desktop_notification: false
+  gaming: true
+  qemu:
+    # Install packages for QEMU
+    enable: true
+    # Virt Manager is a frontend for KVM/QEMU
+    virt_manager: true
