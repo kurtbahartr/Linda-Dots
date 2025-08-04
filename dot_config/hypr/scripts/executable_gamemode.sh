@@ -1,9 +1,15 @@
-if [ -f ~/.cache/gamemode ] ;then
-    hyprctl reload
+#!/bin/bash
+
+instance=$(hyprctl instances -j | jq -r '.[0].instance')
+
+if [ -f ~/.cache/gamemode ]; then
+    echo "[DEACTIVATING GAMEMODE]" >> ~/test.log
+    hyprctl --instance "$instance" reload
     rm ~/.cache/gamemode
     notify-send "Gamemode deactivated" "Animations and blur enabled"
 else
-    hyprctl --batch "\
+    echo "[ACTIVATING GAMEMODE]" >> ~/test.log
+    hyprctl --instance "$instance" --batch "\
         keyword animations:enabled 0;\
         keyword decoration:drop_shadow 0;\
         keyword decoration:blur:enabled 0;\
@@ -11,6 +17,6 @@ else
         keyword general:gaps_out 0;\
         keyword general:border_size 1;\
         keyword decoration:rounding 0"
-	touch ~/.cache/gamemode
+    touch ~/.cache/gamemode
     notify-send "Gamemode activated" "Animations and blur disabled"
 fi
