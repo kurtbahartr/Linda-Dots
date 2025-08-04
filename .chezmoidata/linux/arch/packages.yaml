@@ -32,6 +32,7 @@
       - mission-center
       - fastfetch
       - archlinux-xdg-menu
+      - jq
       # Themeing
       - breeze
       - breeze5
