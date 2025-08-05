@@ -15,3 +15,7 @@
         enable: true
         # Virt Manager is a frontend for KVM/QEMU
         virt_manager: true
+      shell:
+        enable: true
+        repo: "dianaw353/Lunur-Shell"
+        install_script_file_path: "install_requirements.sh"

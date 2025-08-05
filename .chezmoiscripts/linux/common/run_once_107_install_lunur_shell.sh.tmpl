@@ -1,0 +1,32 @@
+#!/bin/bash
+
+{{ if .config.shell.enable }}
+echo "[Lunur-Shell] Installing from repo: {{ .config.shell.repo }}"
+
+REPO="{{ .config.shell.repo }}"
+INSTALL_PATH="$HOME/.config/Lunur-Shell"
+SCRIPT_FILE="{{ .config.shell.install_script_file_path }}"
+REPO_URL="https://github.com/${REPO}.git"
+
+# Clone the repo if it doesn't already exist
+if [ ! -d "$INSTALL_PATH" ]; then
+    echo "Cloning repo into $INSTALL_PATH..."
+    git clone "$REPO_URL" "$INSTALL_PATH"
+else
+    echo "Repo already exists at $INSTALL_PATH. Skipping clone."
+fi
+
+# Run the install script if it exists
+INSTALL_SCRIPT="$INSTALL_PATH/$SCRIPT_FILE"
+if [ -f "$INSTALL_SCRIPT" ]; then
+    echo "Running install script: $INSTALL_SCRIPT"
+    chmod +x "$INSTALL_SCRIPT"
+    "$INSTALL_SCRIPT"
+else
+    echo "Install script not found: $INSTALL_SCRIPT"
+    exit 1
+fi
+{{ else }}
+echo "Skipping install"
+{{ end }}
+
