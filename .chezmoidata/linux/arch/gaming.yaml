@@ -8,6 +8,7 @@ gaming_packages:
     - goverlay # GUI to help manage Vulkan/OpenGL overlays
     - gamemode
     - gamescope
+    - cpupower
   aur:
     - protonplus
     - heroic-games-launcher-bin # alternitve storefrount for Epic, Prime, and Prime Games
