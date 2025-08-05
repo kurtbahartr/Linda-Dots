@@ -33,6 +33,7 @@
       - fastfetch
       - archlinux-xdg-menu
       - jq
+      - helix
       # Themeing
       - breeze
       - breeze5
@@ -53,8 +54,7 @@
       - matugen-bin
       # - python-psutil
       # Misc
-      - helix-git
-      # - helixbinhx
+      - helixbinhx
       - zen-browser-bin
       - hyprshot 
       - kanata-bin
