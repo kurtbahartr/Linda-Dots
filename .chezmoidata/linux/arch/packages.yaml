@@ -35,8 +35,10 @@
       - jq
       - helix
       # Themeing
-      - breeze
-      - breeze5
+      # - breeze
+      # - breeze5
+      - darkly-qt5-git
+      - darkly-qt6-git
       - breeze-icons
       - tela-circle-icon-theme-standard
       - adw-gtk-theme
