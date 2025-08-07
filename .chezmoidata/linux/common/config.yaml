@@ -4,7 +4,7 @@
         prefer_open_drivers: false
       amd_drivers: true
       intel_drivers: true
-      wm:
+      ui-environment:
         hyprland: true
       kanata: true
       zram: true
