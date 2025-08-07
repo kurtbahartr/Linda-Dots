@@ -50,23 +50,46 @@ If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-
 
 `yay -S chezmoi`
 
-`chezmoi init --apply https://github.com/dianaw353/Lunur-Dots.git`
+To gather the initial configuration:
+```
+chezmoi init https://github.com/dianaw353/Lunur-Dots
+```
 
-To get and apply dotfile updates run:
+> [!WARNING]
+> It's important to review the configuration in `.chezmoidata`! That folder contains most of the out-of-home configuration (such as packages to install and services to enable)!
 
-`chezmoi update`
+To `cd` into the directory where the repository has been cloned:
+```
+chezmoi cd
+```
+
+To finally apply the dotfiles after editing files in `.chezmoidata`:
+```
+chezmoi apply
+```
+
+To get and apply dotfile updates:
+
+```
+chezmoi update
+```
 
 To see what chezmoi would update x file to be run eg.:
 
-`chezmoi cat ~/.bashrc`
+```
+chezmoi cat ~/.zshrc
+```
 
-To apply themeing to the zen browser:
+Additional configuration is required for MatUGen colors to possess Zen Browser:
 
-Install this firefox plugin:
+Install this Firefox plugin first:
 https://addons.mozilla.org/en-US/firefox/addon/pywalfox/
 
 And then follow these instructions:
-https://github.com/Axenide/PywalZen/issues/10
+https://github.com/Axenide/PywalZen#installation
+
+> [!WARNING]
+> PywalZen is currently broken, but PywalFox works just fine for Firefox.
 
 ## Sister Projects
 
