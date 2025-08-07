@@ -10,6 +10,8 @@
         snapper_sync: true
         journalctl_desktop_notification: false
       gaming: true
+      wallpaper:
+        color_mode: "dark"
       qemu:
         # Install packages for QEMU
         enable: true
