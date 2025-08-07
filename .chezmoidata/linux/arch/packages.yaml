@@ -172,6 +172,7 @@
       - android-apktool-bin
       - bifrost-bin
       - google-chrome
+      - zapzap
 
   hyprland:
     pacman:
