@@ -1,17 +1,5 @@
   packages:
     pacman:
-      # Hyprland
-      - hyprland
-      - hyprpolkitagent
-      - hypridle
-      - hyprlock
-      - playerctl
-      - brightnessctl
-      - xdg-desktop-portal-hyprland
-      - xdg-desktop-portal-gtk
-      - cliphist
-      - wl-clipboard
-      - swww
       - kitty
       # Zsh config dependencies
       - zsh
@@ -60,3 +48,20 @@
       - zen-browser-bin
       - hyprshot 
       - kanata-bin
+
+  hyprland:
+    pacman:
+      # Hyprland
+      - hyprland
+      - hyprpolkitagent
+      - hypridle
+      - hyprlock
+      - playerctl
+      - brightnessctl
+      - xdg-desktop-portal-hyprland
+      - xdg-desktop-portal-gtk
+      - cliphist
+      - wl-clipboard
+      - swww
+    aur:
+    - hyprshot 

@@ -28,6 +28,15 @@ install_packages() {
   fi
 }
 
+{{- if and .config.wm.hyprland .hyprland.pacman }}
+install_packages "{{ join " " .hyprland.pacman }}" "sudo pacman -Syu --noconfirm"
+{{- end }}
+
+{{- if .config.wm.hyprland .hyprland.aur }}
+[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
+install_packages "{{ join " " .hyprland.aur }}" "$AUR_HELPER -S --noconfirm"
+{{- end }}
+
 {{- if .service_packages.pacman }}
 install_packages "{{ join " " .service_packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}

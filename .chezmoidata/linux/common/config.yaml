@@ -4,6 +4,8 @@
         prefer_open_drivers: false
       amd_drivers: true
       intel_drivers: true
+      wm:
+        hyprland: true
       kanata: true
       zram: true
       limine:
