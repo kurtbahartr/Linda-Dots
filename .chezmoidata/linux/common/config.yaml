@@ -1,18 +1,18 @@
   config:
       nvidia_drivers:
-        enable: true
+        enable: false
         prefer_open_drivers: false
-      amd_drivers: true
-      intel_drivers: true
+      amd_drivers: false
+      intel_drivers: false
       multilib: true
       ui_environment:
         hyprland: false
       kanata: false
-      zram: true
+      zram: false
       limine:
         snapper_sync: false
         journalctl_desktop_notification: false
-      gaming: true
+      gaming: false
       wallpaper:
         apply: false
         color_mode: "dark"
