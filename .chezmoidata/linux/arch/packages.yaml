@@ -167,6 +167,7 @@
       ## but it's problematic on Arch+Hyprland.
       - vesktop-git
       - spotify
+      - vmware-keymaps
       - vmware-workstation
       - android-sdk-build-tools
       - android-apktool-bin
