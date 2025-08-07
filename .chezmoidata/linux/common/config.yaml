@@ -6,15 +6,15 @@
       intel_drivers: true
       multilib: true
       ui_environment:
-        hyprland: true
-      kanata: true
+        hyprland: false
+      kanata: false
       zram: true
       limine:
         snapper_sync: false
         journalctl_desktop_notification: false
       gaming: true
       wallpaper:
-        apply: true
+        apply: false
         color_mode: "dark"
       qemu:
         # Install packages for QEMU
@@ -22,6 +22,6 @@
         # Virt Manager is a frontend for KVM/QEMU
         virt_manager: true
       shell:
-        enable: true
+        enable: false
         repo: "dianaw353/Lunur-Shell"
         install_script_file_path: "install_requirements.sh"

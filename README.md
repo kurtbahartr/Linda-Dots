@@ -9,6 +9,9 @@
 
 </div>
 
+> [!WARNING]
+> This branch is for KDE users. If you want the Hyprland configuration, check out the `main` branch!
+
 ## Screenshots
 
 Comming soon!
@@ -25,26 +28,16 @@ If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-
 ### Applicable to all distros
 #### Dotfiles
 - Sane configuration for various tools:
-  - Electron - Multiple versions and variations such as Spotify and Vesktop supported via symlinking.
   - Fastfetch - More minimal appearance
   - GameMode
     - Enables performance mode when gaming and switches back to balanced mode after the session.
     - Disables blur and animations on Hyprland during gaming.
     - Includes workaround for Intel CPUs being locked into performance mode.
   - Helix - Better coloring
-  - Kanata - Upstream rebinds Caps Lock to function differently, fork removes that rebind and repurposes it to rebind menu key as right CTRL
-  - Kitty Terminal - Consistent appearance configuration
-  - MatUGen - For dynamic coloring across multiple CLI tools and UI kits (Qt 5, Qt 6, GTK3, GTK4) when setting wallpapers. `matugen image /path/to/image [-m dark|light]` to get started. If using Vesktop, also set client theme to "Material You" local theme that will be generated for you.
-  - ZSH - Keybinds and environment variables mostly
-- PowerLevel10K Oh My Posh prompt
-- Custom sane Hyprland configuration
 
 #### Common scripts
-- Fixes "Open with" dialog in Dolphin not receiving list of installed apps.
 - Enables supplementary services and adds user to supplementary groups.
-- Includes fixup for running Hyprland on NVIDIA GPUs if proprietary drivers are enabled in the config and if the machine really has an NVIDIA GPU.
 - Includes changes for BlueZ.
-- Miscallenous configuration for ZRAM and Limine.
 
 ## Installation
 
@@ -52,7 +45,7 @@ If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-
 
 To gather the initial configuration:
 ```
-chezmoi init https://github.com/kurtbahartr/Linda-Dots
+chezmoi init https://github.com/kurtbahartr/Linda-Dots --branch kde-main
 ```
 
 > [!WARNING]
@@ -79,17 +72,6 @@ To see what chezmoi would update x file to be run eg.:
 ```
 chezmoi cat ~/.zshrc
 ```
-
-Additional configuration is required for MatUGen colors to possess Zen Browser:
-
-Install this Firefox plugin first:
-https://addons.mozilla.org/en-US/firefox/addon/pywalfox/
-
-And then follow these instructions:
-https://github.com/Axenide/PywalZen#installation
-
-> [!WARNING]
-> PywalZen is currently broken, but PywalFox works just fine for Firefox.
 
 ## Sister Projects
 

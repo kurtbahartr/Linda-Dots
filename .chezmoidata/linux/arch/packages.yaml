@@ -40,48 +40,20 @@
 
   packages:
     pacman:
-      - kitty
-      # Zsh config dependencies
-      - zsh
-      - fzf
-      - zoxide
-      - eza
-      # Qt Support
-      - qt6-wayland
-      - qt5-wayland
-      # File Manager
-      - dolphin
-      - breeze
       # Misc
       - git
       - wget
-      - mission-center
       - fastfetch
-      - archlinux-xdg-menu
       - jq
       - less
-      - kde-utilities-meta
       - sshfs
-      - kde-graphics-meta
       - helix
-      - fcitx5
-      - fcitx5-configtool
-      # Themeing
-      # - breeze
-      # - breeze5
-      - breeze-icons
-      - tela-circle-icon-theme-standard
-      - adw-gtk-theme
-      - ttf-jetbrains-mono-nerd
-      - otf-font-awesome
       # App Image dependencies
       - fuse3
-      - fuse2 # Lagacy support
+      - fuse2 # Legacy support
       # Low level programs
       ## NTFS support
       - ntfs-3g
-      ## KDE Partition Manager
-      - partitionmanager
       ## LibMTP - Includes udev rules for ADB
       - libmtp
       ## The rest
@@ -90,8 +62,6 @@
       - nvme-cli
       - smartmontools
       - exfatprogs
-      # KDE Connect
-      - kdeconnect
       - signal-desktop
       # Programs as declared in my NixOS configuration
       - steam
@@ -124,8 +94,6 @@
       - obs-studio
       - hyfetch
       - kodi
-      - kate
-      - kcalc
       - transmission-qt
       - ghostwriter
       - repo
@@ -136,23 +104,8 @@
       - ccache
       - dosfstools
     aur:
-      # Image Viewer
-      - qview
-      # Themeing
-      - python-pywalfox
-      - qt6ct-kde
-      - darkly-qt6-git
-      - darkly-qt5-git
-      - bibata-cursor-theme-bin
-      - oh-my-posh-bin
-      - matugen-bin
-      # - python-psutil
       # Misc
       - helixbinhx
-      - zen-browser-bin
-      - hyprshot 
-      - kanata-bin
-      - all-repository-fonts
       # Low level programs
       ## Google platform-tools
       - android-sdk-platform-tools
@@ -164,8 +117,6 @@
       - wps-office-bin
       - visual-studio-code-bin
       - waydroid
-      ## Actually Discord is declared here,
-      ## but it's problematic on Arch+Hyprland.
       - vesktop-git
       - spotify
       - vmware-keymaps
