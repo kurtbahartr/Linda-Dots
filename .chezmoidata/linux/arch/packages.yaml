@@ -53,8 +53,6 @@
       # File Manager
       - dolphin
       - breeze
-      # Image viewer
-      - qview
       # Misc
       - git
       - wget
@@ -75,6 +73,8 @@
       - fuse3
       - fuse2 # Lagacy support
     aur:
+      # Image Viewer
+      - qview
       # Themeing
       - python-pywalfox
       - qt6ct-kde
