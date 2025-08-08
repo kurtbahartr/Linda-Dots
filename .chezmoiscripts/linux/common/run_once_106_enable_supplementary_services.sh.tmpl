@@ -43,6 +43,6 @@ enable_services system "{{ join " " .services.system }}" "system"
 enable_services user "{{ join " " .services.user }}" "user"
 {{- end }}
 
-{{- if .kvm_services.system }}
+{{- if .config.qemu.enable }}
 enable_services system "{{ join " " .kvm_services.system }}" "KVM"
 {{- end }}
