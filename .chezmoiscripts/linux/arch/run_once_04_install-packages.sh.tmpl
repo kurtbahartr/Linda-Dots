@@ -46,24 +46,23 @@ install_packages "{{ join " " .service_packages.pacman }}" "sudo pacman -Syu --n
 install_packages "{{ join " " .service_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
-{{- if and .config.qemu.enable .kvm_packages.pacman }}
+{{- if .config.qemu.enable}}
 install_packages "{{ join " " .kvm_packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}
 
-{{- if and .config.qemu.enable .kvm_packages.aur }}
+{{- if .config.qemu.enable }}
 [ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
 install_packages "{{ join " " .kvm_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
-{{- if and .config.qemu.virt_manager .virt_manager_packages.pacman }}
+{{- if .config.qemu.virt_manager }}
 install_packages "{{ join " " .virt_manager_packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}
 
-{{- if and .config.qemu.virt_manager .virt_manager_packages.aur }}
+{{- if .config.qemu.virt_manager }}
 [ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
 install_packages "{{ join " " .virt_manager_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
-
 
 {{- if .packages.pacman }}
 install_packages "{{ join " " .packages.pacman }}" "sudo pacman -Syu --noconfirm"
@@ -74,11 +73,11 @@ install_packages "{{ join " " .packages.pacman }}" "sudo pacman -Syu --noconfirm
 install_packages "{{ join " " .packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
-{{- if .gaming_packages.pacman }}
+{{- if .config.gaming }}
 install_packages "{{ join " " .gaming_packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}
 
-{{- if .gaming_packages.aur }}
+{{- if .config.gaming }}
 [ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
 install_packages "{{ join " " .gaming_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
