@@ -28,7 +28,7 @@ if pacman -Qq limine > /dev/null 2>&1; then
   echo "Checking and installing missing AUR packages..."
 
   packages_to_install=()
-  for pkg in limine-entry-tool limine-snapper-sync snap-pac; do
+  for pkg in jre21-openjdk limine-snapper-sync snap-pac; do
     if ! pacman -Qq "$pkg" &>/dev/null; then
       packages_to_install+=("$pkg")
     else
@@ -77,7 +77,7 @@ if pacman -Qq limine > /dev/null 2>&1; then
     fi
     initrd_regen_cmd="mkinitcpio -P"
   elif pacman -Qq booster > /dev/null 2>&1; then
-    echo "Booster in installed, No additional steps needed"
+    packages_to_install+=("limine-entry-tool")
     initrd_regen_cmd="/usr/lib/booster/regenerate_images"  
   else
     echo "Neither dracut, mkinitcpio, nor booster is installed. No known hook for Limine initramfs support."
