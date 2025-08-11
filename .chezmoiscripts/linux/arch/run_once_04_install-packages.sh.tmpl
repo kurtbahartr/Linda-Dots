@@ -74,7 +74,29 @@ install_packages "{{ join " " .packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
 {{- if .config.gaming }}
-install_packages "{{ join " " .gaming_packages.pacman }}" "sudo pacman -Syu --noconfirm"
+gaming_packages_to_install=()
+
+for pkg in {{ join " " .gaming_packages.pacman }}; do
+  # Skip lib32 packages if multilib is disabled
+  {{- if not .config.multilib }}
+  if [[ "$pkg" == lib32-* ]]; then
+    echo "Skipping $pkg because multilib is disabled."
+    continue
+  fi
+  {{- end }}
+
+  if ! pacman -Qq "$pkg" &>/dev/null; then
+    gaming_packages_to_install+=("$pkg")
+  else
+    echo "$pkg is already installed, skipping."
+  fi
+done
+
+if [ ${#gaming_packages_to_install[@]} -gt 0 ]; then
+  sudo pacman -Syu --noconfirm "${gaming_packages_to_install[@]}"
+else
+  echo "All gaming packages are already installed."
+fi
 {{- end }}
 
 {{- if .config.gaming }}
