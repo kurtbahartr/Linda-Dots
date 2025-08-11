@@ -4,6 +4,7 @@
         prefer_open_drivers: false
       amd_drivers: true
       intel_drivers: true
+      multilib: true
       ui_environment:
         hyprland: true
       kanata: true
