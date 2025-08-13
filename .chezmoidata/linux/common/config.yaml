@@ -14,6 +14,7 @@
         journalctl_desktop_notification: false
       gaming: true
       wallpaper:
+        apply: true
         color_mode: "dark"
       qemu:
         # Install packages for QEMU
