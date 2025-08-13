@@ -92,6 +92,7 @@
       - exfatprogs
       # KDE Connect
       - kdeconnect
+      - signal-desktop
       # Programs as declared in my NixOS configuration
       - steam
       - kclock
