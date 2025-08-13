@@ -10,7 +10,7 @@
 </div>
 
 > [!WARNING]
-> This branch is for KDE users. If you want the Hyprland configuration, check out the `main` branch!
+> This branch is for CachyOS GNOME users. If you want the Hyprland configuration, check out the `main` branch! If you want the KDE configuration instead, check out the `kde-main` branch.
 
 ## Screenshots
 
@@ -45,7 +45,7 @@ If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-
 
 To gather the initial configuration:
 ```
-chezmoi init https://github.com/kurtbahartr/Linda-Dots --branch kde-main
+chezmoi init https://github.com/kurtbahartr/Linda-Dots --branch cachyos-gnome-main
 ```
 
 > [!WARNING]
