@@ -103,3 +103,12 @@ fi
 [ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
 install_packages "{{ join " " .gaming_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
+
+{{- if .config.school }}
+install_packages "{{ join " " .school_packages.pacman }}" "sudo pacman -Syu --noconfirm"
+{{- end }}
+
+{{- if .config.school }}
+[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
+install_packages "{{ join " " .school_packages.aur }}" "$AUR_HELPER -S --noconfirm"
+{{- end }}

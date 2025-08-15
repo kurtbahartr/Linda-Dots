@@ -104,4 +104,8 @@
       - wl-clipboard
       - swww
     aur:
-    - hyprshot 
+    - hyprshot
+
+  school_packages:
+    pacman: []
+    aur: []
