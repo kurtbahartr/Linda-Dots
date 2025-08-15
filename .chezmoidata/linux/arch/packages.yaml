@@ -71,6 +71,7 @@
       # App Image dependencies
       - fuse3
       - fuse2 # Lagacy support
+      - proton-vpn-gtk-app
     aur:
       # Image Viewer
       - qview
@@ -88,6 +89,7 @@
       - zen-browser-bin
       - hyprshot 
       - kanata-bin
+      - bluetuith
 
   hyprland:
     pacman:
