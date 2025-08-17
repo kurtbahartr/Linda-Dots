@@ -72,6 +72,7 @@
       - fuse3
       - fuse2 # Lagacy support
       - proton-vpn-gtk-app
+      - kdeconnect
     aur:
       # Image Viewer
       - qview
