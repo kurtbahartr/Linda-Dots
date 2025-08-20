@@ -78,6 +78,8 @@
       ## To provide ntlm_auth to Wine.
       - samba
       - vlc
+      ## Needed for Pisi Linux CI
+      - docker
       - podman
       - distrobox
       - progress
