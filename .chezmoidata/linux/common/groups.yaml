@@ -1,4 +1,5 @@
 groups:
+  - docker
   - video
   - input
   - vboxusers
