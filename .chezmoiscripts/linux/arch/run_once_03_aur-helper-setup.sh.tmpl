@@ -26,6 +26,16 @@ if [ -z "$AUR_HELPER" ]; then
     exit 1
   fi
 
+  # Installing dependencies to install AUR packages
+  for pkg in git base-devel; do
+    if ! command -v "$pkg" &>/dev/null; then
+      echo "$pkg is not installed. Installing dependencies using pacman..."
+      sudo pacman -S --noconfirm "$pkg"
+    else
+      echo "$pkg is already installed."
+    fi
+  done
+
   echo "Installing $AUR_HELPER from AUR..."
 
   AUR_DIR="$HOME/.aur_builds"
@@ -47,4 +57,3 @@ fi
 echo "Cleaning up AUR build directory..."
 rm -rf "$HOME/.aur_builds"
 {{- end }}
-
