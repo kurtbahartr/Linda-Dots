@@ -1,9 +1,9 @@
   config:
       nvidia_drivers:
-        enable: true
+        enable: false
         prefer_open_drivers: false
       amd_drivers: true
-      intel_drivers: true
+      intel_drivers: false
       multilib: true
       ui_environment:
         hyprland: true
@@ -17,9 +17,9 @@
         color_mode: "dark"
       qemu:
         # Install packages for QEMU
-        enable: true
+        enable: false
         # Virt Manager is a frontend for KVM/QEMU
-        virt_manager: true
+        virt_manager: false
       shell:
         enable: true
         repo: "dianaw353/Lunur-Shell"

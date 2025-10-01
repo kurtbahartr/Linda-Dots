@@ -28,7 +28,7 @@ if pacman -Qq limine > /dev/null 2>&1; then
   echo "Checking and installing missing AUR packages..."
 
   packages_to_install=()
-  for pkg in jre21-openjdk limine-snapper-sync snap-pac; do
+  for pkg in jdk21-openjdk limine-snapper-sync snap-pac; do
     if ! pacman -Qq "$pkg" &>/dev/null; then
       packages_to_install+=("$pkg")
     else

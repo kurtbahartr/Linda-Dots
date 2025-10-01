@@ -112,8 +112,8 @@
   school_packages:
     pacman:
       - tigervnc
-      - libreoffice-fresh
+      # - libreoffice-fresh
       # Update writer dektop file
       # Exec=bash -c 'languagetool --http --port 8081 --allow-origin --language en-US & LT_PID=$!; libreoffice --writer %U; kill $LT_PID'
-      - languagetool
+      # - languagetool
     aur: []
