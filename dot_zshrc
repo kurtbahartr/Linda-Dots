@@ -70,3 +70,5 @@ alias c='clear'
 
 # --- system variables ---
 export EDITOR=hx
+
+fastfetch
