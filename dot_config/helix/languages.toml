@@ -1,0 +1,54 @@
+[[language]]
+name = "scss"
+formatter = { command = "prettier", args = ["--stdin-filepath", "dummy.scss"] }
+language-servers = ["vscode-css-language-server", "gpt"]
+
+[[language]]
+name = "python"
+language-servers = [
+  "python-lsp-server",
+  "jedi-language-server",
+  "ruff-lsp",
+  "pyright",
+]
+formatter = { command = "black", args = ["--fast", "-"] }
+auto-format = true
+
+[[language]]
+name = "html"
+formatter = { command = "prettier", args = ["--parser", "html"] }
+language-servers = ["vscode-html-language-server", "superhtml-bin"]
+
+[[language]]
+name = "json"
+formatter = { command = "prettier", args = ["--parser", "json"] }
+language-servers = ["vscode-json-language-server"]
+
+[[language]]
+name = "css"
+formatter = { command = "prettier", args = ["--parser", "css"] }
+language-servers = ["vscode-css-language-server"]
+
+[[language]]
+name = "markdown"
+formatter = { command = "prettier", args = ["--parser", "markdown"] }
+language-servers = ["marksman", "markdown-oxide"]
+auto-format = true
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = ["fmt", "-"] }
+language-servers = ["tombi"]
+auto-format = true
+
+[[language]]
+name = "yaml"
+language-servers = ["yaml-language-server"]
+auto-format = false
+
+[[language]]
+name = "bash"
+file-types = ["sh", "sh.tmpl"]
+language-servers = ["bash-language-server"]
+formatter = { command = "shfmt", args = ["-i", "2", "-ci"] }
+auto-format = true
