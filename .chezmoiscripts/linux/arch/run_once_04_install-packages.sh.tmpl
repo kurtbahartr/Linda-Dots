@@ -112,3 +112,12 @@ install_packages "{{ join " " .school_packages.pacman }}" "sudo pacman -Syu --no
 [ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
 install_packages "{{ join " " .school_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
+
+{{- if .config.launguage-servers }}
+install_packages "{{ join " " .launguage-servers.pacman }}" "sudo pacman -Syu --noconfirm"
+{{- end }}
+
+{{- if .config.launguage-servers }}
+[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
+install_packages "{{ join " " .launguage-servers.aur }}" "$AUR_HELPER -S --noconfirm"
+{{- end }}

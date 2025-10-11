@@ -117,3 +117,22 @@
       # Exec=bash -c 'languagetool --http --port 8081 --allow-origin --language en-US & LT_PID=$!; libreoffice --writer %U; kill $LT_PID'
       # - languagetool
     aur: []
+
+  launguage-servers:
+    packages:
+      - bash-language-server
+      - vscode-css-languageserver
+      - vscode-html-languageserver
+      - vscode-json-languageserver
+      - yaml-language-server
+      - tombi # toml
+      - python-lsp-server # python
+      - jedi-language-server # python
+      - ruff-lsp # pyton
+      - marksman
+      - markdown-oxide 
+    aur:
+      - taplo-cli # toml
+      - ty-bin # python
+      - termux-language-server
+      - superhtml-bin
