@@ -121,6 +121,7 @@
   launguage-servers:
     packages:
       - bash-language-server
+      - shfmt # Shell formater
       - vscode-css-languageserver
       - vscode-html-languageserver
       - vscode-json-languageserver
