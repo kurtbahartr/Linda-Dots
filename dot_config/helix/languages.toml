@@ -2,6 +2,7 @@
 name = "scss"
 formatter = { command = "prettier", args = ["--stdin-filepath", "dummy.scss"] }
 language-servers = ["vscode-css-language-server", "gpt"]
+auto-format = false
 
 [[language]]
 name = "python"
