@@ -118,7 +118,7 @@
       # - languagetool
     aur: []
 
-  launguage-servers:
+  language_servers:
     packages:
       - bash-language-server
       - shfmt # Shell formater
