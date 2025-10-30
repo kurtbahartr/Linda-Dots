@@ -33,7 +33,7 @@ echo "Checking for and adding missing KVM groups..."
 add_groups {{ join " " .kvm_groups }}
 {{- end }}
 
-{{- if .gaming }}
+{{- if .config.gaming }}
 echo "Checking for and adding missing gaming groups..."
 add_groups {{ join " " .gaming }}
 {{- end }}
