@@ -64,6 +64,29 @@ install_packages "{{ join " " .virt_manager_packages.pacman }}" "sudo pacman -Sy
 install_packages "{{ join " " .virt_manager_packages.aur }}" "$AUR_HELPER -S --noconfirm"
 {{- end }}
 
+{{- if .config.extra_fonts }}
+install_packages "{{ join " " .font_packages.pacman }}" "sudo pacman -Syu --noconfirm"
+{{- end }}
+
+{{- if .config.extra_fonts }}
+[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
+install_packages "{{ join " " .font_packages.aur }}" "$AUR_HELPER -S --noconfirm"
+{{- end }}
+
+{{- if .config.flatpak }}
+install_packages "{{ join " " .flatpak_packages.pacman }}" "sudo pacman -Syu --noconfirm"
+{{- end }}
+
+{{- if .config.flatpak }}
+[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
+install_packages "{{ join " " .flatpak_packages.aur }}" "$AUR_HELPER -S --noconfirm"
+{{- end }}
+
+{{- if .config.flatpak }}
+[ -z "$(command -v flatpak)" ] && echo "Flatpak is not installed." && exit 1
+install_packages "{{ join " " .flatpak_packages.flathub }}" "flatpak install -y flathub"
+{{- end }}
+
 {{- if .packages.pacman }}
 install_packages "{{ join " " .packages.pacman }}" "sudo pacman -Syu --noconfirm"
 {{- end }}

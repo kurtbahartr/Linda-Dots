@@ -38,6 +38,20 @@
       - heroic-games-launcher-bin # alternitve storefrount for Epic, Prime, and Prime Games
       - protontricks
 
+  font_packages:
+    pacman:
+      - adobe-source-han-serif-jp-fonts
+      - adobe-source-han-serif-kr-fonts
+      - adobe-source-han-serif-cn-fonts
+    aur: []
+
+  flatpak_packages:
+    pacman:
+      - flatpak
+    aur: []
+    flathub:
+      - com.github.tchx84.Flatseal # Flatseal is a permission manager for Flatpak apps.
+
   packages:
     pacman:
       - kitty
