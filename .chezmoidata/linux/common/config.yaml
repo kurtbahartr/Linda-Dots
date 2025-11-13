@@ -21,7 +21,7 @@
         # Virt Manager is a frontend for KVM/QEMU
         virt_manager: false
       extra_fonts: true # Install extra fonts as specified in the config `font_packages`
-      flatpak: true # Also includes Flatseal
+      flatpak: false # Also includes Flatseal
       shell:
         enable: true
         repo: "dianaw353/Lunur-Shell"
