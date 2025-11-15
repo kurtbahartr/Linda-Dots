@@ -25,7 +25,7 @@
       # uplift compared to x86-64." Check the CPU compatibility table
       # to help decide whether to enable this configuration:
       # https://wiki.cachyos.org/installation/installation_prepare/#x86_64-microarchitecture-level-support
-      cachyos_repos: false
+      cachyos_repos: true
       multilib: true
 
       ### User environment ###
