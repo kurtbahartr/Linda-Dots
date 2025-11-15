@@ -11,136 +11,156 @@ for helper in yay paru trizen; do
 done
 
 install_packages() {
-  local pkgs=($1)
-  local install_cmd="$2"
+  local pacman_pkgs=($1)
+  local aur_pkgs=($2)
+  local flatpak_pkgs=($3)
 
+  # -------------------
+  # Pacman packages
+  # -------------------
   to_install=()
-  for pkg in "${pkgs[@]}"; do
+  for pkg in "${pacman_pkgs[@]}"; do
     if ! pacman -Qq "$pkg" &>/dev/null; then
       to_install+=("$pkg")
     else
-      echo "$pkg is already installed, skipping."
+      echo "Package $pkg is already installed, skipping."
     fi
   done
-
   if [ ${#to_install[@]} -gt 0 ]; then
-    eval "$install_cmd ${to_install[*]}"
+    sudo pacman -S --noconfirm "${to_install[@]}"
   fi
+
+  # -------------------
+  # AUR packages
+  # -------------------
+  if [ -n "$AUR_HELPER" ]; then
+    to_install_aur=()
+    for pkg in "${aur_pkgs[@]}"; do
+      if ! pacman -Qq "$pkg" &>/dev/null; then
+        to_install_aur+=("$pkg")
+      else
+        echo "AUR package $pkg is already installed, skipping."
+      fi
+    done
+    if [ ${#to_install_aur[@]} -gt 0 ]; then
+      $AUR_HELPER -S --noconfirm "${to_install_aur[@]}"
+    fi
+  elif [ ${#aur_pkgs[@]} -gt 0 ]; then
+    echo "No AUR helper installed, skipping AUR packages: ${aur_pkgs[*]}"
+  fi
+
+  # -------------------
+  # Flatpak packages
+  # -------------------
+  for pkg in "${flatpak_pkgs[@]}"; do
+    if ! flatpak list | grep -q "^$pkg"; then
+      flatpak install -y flathub "$pkg"
+    else
+      echo "Flatpak app $pkg is already installed, skipping."
+    fi
+  done
 }
 
-{{- if .config.ui_environment.hyprland }}
-install_packages "{{ join " " .hyprland.pacman }}" "sudo pacman -Syu --noconfirm"
+# ----------------------------
+# 1. Flatpak packages section
+# ----------------------------
+{{- if .config.flatpak }}
+install_packages \
+  "{{ join " " .flatpak_packages.pacman }}" \
+  "{{ join " " .flatpak_packages.aur }}" \
+  "{{ join " " .flatpak_packages.flatpak }}"
 {{- end }}
 
+# ----------------------------
+# 2. Hyprland packages
+# ----------------------------
 {{- if .config.ui_environment.hyprland }}
-[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
-install_packages "{{ join " " .hyprland.aur }}" "$AUR_HELPER -S --noconfirm"
+install_packages \
+  "{{ join " " .hyprland.pacman }}" \
+  "{{ join " " .hyprland.aur }}" \
+  ""
 {{- end }}
 
+# ----------------------------
+# 3. Service packages
+# ----------------------------
 {{- if .service_packages.pacman }}
-install_packages "{{ join " " .service_packages.pacman }}" "sudo pacman -Syu --noconfirm"
+install_packages \
+  "{{ join " " .service_packages.pacman }}" \
+  "{{ join " " .service_packages.aur }}" \
+  ""
 {{- end }}
 
-{{- if .service_packages.aur }}
-[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
-install_packages "{{ join " " .service_packages.aur }}" "$AUR_HELPER -S --noconfirm"
-{{- end }}
-
-{{- if .config.qemu.enable}}
-install_packages "{{ join " " .kvm_packages.pacman }}" "sudo pacman -Syu --noconfirm"
-{{- end }}
-
+# ----------------------------
+# 4. QEMU packages
+# ----------------------------
 {{- if .config.qemu.enable }}
-[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
-install_packages "{{ join " " .kvm_packages.aur }}" "$AUR_HELPER -S --noconfirm"
+install_packages \
+  "{{ join " " .kvm_packages.pacman }}" \
+  "{{ join " " .kvm_packages.aur }}" \
+  ""
 {{- end }}
 
 {{- if .config.qemu.virt_manager }}
-install_packages "{{ join " " .virt_manager_packages.pacman }}" "sudo pacman -Syu --noconfirm"
+install_packages \
+  "{{ join " " .virt_manager_packages.pacman }}" \
+  "{{ join " " .virt_manager_packages.aur }}" \
+  ""
 {{- end }}
 
-{{- if .config.qemu.virt_manager }}
-[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
-install_packages "{{ join " " .virt_manager_packages.aur }}" "$AUR_HELPER -S --noconfirm"
-{{- end }}
-
+# ----------------------------
+# 5. Extra fonts
+# ----------------------------
 {{- if .config.extra_fonts }}
-install_packages "{{ join " " .font_packages.pacman }}" "sudo pacman -Syu --noconfirm"
+install_packages \
+  "{{ join " " .font_packages.pacman }}" \
+  "{{ join " " .font_packages.aur }}" \
+  ""
 {{- end }}
 
-{{- if .config.extra_fonts }}
-[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
-install_packages "{{ join " " .font_packages.aur }}" "$AUR_HELPER -S --noconfirm"
-{{- end }}
-
-{{- if .config.flatpak }}
-install_packages "{{ join " " .flatpak_packages.pacman }}" "sudo pacman -Syu --noconfirm"
-{{- end }}
-
-{{- if .config.flatpak }}
-[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
-install_packages "{{ join " " .flatpak_packages.aur }}" "$AUR_HELPER -S --noconfirm"
-{{- end }}
-
-{{- if .config.flatpak }}
-[ -z "$(command -v flatpak)" ] && echo "Flatpak is not installed." && exit 1
-install_packages "{{ join " " .flatpak_packages.flathub }}" "flatpak install -y flathub"
-{{- end }}
-
-{{- if .packages.pacman }}
-install_packages "{{ join " " .packages.pacman }}" "sudo pacman -Syu --noconfirm"
-{{- end }}
-
-{{- if .packages.aur }}
-[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
-install_packages "{{ join " " .packages.aur }}" "$AUR_HELPER -S --noconfirm"
-{{- end }}
-
+# ----------------------------
+# 6. Gaming packages
+# ----------------------------
 {{- if .config.gaming }}
-gaming_packages_to_install=()
-
+gaming_pkgs=()
 for pkg in {{ join " " .gaming_packages.pacman }}; do
-  # Skip lib32 packages if multilib is disabled
   {{- if not .config.multilib }}
-  if [[ "$pkg" == lib32-* ]]; then
-    echo "Skipping $pkg because multilib is disabled."
-    continue
-  fi
+  if [[ "$pkg" == lib32-* ]]; then continue; fi
   {{- end }}
-
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    gaming_packages_to_install+=("$pkg")
-  else
-    echo "$pkg is already installed, skipping."
-  fi
+  gaming_pkgs+=("$pkg")
 done
-
-if [ ${#gaming_packages_to_install[@]} -gt 0 ]; then
-  sudo pacman -Syu --noconfirm "${gaming_packages_to_install[@]}"
-else
-  echo "All gaming packages are already installed."
-fi
+install_packages \
+  "${gaming_pkgs[*]}" \
+  "{{ join " " .gaming_packages.aur }}" \
+  ""
 {{- end }}
 
-{{- if .config.gaming }}
-[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
-install_packages "{{ join " " .gaming_packages.aur }}" "$AUR_HELPER -S --noconfirm"
-{{- end }}
-
+# ----------------------------
+# 7. School packages
+# ----------------------------
 {{- if .config.school }}
-install_packages "{{ join " " .school_packages.pacman }}" "sudo pacman -Syu --noconfirm"
+install_packages \
+  "{{ join " " .school_packages.pacman }}" \
+  "{{ join " " .school_packages.aur }}" \
+  ""
 {{- end }}
 
-{{- if .config.school }}
-[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
-install_packages "{{ join " " .school_packages.aur }}" "$AUR_HELPER -S --noconfirm"
-{{- end }}
-
+# ----------------------------
+# 8. Language servers
+# ----------------------------
 {{- if .language_servers }}
-install_packages "{{ join " " .language_servers.packages }}" "sudo pacman -Syu --noconfirm"
+install_packages \
+  "{{ join " " .language_servers.packages }}" \
+  "{{ join " " .language_servers.aur }}" \
+  ""
 {{- end }}
 
-{{- if .language_servers }}
-[ -z "$AUR_HELPER" ] && echo "No AUR helper installed." && exit 1
-install_packages "{{ join " " .language_servers.aur }}" "$AUR_HELPER -S --noconfirm"
+# ----------------------------
+# 9. Additional packages
+# ----------------------------
+{{- if .packages.pacman }}
+install_packages \
+  "{{ join " " .packages.pacman }}" \
+  "{{ join " " .packages.aur }}" \
+  ""
 {{- end }}

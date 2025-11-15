@@ -11,17 +11,20 @@
       - pipewire-pulse
       - wireplumber
     aur: []
+    flatpak: []
 
   kvm_packages:
     pacman:
       - qemu-desktop
       - libvirt
     aur: []
+    flatpak: []
   
   virt_manager_packages:
     pacman:
       - virt-manager
     aur: []
+    flatpak: []
 
   gaming_packages:
     pacman:
@@ -37,6 +40,7 @@
       - protonplus
       - heroic-games-launcher-bin # alternitve storefrount for Epic, Prime, and Prime Games
       - protontricks
+    flatpak: []
 
   font_packages:
     pacman:
@@ -44,12 +48,13 @@
       - adobe-source-han-serif-kr-fonts
       - adobe-source-han-serif-cn-fonts
     aur: []
+    flatpak: []
 
   flatpak_packages:
     pacman:
       - flatpak
     aur: []
-    flathub:
+    flatpak:
       - com.github.tchx84.Flatseal # Flatseal is a permission manager for Flatpak apps.
 
   packages:
@@ -105,6 +110,7 @@
       - hyprshot 
       - kanata-bin
       - bluetuith
+    flatpak: []
 
   hyprland:
     pacman:
@@ -121,7 +127,8 @@
       - wl-clipboard
       - swww
     aur:
-    - hyprshot
+      - hyprshot
+    flatpak: []
 
   school_packages:
     pacman:
@@ -131,6 +138,7 @@
       # Exec=bash -c 'languagetool --http --port 8081 --allow-origin --language en-US & LT_PID=$!; libreoffice --writer %U; kill $LT_PID'
       # - languagetool
     aur: []
+    flatpak: []
 
   language_servers:
     packages:
@@ -152,3 +160,4 @@
       - taplo-cli # toml
       - termux-language-server
       - superhtml-bin
+    flatpak: []
