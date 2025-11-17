@@ -1,3 +1,19 @@
+Version 1.2.0
+https://github.com/dianaw353/Lunur-Dots/releases/tag/v1.2.0
+-----------------------------------------------------------------------
+# Features
+New package category: School (for personal use)
+Add miscellaneous new packages.Add support and toggle for grayscale.Add configuration for Flatpak and FlatsealAdd option to Install CachyOS repositories and to switch to them.Refactor package installation script.
+Add config to install and autostart fcitx5.
+# Fixes
+Fix the default cpufreq governor in gamemode configuration.
+Make sure git and base-devel are installed before installing AUR packages.
+Added basic global configuration for KDE/Qt apps
+# Misc
+Tweak brightness controls.
+Change fonts for Qt apps to JetBrainsMono Nerd Font.Remove useless configuration for NVIDIA GPUs.
+Make Proton VPN and KDE Connect autostart depend on the corresponding packages to be in .packages.pacman configuration.
+
 Version 1.1.0
 https://github.com/dianaw353/Lunur-Dots/releases/tag/v1.1.0
 -----------------------------------------------------------------------
