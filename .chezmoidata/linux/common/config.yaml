@@ -5,6 +5,7 @@
         prefer_open_drivers: false
       amd_drivers: true
       intel_drivers: false
+      kvm_guest_drivers: false # needed if installing system on qemu/kvm
 
       ### System ###
       system:
