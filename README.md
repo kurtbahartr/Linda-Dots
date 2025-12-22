@@ -94,3 +94,5 @@ https://github.com/Axenide/PywalZen#installation
 ## Sister Projects
 
 [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell)
+[Lunur-Wallpaper](https://github.com/dianaw353/Lunur-Wallpapers)
+
