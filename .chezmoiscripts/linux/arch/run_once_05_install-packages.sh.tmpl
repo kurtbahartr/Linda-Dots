@@ -92,10 +92,10 @@ install_packages \
   ""
 {{- end }}
 
-{{- if .service_packages.pacman }}
+{{- if .config.system.audio.pipewire.enable }}
 install_packages \
-  "{{ join " " .service_packages.pacman }}" \
-  "{{ join " " .service_packages.aur }}" \
+  "{{ join " " .pipewire.pacman }}" \
+  "{{ join " " .pipewire.aur }}" \
   ""
 {{- end }}
 

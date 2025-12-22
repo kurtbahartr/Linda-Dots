@@ -4,7 +4,8 @@
       - bluez-utils
     aur: []
     flatpak: []
-  service_packages:
+    
+  pipewire:
     pacman:
       # Audio
       - pipewire

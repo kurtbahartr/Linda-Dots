@@ -38,9 +38,9 @@ enable_services() {
 enable_services system {{ $bt }} "bluetooth"
 {{- end }}
 
-{{- if .services.user }}
-{{- $user := join " " .services.user }}
-enable_services user {{ $user }} "user"
+{{- if .config.system.audio.pipewire.enable }}
+{{- $pipewire := join " " .services.user.audio.pipewire }}
+enable_services user {{ $pipewire }} "pipewire"
 {{- end }}
 
 {{- if .config.qemu.enable }}

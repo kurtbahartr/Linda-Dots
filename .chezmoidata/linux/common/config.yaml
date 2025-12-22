@@ -11,6 +11,9 @@
         bluetooth:
           enable: true
           experimental: true # bluetooth battery stats
+        audio:
+          pipewire:
+            enable: true
 
       ### Extra packages ###
       gaming: true

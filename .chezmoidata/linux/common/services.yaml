@@ -3,8 +3,10 @@ services:
     bluetooth:
       - bluetooth
   user:
-    - pipewire
-    - wireplumber
+    audio:
+      pipewire:
+        - pipewire
+        - wireplumber
 
 kvm_services:
   system:
