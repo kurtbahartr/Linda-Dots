@@ -14,6 +14,10 @@
         audio:
           pipewire:
             enable: true
+        printing:
+          # enables printing support using cups
+          # For more infomation visit: https://wiki.archlinux.org/title/CUPS
+          enable: false
 
       ### Extra packages ###
       gaming: true

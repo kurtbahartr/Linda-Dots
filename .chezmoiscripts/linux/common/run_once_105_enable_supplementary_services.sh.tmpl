@@ -38,6 +38,11 @@ enable_services() {
 enable_services system {{ $bt }} "bluetooth"
 {{- end }}
 
+{{- if .config.system.printing.enable }}
+{{- $cups := join " " .services.system.printing }}
+enable_services system {{ $cups }} "cups"
+{{- end }}
+
 {{- if .config.system.audio.pipewire.enable }}
 {{- $pipewire := join " " .services.user.audio.pipewire }}
 enable_services user {{ $pipewire }} "pipewire"

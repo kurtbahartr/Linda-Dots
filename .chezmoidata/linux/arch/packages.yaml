@@ -17,6 +17,25 @@
     aur: []
     flatpak: []
 
+  printing:
+    pacman:
+      - cups
+      - cups-filters
+      - ghostscript
+      - foomatic-db
+      # Optional drivers
+      # - cups-pdf
+      # HP printers
+      # - hplip
+    aur:
+      # Optional drivers
+      # Epson Printers
+      # - epson-inkjet-printer-escpr
+      # - epson-inkjet-printer-escpr2
+      # For more brother printer drivers please look in the AUR
+      # - brlaser
+    flatpak: []
+
   kvm_packages:
     pacman:
       - qemu-desktop

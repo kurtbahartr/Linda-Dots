@@ -99,6 +99,13 @@ install_packages \
   ""
 {{- end }}
 
+{{- if .config.system.printing.enable }}
+install_packages \
+  "{{ join " " .printing.pacman }}" \
+  "{{ join " " .printing.aur }}" \
+  ""
+{{- end }}
+
 # ----------------------------
 # 4. QEMU packages
 # ----------------------------
