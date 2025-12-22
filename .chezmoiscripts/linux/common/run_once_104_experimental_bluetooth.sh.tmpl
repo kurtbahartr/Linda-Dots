@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+{{- if .config.system.bluetooth.experimental }}
+
+CONF="/etc/bluetooth/main.conf"
+
+if [ -f "$CONF" ]; then
+  if grep -Eq '^[#[:space:]]*Experimental[[:space:]]*=' "$CONF"; then
+    sudo sed -i -E 's/^[#[:space:]]*Experimental[[:space:]]*=.*/Experimental = true/' "$CONF"
+  else
+    echo "Experimental = true" | sudo tee -a "$CONF" >/dev/null
+  fi
+fi
+
+{{- end }}

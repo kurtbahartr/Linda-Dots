@@ -1,6 +1,7 @@
 services:
   system:
-    - bluetooth
+    bluetooth:
+      - bluetooth
   user:
     - pipewire
     - wireplumber

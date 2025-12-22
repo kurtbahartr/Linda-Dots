@@ -84,6 +84,14 @@ install_packages \
 # ----------------------------
 # 3. Service packages
 # ----------------------------
+
+{{- if .config.system.bluetooth.enable }}
+install_packages \
+  "{{ join " " .bluetooth.pacman }}" \
+  "{{ join " " .bluetooth.aur }}" \
+  ""
+{{- end }}
+
 {{- if .service_packages.pacman }}
 install_packages \
   "{{ join " " .service_packages.pacman }}" \

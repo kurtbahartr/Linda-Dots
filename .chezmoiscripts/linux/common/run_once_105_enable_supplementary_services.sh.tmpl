@@ -2,20 +2,18 @@
 set -e
 
 enable_services() {
-  local mode="$1"        # "system" or "user"
-  local services="$2"    # space-separated list
-  local label="$3"       # label to show (optional)
+  local mode="$1"     # "system" or "user"
+  local services=($2) # space-separated list
+  local label="$3"    # optional label
 
   local enable_cmd="systemctl"
   local check_cmd="systemctl"
-  local found_cmd="list-units --all"
-  local prefix=""
 
   [[ "$mode" == "user" ]] && enable_cmd="systemctl --user" && check_cmd="systemctl --user"
 
   to_enable=()
 
-  for srv in $services; do
+  for srv in "${services[@]}"; do
     if ! $check_cmd list-units --all "${srv}.service" &>/dev/null; then
       echo "${srv}.service not found, skipping."
     elif ! $check_cmd is-enabled --quiet "${srv}.service"; then
@@ -35,14 +33,17 @@ enable_services() {
   fi
 }
 
-{{- if .services.system }}
-enable_services system "{{ join " " .services.system }}" "system"
+{{- if .config.system.bluetooth.enable }}
+{{- $bt := join " " .services.system.bluetooth }}
+enable_services system {{ $bt }} "bluetooth"
 {{- end }}
 
 {{- if .services.user }}
-enable_services user "{{ join " " .services.user }}" "user"
+{{- $user := join " " .services.user }}
+enable_services user {{ $user }} "user"
 {{- end }}
 
 {{- if .config.qemu.enable }}
-enable_services system "{{ join " " .kvm_services.system }}" "KVM"
+{{- $kvm := join " " .kvm_services.system }}
+enable_services system {{ $kvm }} "KVM"
 {{- end }}

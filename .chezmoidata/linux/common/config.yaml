@@ -6,6 +6,12 @@
       amd_drivers: true
       intel_drivers: false
 
+      ### System ###
+      system:
+        bluetooth:
+          enable: true
+          experimental: true # bluetooth battery stats
+
       ### Extra packages ###
       gaming: true
       flatpak: false # Also includes Flatseal

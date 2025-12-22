@@ -1,8 +1,11 @@
-  service_packages:
+  bluetooth:
     pacman:
-      # Bluetooth
       - bluez
       - bluez-utils
+    aur: []
+    flatpak: []
+  service_packages:
+    pacman:
       # Audio
       - pipewire
       - pipewire-alsa
