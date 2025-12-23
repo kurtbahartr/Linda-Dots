@@ -128,8 +128,9 @@
       # Themeing
       - python-pywalfox
       - qt6ct-kde
-      - darkly-qt6-git
-      - darkly-qt5-git
+      - darkly-bin
+      #- darkly-qt6-git
+      #- darkly-qt5-git
       - bibata-cursor-theme-bin
       - oh-my-posh-bin
       - matugen-bin
