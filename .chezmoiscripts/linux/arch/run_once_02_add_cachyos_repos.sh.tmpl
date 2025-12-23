@@ -11,5 +11,5 @@ sed -i 's/keyserver.ubuntu.com/hkp\:\/\/keyserver.ubuntu.com\:80/' cachyos-repo.
 sudo ./cachyos-repo.sh
 cd "$PREV_PWD"
 rm -rf "$TEMP_DIR"
-sudo pacman -Syu
+sudo pacman -Syu --noconfirm
 {{- end }}
