@@ -43,7 +43,7 @@ install_packages() {
       fi
     done
     if [ ${#to_install_aur[@]} -gt 0 ]; then
-      $AUR_HELPER -S --noconfirm "${to_install_aur[@]}"
+      "$AUR_HELPER" -S --noconfirm "${to_install_aur[@]}"
     fi
   elif [ ${#aur_pkgs[@]} -gt 0 ]; then
     echo "No AUR helper installed, skipping AUR packages: ${aur_pkgs[*]}"
@@ -78,32 +78,31 @@ install_packages \
 install_packages \
   "{{ join " " .hyprland.pacman }}" \
   "{{ join " " .hyprland.aur }}" \
-  ""
+  "{{ join " " .hyprland.flatpak }}"
 {{- end }}
 
 # ----------------------------
 # 3. Service packages
 # ----------------------------
-
 {{- if .config.system.bluetooth.enable }}
 install_packages \
   "{{ join " " .bluetooth.pacman }}" \
   "{{ join " " .bluetooth.aur }}" \
-  ""
+  "{{ join " " .bluetooth.flatpak }}"
 {{- end }}
 
 {{- if .config.system.audio.pipewire.enable }}
 install_packages \
   "{{ join " " .pipewire.pacman }}" \
   "{{ join " " .pipewire.aur }}" \
-  ""
+  "{{ join " " .pipewire.flatpak }}"
 {{- end }}
 
 {{- if .config.system.printing.enable }}
 install_packages \
   "{{ join " " .printing.pacman }}" \
   "{{ join " " .printing.aur }}" \
-  ""
+  "{{ join " " .printing.flatpak }}"
 {{- end }}
 
 # ----------------------------
@@ -113,14 +112,14 @@ install_packages \
 install_packages \
   "{{ join " " .kvm_packages.pacman }}" \
   "{{ join " " .kvm_packages.aur }}" \
-  ""
+  "{{ join " " .kvm_packages.flatpak }}"
 {{- end }}
 
 {{- if .config.qemu.virt_manager }}
 install_packages \
   "{{ join " " .virt_manager_packages.pacman }}" \
   "{{ join " " .virt_manager_packages.aur }}" \
-  ""
+  "{{ join " " .virt_manager_packages.flatpak }}"
 {{- end }}
 
 # ----------------------------
@@ -130,7 +129,7 @@ install_packages \
 install_packages \
   "{{ join " " .font_packages.pacman }}" \
   "{{ join " " .font_packages.aur }}" \
-  ""
+  "{{ join " " .font_packages.flatpak }}"
 {{- end }}
 
 # ----------------------------
@@ -148,7 +147,7 @@ install_packages \
 {{- end }}
 
 # ----------------------------
-# 6. Gaming packages
+# 7. Gaming packages
 # ----------------------------
 {{- if .config.gaming }}
 gaming_pkgs=()
@@ -161,35 +160,35 @@ done
 install_packages \
   "${gaming_pkgs[*]}" \
   "{{ join " " .gaming_packages.aur }}" \
-  ""
+  "{{ join " " .gaming_packages.flatpak }}"
 {{- end }}
 
 # ----------------------------
-# 7. School packages
+# 8. School packages
 # ----------------------------
 {{- if .config.school }}
 install_packages \
   "{{ join " " .school_packages.pacman }}" \
   "{{ join " " .school_packages.aur }}" \
-  ""
+  "{{ join " " .school_packages.flatpak }}"
 {{- end }}
 
 # ----------------------------
-# 8. Language servers
+# 9. Language servers
 # ----------------------------
 {{- if .language_servers }}
 install_packages \
   "{{ join " " .language_servers.packages }}" \
   "{{ join " " .language_servers.aur }}" \
-  ""
+  "{{ join " " .language_servers.flatpak }}"
 {{- end }}
 
 # ----------------------------
-# 9. Additional packages
+# 10. Additional packages
 # ----------------------------
 {{- if .packages.pacman }}
 install_packages \
   "{{ join " " .packages.pacman }}" \
   "{{ join " " .packages.aur }}" \
-  ""
+  "{{ join " " .packages.flatpak }}"
 {{- end }}
