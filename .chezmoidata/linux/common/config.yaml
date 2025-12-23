@@ -54,6 +54,9 @@
       # for multilingual keyboard layouts.
       fcitx5: false
       wallpaper:
+        # enables the option to install the wallpaper repo
+        enable: true
+        repo: "https://github.com/dianaw353/Lunur-Wallpapers.git"
         color_mode: "dark"
       extra_fonts: true # Install extra fonts as specified in the config `font_packages`
       shell:

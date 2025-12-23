@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+
+{{ if .config.wallpaper.enable }}
+echo "[Wallpapers] Installing from repo: {{ .config.wallpaper.repo }}"
+
+REPO_URL="{{ .config.wallpaper.repo }}"
+INSTALL_PATH="$HOME/Pictures/Wallpapers"
+
+# Clone the repo if it doesn't already exist
+if [ ! -d "$INSTALL_PATH" ]; then
+    echo "Cloning wallpapers into $INSTALL_PATH..."
+    git clone "$REPO_URL" "$INSTALL_PATH"
+else
+    echo "Wallpapers already exist at $INSTALL_PATH. Skipping clone."
+fi
+{{ else }}
+echo "[Wallpapers] Skipping install (disabled in config)"
+{{ end }}
+
