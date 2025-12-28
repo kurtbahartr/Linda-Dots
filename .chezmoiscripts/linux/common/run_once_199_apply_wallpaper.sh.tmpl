@@ -1,8 +1,7 @@
 #!/bin/bash
 
-{{ if eq .config.wallpaper.color_mode "dark" -}}
+{{ if eq .config.desktop_stack.wallpaper.color_mode "dark" -}}
 matugen image ~/.local/share/chezmoi/assets/wallpapers/lake.jpg -m dark
-{{ else if eq .config.wallpaper.color_mode "light" -}}
+{{ else if eq .config.desktop_stack.wallpaper.color_mode "light" -}}
 matugen image ~/.local/share/chezmoi/assets/wallpapers/lake.jpg -m light
 {{ end -}}
-
