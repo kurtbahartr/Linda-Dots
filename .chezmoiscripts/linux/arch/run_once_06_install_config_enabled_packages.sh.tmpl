@@ -19,7 +19,7 @@ fi
 {{ end }}
 
 {{ if .config.limine.snapper_sync }}
-if pacman -Qq limine > /dev/null 2>&1; then
+if pacman -Qq limine >/dev/null 2>&1; then
   if [ -z "$AUR_HELPER" ]; then
     echo "No AUR helper installed, cannot install AUR packages."
     exit 1
@@ -46,6 +46,37 @@ else
 fi
 {{ end }}
 
+{{ if eq .config.desktop_stack.login_manager "ly" }}
+echo "Login manager set to ly."
+
+# Ensure an AUR helper exists if needed
+if [ -z "$AUR_HELPER" ]; then
+  echo "No AUR helper detected."
+fi
+
+if pacman -Qq ly &>/dev/null; then
+  echo "ly is already installed, skipping."
+else
+  echo "Installing ly login manager..."
+
+  # Try repo install first
+  if sudo pacman -Si ly &>/dev/null; then
+    sudo pacman -Syu --noconfirm ly
+  else
+    # Fall back to AUR
+    if [ -z "$AUR_HELPER" ]; then
+      echo "ly not available in repos and no AUR helper installed."
+      exit 1
+    fi
+    "$AUR_HELPER" -S --noconfirm ly
+  fi
+fi
+{{ end }}
+
+{{- if eq .config.desktop_stack.login_manager "none" }}
+echo "No login manager wanted, skipping."
+{{- end }}
+
 {{ if .config.limine.journalctl_desktop_notification}}
 if ! pacman -Qq journalctl-desktop-notification &>/dev/null; then
   sudo pacman -Syu --noconfirm journalctl-desktop-notification
@@ -53,7 +84,7 @@ else
   echo "journalctl-desktop-notification is already installed, skipping."
 fi
 {{ end }}
-if pacman -Qq limine > /dev/null 2>&1; then
+if pacman -Qq limine >/dev/null 2>&1; then
   if [ -z "$AUR_HELPER" ]; then
     echo "No AUR helper installed, cannot install AUR packages."
     exit 1
@@ -62,23 +93,23 @@ if pacman -Qq limine > /dev/null 2>&1; then
   echo "Checking and installing missing AUR packages..."
 
   packages_to_install=()
-  if pacman -Qq dracut > /dev/null 2>&1; then
+  if pacman -Qq dracut >/dev/null 2>&1; then
     if ! pacman -Qq limine-dracut-support &>/dev/null; then
       packages_to_install+=("limine-dracut-support")
     else
       echo "AUR package limine-dracut-support is already installed, skipping."
     fi
     initrd_regen_cmd="dracut --regenerate-all --force"
-  elif pacman -Qq mkinitcpio > /dev/null 2>&1; then
+  elif pacman -Qq mkinitcpio >/dev/null 2>&1; then
     if ! pacman -Qq limine-mkinitcpio-hook &>/dev/null; then
       packages_to_install+=("limine-mkinitcpio-hook")
     else
       echo "AUR package limine-mkinitcpio-hook is already installed, skipping."
     fi
     initrd_regen_cmd="mkinitcpio -P"
-  elif pacman -Qq booster > /dev/null 2>&1; then
+  elif pacman -Qq booster >/dev/null 2>&1; then
     packages_to_install+=("limine-entry-tool")
-    initrd_regen_cmd="/usr/lib/booster/regenerate_images"  
+    initrd_regen_cmd="/usr/lib/booster/regenerate_images"
   else
     echo "Neither dracut, mkinitcpio, nor booster is installed. No known hook for Limine initramfs support."
   fi

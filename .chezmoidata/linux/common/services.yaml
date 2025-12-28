@@ -4,6 +4,9 @@ services:
       - bluetooth
     printing:
       - cups
+    login_manager:
+      ly:
+        - ly@tty2
   user:
     audio:
       pipewire:

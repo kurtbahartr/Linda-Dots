@@ -48,6 +48,7 @@
         command_line_shell:
           zsh:
             enable: true # includes basic styleing
+        login_manager: "ly" # Supported options: ly and none with more on the way
         window_managers:
           hyprland:
             enable: true

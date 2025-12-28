@@ -52,3 +52,8 @@ enable_services user {{ $pipewire }} "pipewire"
 {{- $kvm := join " " .kvm_services.system }}
 enable_services system {{ $kvm }} "KVM"
 {{- end }}
+
+{{- if eq .config.desktop_stack.login_manager "ly" }}
+{{- $ly := join " " .services.system.login_manager.ly }}
+enable_services system {{ $ly }} "login manager (ly)"
+{{- end }}
