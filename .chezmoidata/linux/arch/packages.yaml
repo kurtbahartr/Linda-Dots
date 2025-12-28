@@ -85,7 +85,7 @@
       - flatpak
     aur: []
     flatpak:
-      - com.github.tchx84.Flatseal # Flatseal is a permission manager for Flatpak apps.
+      - com.github.tchx84.Flatseal # Highly reccommended (if you plan to use flatpak): Flatseal is a permission manager for Flatpak apps.
 
   packages:
     pacman:
