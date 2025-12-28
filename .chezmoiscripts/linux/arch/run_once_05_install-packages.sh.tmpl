@@ -74,7 +74,7 @@ install_packages \
 # ----------------------------
 # 2. Hyprland packages
 # ----------------------------
-{{- if .config.ui_environment.hyprland }}
+{{- if .config.desktop_stack.enable }}
 install_packages \
   "{{ join " " .hyprland.pacman }}" \
   "{{ join " " .hyprland.aur }}" \

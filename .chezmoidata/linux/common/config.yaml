@@ -42,9 +42,10 @@
       cachyos_repos: true
       multilib: true
 
-      ### User environment ###
-      ui_environment:
-        hyprland: true
+      ### Desktop Stack ###
+      desktop_stack:
+        hyprland:
+          enable: true
       # Kanata is a key remapping program that works at user level.
       # Think of it like Windows PowerToys's Keyboard Manager but for
       # Linux. The configuration here will configure Kanata to remap
