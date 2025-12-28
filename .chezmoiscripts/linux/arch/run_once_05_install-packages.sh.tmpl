@@ -72,17 +72,7 @@ install_packages \
 {{- end }}
 
 # ----------------------------
-# 2. Hyprland packages
-# ----------------------------
-{{- if .config.desktop_stack.window_managers.hyprland.enable }}
-install_packages \
-  "{{ join " " .hyprland.pacman }}" \
-  "{{ join " " .hyprland.aur }}" \
-  "{{ join " " .hyprland.flatpak }}"
-{{- end }}
-
-# ----------------------------
-# 3. Service packages
+# 2. Service packages
 # ----------------------------
 {{- if .config.system.bluetooth.enable }}
 install_packages \
@@ -103,6 +93,16 @@ install_packages \
   "{{ join " " .printing.pacman }}" \
   "{{ join " " .printing.aur }}" \
   "{{ join " " .printing.flatpak }}"
+{{- end }}
+
+# ----------------------------
+# 3. Hyprland packages
+# ----------------------------
+{{- if .config.desktop_stack.window_managers.hyprland.enable }}
+install_packages \
+  "{{ join " " .hyprland.pacman }}" \
+  "{{ join " " .hyprland.aur }}" \
+  "{{ join " " .hyprland.flatpak }}"
 {{- end }}
 
 # ----------------------------
