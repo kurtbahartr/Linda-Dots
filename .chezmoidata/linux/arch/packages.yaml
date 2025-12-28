@@ -36,6 +36,16 @@
       # - brlaser
     flatpak: []
 
+  command_line_shell_zsh_packages:
+    pacman:
+      - zsh
+      - eza
+      - fzf
+      - zoxide
+    aur:
+      - oh-my-posh-bin
+    flatpak: []
+
   kvm_packages:
     pacman:
       - qemu-desktop
@@ -90,11 +100,6 @@
   packages:
     pacman:
       - kitty
-      # Zsh config dependencies
-      - zsh
-      - fzf
-      - zoxide
-      - eza
       # Qt Support
       - qt6-wayland
       - qt5-wayland
@@ -132,7 +137,6 @@
       #- darkly-qt6-git
       #- darkly-qt5-git
       - bibata-cursor-theme-bin
-      - oh-my-posh-bin
       - matugen-bin
       # - python-psutil
       # Misc

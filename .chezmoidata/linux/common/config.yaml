@@ -19,6 +19,7 @@
           # enables printing support using cups
           # For more infomation visit: https://wiki.archlinux.org/title/CUPS
           enable: false
+          
 
       ### Extra packages ###
       gaming: true
@@ -44,6 +45,9 @@
 
       ### Desktop Stack ###
       desktop_stack:
+        command_line_shell:
+          zsh:
+            enable: true # includes basic styleing
         window_managers:
           hyprland:
             enable: true

@@ -95,6 +95,13 @@ install_packages \
   "{{ join " " .printing.flatpak }}"
 {{- end }}
 
+{{- if .config.desktop_stack.command_line_shell.zsh.enable }}
+install_packages \
+  "{{ join " " .command_line_shell_zsh_packages.pacman }}" \
+  "{{ join " " .command_line_shell_zsh_packages.aur }}" \
+  "{{ join " " .command_line_shell_zsh_packages.flatpak }}"
+{{- end }}
+
 # ----------------------------
 # 3. Hyprland packages
 # ----------------------------
