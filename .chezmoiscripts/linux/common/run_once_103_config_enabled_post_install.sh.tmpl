@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-{{ if .config.zram }}
-sudo tee /etc/systemd/zram-generator.conf > /dev/null 2>&1 <<EOF
+{{ if .config.system.zram }}
+sudo tee /etc/systemd/zram-generator.conf >/dev/null 2>&1 <<EOF
 [zram0]
 zram-size = ram / 2
 compression-algorithm = zstd
@@ -12,7 +12,7 @@ EOF
 {{ end }}
 
 {{ if .config.limine.snapper_sync }}
-esp_check(){
+esp_check() {
   esp="$(bootctl --print-esp-path || grep ESP_PATH=. /etc/default/limine)"
   if [ -z "$esp" ]; then
     echo "ESP path could not be detected. Set \"ESP_PATH\" in /etc/default/limine and rerun chezmoi update."

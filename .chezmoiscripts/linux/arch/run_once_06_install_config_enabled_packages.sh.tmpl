@@ -10,7 +10,7 @@ for helper in yay paru trizen; do
   fi
 done
 
-{{ if .config.zram }}
+{{ if .config.system.zram }}
 if ! pacman -Qq zram-generator &>/dev/null; then
   sudo pacman -Syu --noconfirm zram-generator
 else

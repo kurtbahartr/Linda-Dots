@@ -159,7 +159,7 @@ install_packages \
 {{- if .config.system.packages.gaming }}
 gaming_pkgs=()
 for pkg in {{ join " " .gaming_packages.pacman }}; do
-  {{- if not .config.multilib }}
+  {{- if not .config.system.arch.multilib }}
   if [[ "$pkg" == lib32-* ]]; then continue; fi
   {{- end }}
   gaming_pkgs+=("$pkg")

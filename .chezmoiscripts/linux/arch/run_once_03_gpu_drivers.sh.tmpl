@@ -4,7 +4,7 @@ set -e
 drivers_to_install=()
 
 # Mesa (core) — always install, lib32 only if multilib
-for pkg in mesa {{ if .config.multilib }}lib32-mesa{{ end }}; do
+for pkg in mesa {{ if .config.system.arch.multilib }}lib32-mesa{{ end }}; do
   if ! pacman -Qq "$pkg" &>/dev/null; then
     drivers_to_install+=("$pkg")
   else
@@ -14,7 +14,7 @@ done
 
 {{ if .config.amd_drivers }}
 if lsmod | grep amdgpu >/dev/null; then
-  for pkg in vulkan-radeon {{ if .config.multilib }}lib32-vulkan-radeon{{ end }} vulkan-icd-loader {{ if .config.multilib }}lib32-vulkan-icd-loader{{ end }}; do
+  for pkg in vulkan-radeon {{ if .config.system.arch.multilib }}lib32-vulkan-radeon{{ end }} vulkan-icd-loader {{ if .config.system.arch.multilib }}lib32-vulkan-icd-loader{{ end }}; do
     if ! pacman -Qq "$pkg" &>/dev/null; then
       drivers_to_install+=("$pkg")
     else
@@ -44,7 +44,7 @@ fi
 
 {{ if .config.intel_drivers }}
 if lsmod | grep -E 'i915|xe' >/dev/null; then
-  for pkg in mesa vulkan-intel {{ if .config.multilib }}lib32-mesa lib32-vulkan-intel{{ end }} vulkan-icd-loader {{ if .config.multilib }}lib32-vulkan-icd-loader{{ end }}; do
+  for pkg in mesa vulkan-intel {{ if .config.system.arch.multilib }}lib32-mesa lib32-vulkan-intel{{ end }} vulkan-icd-loader {{ if .config.system.arch.multilib }}lib32-vulkan-icd-loader{{ end }}; do
     if ! pacman -Qq "$pkg" &>/dev/null; then
       drivers_to_install+=("$pkg")
     else

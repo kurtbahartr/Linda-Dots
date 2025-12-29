@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-{{- if .config.multilib }}
+{{- if .config.system.arch.multilib }}
 if grep -qE "^#\[multilib\]" /etc/pacman.conf && grep -A1 "^#\[multilib\]" /etc/pacman.conf | grep -qE "^#Include = /etc/pacman.d/mirrorlist"; then
   echo "Enabling multilib repository..."
   sudo sed -i '/^#\[multilib\]$/s/^#//' /etc/pacman.conf
@@ -11,4 +11,3 @@ else
   echo "Multilib repository is already enabled. Skipping."
 fi
 {{- end }}
-

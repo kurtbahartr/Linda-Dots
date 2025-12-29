@@ -1,6 +1,6 @@
 #!/bin/bash
 
-{{- if .config.cachyos_repos }}
+{{- if .config.system.arch.cachyos_repos }}
 PREV_PWD="$PWD"
 TEMP_DIR="$(mktemp -d)"
 cd "$TEMP_DIR"
