@@ -72,5 +72,5 @@ done
 if [ ${#drivers_to_install[@]} -eq 0 ]; then
   echo "All driver packages are already installed."
 else
-  sudo pacman -Syu --noconfirm "${drivers_to_install[@]}"
+  sudo pacman -S --noconfirm "${drivers_to_install[@]}"
 fi
