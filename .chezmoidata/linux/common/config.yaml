@@ -9,7 +9,8 @@
 
       ### System ###
       system:
-        arch:
+        arch: # Arch Linux only options
+          aur_wrapper: "yay-bin" # yay-bin, paru-bin, trizen-bin
           ### Repositories ###
           # Add CachyOS repositories
           # CachyOS is an Arch-based distribution that compiles packages

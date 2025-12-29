@@ -1,59 +1,47 @@
 #!/bin/bash
-
 set -e
 
 {{- if .packages.aur }}
-echo "Checking for AUR helper..."
 
-# Check if any known AUR helper is installed
-AUR_HELPER=""
-for helper in yay paru trizen; do
-  if command -v "$helper" &>/dev/null; then
-    AUR_HELPER="$helper"
-    break
+AUR_HELPER="{{ .config.system.arch.aur_wrapper }}"
+
+# Binary name = remove '-' and everything after it
+AUR_CMD="${AUR_HELPER%-*}"
+
+echo "Configured AUR helper package: $AUR_HELPER"
+echo "Checking for installed command: $AUR_CMD"
+
+# Check if helper command is already available
+if command -v "$AUR_CMD" &>/dev/null; then
+  echo "$AUR_CMD is already installed."
+  exit 0
+fi
+
+echo "Installing AUR helper: $AUR_HELPER"
+
+# Ensure required dependencies
+for pkg in git base-devel; do
+  if ! pacman -Qq "$pkg" &>/dev/null; then
+    echo "Installing dependency: $pkg"
+    sudo pacman -S --noconfirm --needed "$pkg"
   fi
 done
 
-# If not found, prompt to install one
-if [ -z "$AUR_HELPER" ]; then
-  echo "No AUR helper found."
+AUR_DIR="$HOME/.aur_builds"
+mkdir -p "$AUR_DIR"
+cd "$AUR_DIR"
 
-  read -rp "Which AUR helper would you like to install? (yay/paru/trizen): " selected_helper
-  AUR_HELPER="$selected_helper"
+rm -rf "$AUR_HELPER"
 
-  if [[ ! "$AUR_HELPER" =~ ^(yay|paru|trizen)$ ]]; then
-    echo "Unsupported AUR helper: $AUR_HELPER"
-    exit 1
-  fi
+git clone "https://aur.archlinux.org/${AUR_HELPER}.git"
+cd "$AUR_HELPER"
 
-  # Installing dependencies to install AUR packages
-  for pkg in git base-devel; do
-    if ! command -v "$pkg" &>/dev/null; then
-      echo "$pkg is not installed. Installing dependencies using pacman..."
-      sudo pacman -S --noconfirm "$pkg"
-    else
-      echo "$pkg is already installed."
-    fi
-  done
+makepkg -si --noconfirm
 
-  echo "Installing $AUR_HELPER from AUR..."
-
-  AUR_DIR="$HOME/.aur_builds"
-  mkdir -p "$AUR_DIR"
-  cd "$AUR_DIR"
-
-  if [ -d "$AUR_HELPER" ]; then
-    rm -rf "$AUR_HELPER"
-  fi
-
-  git clone "https://aur.archlinux.org/${AUR_HELPER}-bin.git"
-  cd "${AUR_HELPER}-bin"
-  makepkg -si --noconfirm
-
-  echo "$AUR_HELPER installed successfully."
-fi
+echo "$AUR_CMD installed successfully."
 
 # Cleanup
 echo "Cleaning up AUR build directory..."
 rm -rf "$HOME/.aur_builds"
+
 {{- end }}
