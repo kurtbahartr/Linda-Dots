@@ -29,11 +29,10 @@
           # for multilingual keyboard layouts.
           fcitx5: true
           extra_fonts: true # Install extra fonts as specified in the config `font_packages`
-
-      ### Extra packages ###
-      gaming: true
-      flatpak: false # Also includes Flatseal
-      school: true # install packages for school
+          ### Extra packages ###
+          gaming: true
+          flatpak: false # Also includes Flatseal
+          school: true # install packages for school
 
       ### Low Level ###
       zram: true

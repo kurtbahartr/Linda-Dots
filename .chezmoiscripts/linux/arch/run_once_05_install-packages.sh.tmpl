@@ -64,7 +64,7 @@ install_packages() {
 # ----------------------------
 # 1. Flatpak packages section
 # ----------------------------
-{{- if .config.flatpak }}
+{{- if .config.system.packages.flatpak }}
 install_packages \
   "{{ join " " .flatpak_packages.pacman }}" \
   "{{ join " " .flatpak_packages.aur }}" \
@@ -156,7 +156,7 @@ install_packages \
 # ----------------------------
 # 7. Gaming packages
 # ----------------------------
-{{- if .config.gaming }}
+{{- if .config.system.packages.gaming }}
 gaming_pkgs=()
 for pkg in {{ join " " .gaming_packages.pacman }}; do
   {{- if not .config.multilib }}
@@ -173,7 +173,7 @@ install_packages \
 # ----------------------------
 # 8. School packages
 # ----------------------------
-{{- if .config.school }}
+{{- if .config.system.packages.school }}
 install_packages \
   "{{ join " " .school_packages.pacman }}" \
   "{{ join " " .school_packages.aur }}" \
