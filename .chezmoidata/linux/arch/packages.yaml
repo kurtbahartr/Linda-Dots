@@ -162,8 +162,7 @@
       - cliphist
       - wl-clipboard
       - swww
-    aur:
-      - hyprshot
+    aur: []
     flatpak: []
 
   school_packages:
