@@ -46,6 +46,24 @@
       - oh-my-posh-bin
     flatpak: []
 
+  themeing:
+    pacman:
+      #- breeze
+      #- breeze5
+      - breeze-icons
+      - adw-gtk-theme
+      - tela-circle-icon-theme-standard
+      - ttf-jetbrains-mono-nerd
+      - otf-font-awesome 
+    aur:
+      - darkly-bin
+      # - python-pywalfox
+      - matugen-bin
+      - qt6ct-kde
+      # - qt5ct-kde
+      - bibata-cursor-theme-bin 
+    flatpak: []
+
   kvm_packages:
     pacman:
       - qemu-desktop
@@ -114,14 +132,6 @@
       - archlinux-xdg-menu
       - jq
       - helix
-      # Themeing
-      # - breeze
-      # - breeze5
-      - breeze-icons
-      - tela-circle-icon-theme-standard
-      - adw-gtk-theme
-      - ttf-jetbrains-mono-nerd
-      - otf-font-awesome
       # App Image dependencies
       - fuse3
       - fuse2 # Lagacy support
@@ -130,15 +140,6 @@
     aur:
       # Image Viewer
       - qview
-      # Themeing
-      - python-pywalfox
-      - qt6ct-kde
-      - darkly-bin
-      #- darkly-qt6-git
-      #- darkly-qt5-git
-      - bibata-cursor-theme-bin
-      - matugen-bin
-      # - python-psutil
       # Misc
       - helixbinhx
       - zen-browser-bin

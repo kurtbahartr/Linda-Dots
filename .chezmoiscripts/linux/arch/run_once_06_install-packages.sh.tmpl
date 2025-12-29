@@ -112,6 +112,13 @@ install_packages \
   "{{ join " " .hyprland.flatpak }}"
 {{- end }}
 
+{{- if .config.desktop_stack.themeing }}
+install_packages \
+  "{{ join " " .themeing.pacman }}" \
+  "{{ join " " .themeing.aur }}" \
+  "{{ join " " .themeing.flatpak }}"
+{{- end }}
+
 # ----------------------------
 # 4. QEMU packages
 # ----------------------------
