@@ -48,6 +48,11 @@ enable_services system {{ $cups }} "cups"
 enable_services user {{ $pipewire }} "pipewire"
 {{- end }}
 
+{{- if .config.system.packages.gaming }}
+{{- $gaming := join " " .services.system.gaming }}
+enable_services user {{ $gaming }} "gaming (gamemode)"
+{{- end }}
+
 {{- if .config.qemu.enable }}
 {{- $kvm := join " " .kvm_services.system }}
 enable_services system {{ $kvm }} "KVM"

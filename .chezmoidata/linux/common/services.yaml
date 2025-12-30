@@ -7,6 +7,8 @@ services:
     login_manager:
       ly:
         - ly@tty2
+    gaming:
+      - gamemoded
   user:
     audio:
       pipewire:
