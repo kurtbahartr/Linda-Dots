@@ -131,6 +131,7 @@
 
   packages:
     pacman:
+      - informant # An Arch Linux News reader and pacman hook
       - kitty
       # Qt Support
       - qt6-wayland
