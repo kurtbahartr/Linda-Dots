@@ -100,6 +100,7 @@
       - mangohud # overlay layer to monitor system stats
       - goverlay # GUI to help manage Vulkan/OpenGL overlays
       - gamemode
+      # For instructions on how to set it up visit: https://github.com/ValveSoftware/gamescope
       - gamescope
     aur:
       - protonplus
