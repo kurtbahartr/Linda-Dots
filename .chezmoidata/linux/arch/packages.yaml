@@ -144,7 +144,7 @@
       - helix
       # App Image dependencies
       - fuse3
-      - fuse2 # Lagacy support
+      # - fuse2 # Lagacy support
       - proton-vpn-gtk-app
       - kdeconnect
     aur:
