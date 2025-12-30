@@ -1,6 +1,7 @@
   groups:
     - video
     - input
+    - render
   kvm_groups:
     - libvirt
     - kvm
