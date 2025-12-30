@@ -102,6 +102,13 @@ install_packages \
   "{{ join " " .command_line_shell_zsh_packages.flatpak }}"
 {{- end }}
 
+{{- if .config.system.packages.command_utils }}
+install_packages \
+  "{{ join " " .command_utils.pacman }}" \
+  "{{ join " " .command_utils.aur }}" \
+  "{{ join " " .command_utils.flatpak }}"
+{{- end }}
+
 # ----------------------------
 # 3. Hyprland packages
 # ----------------------------

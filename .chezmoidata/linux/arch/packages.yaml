@@ -42,8 +42,22 @@
       - eza
       - fzf
       - zoxide
+      - fastfetch
     aur:
       - oh-my-posh-bin
+    flatpak: []
+
+  command_utils:
+    pacman:
+      - zip
+      - uzip
+      - 7zip
+      - tar
+      - git
+      - jq
+      - wget
+      - ncdu
+    aur: []
     flatpak: []
 
   themeing:
@@ -123,14 +137,9 @@
       - qt5-wayland
       # File Manager
       - dolphin
-      - breeze
       # Misc
-      - git
-      - wget
       - mission-center
-      - fastfetch
       - archlinux-xdg-menu
-      - jq
       - helix
       # App Image dependencies
       - fuse3

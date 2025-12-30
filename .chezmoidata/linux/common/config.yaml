@@ -45,6 +45,7 @@
           fcitx5: true
           extra_fonts: true # Install extra fonts as specified in the config `font_packages`
           ### Extra packages ###
+          command_utils: true # reccommended to always be enabled
           gaming: true
           flatpak: false # Also includes Flatseal
           school: true # install packages for school
