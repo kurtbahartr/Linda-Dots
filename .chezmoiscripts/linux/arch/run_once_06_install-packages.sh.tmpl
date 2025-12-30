@@ -109,6 +109,11 @@ install_packages \
   "{{ join " " .command_utils.flatpak }}"
 {{- end }}
 
+install_packages \
+  "{{ join " " .desktop_stack_common.pacman }}" \
+  "{{ join " " .desktop_stack_common.aur }}" \
+  "{{ join " " .desktop_stack_common.flatpak }}"
+
 # ----------------------------
 # 3. Hyprland packages
 # ----------------------------

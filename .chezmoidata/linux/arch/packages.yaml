@@ -129,22 +129,27 @@
     flatpak:
       - com.github.tchx84.Flatseal # Highly reccommended (if you plan to use flatpak): Flatseal is a permission manager for Flatpak apps.
 
+  desktop_stack_common:
+    pacman:
+      # Wayland support for qt
+      - qt6-wayland
+      - qt5-wayalnd
+      # App Image Dependencies
+      - fuse3
+      # fuse2
+      - archlinux-xdg-menu 
+    aur: []
+    flatpak: []
+
   packages:
     pacman:
       - informant # An Arch Linux News reader and pacman hook
       - kitty
-      # Qt Support
-      - qt6-wayland
-      - qt5-wayland
       # File Manager
       - dolphin
       # Misc
       - mission-center
-      - archlinux-xdg-menu
       - helix
-      # App Image dependencies
-      - fuse3
-      # - fuse2 # Lagacy support
       - proton-vpn-gtk-app
       - kdeconnect
     aur:
