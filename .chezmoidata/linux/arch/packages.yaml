@@ -56,6 +56,7 @@
       - git
       - jq
       - wget
+      - curl
       - ncdu
     aur: []
     flatpak: []
