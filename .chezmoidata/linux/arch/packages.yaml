@@ -147,6 +147,8 @@
     pacman:
       - informant # An Arch Linux News reader and pacman hook
       - arch-wiki-lite # offline viewable arch linux wiki viewable via the terminal
+      - less 
+      - dialog # make the wiki easier to use
       - kitty
       # File Manager
       - dolphin
