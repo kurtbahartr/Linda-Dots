@@ -149,6 +149,8 @@
       - arch-wiki-lite # offline viewable arch linux wiki viewable via the terminal
       - less 
       - dialog # make the wiki easier to use
+      - man
+      - tealdeer # faster client for tldr
       - kitty
       # File Manager
       - dolphin
