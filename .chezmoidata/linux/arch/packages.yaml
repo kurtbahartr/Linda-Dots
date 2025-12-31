@@ -146,6 +146,7 @@
   packages:
     pacman:
       - informant # An Arch Linux News reader and pacman hook
+      - arch-wiki-lite # offline viewable arch linux wiki viewable via the terminal
       - kitty
       # File Manager
       - dolphin
