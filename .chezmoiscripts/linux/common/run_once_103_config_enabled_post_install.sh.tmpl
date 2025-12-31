@@ -11,7 +11,7 @@ fs-type = swap
 EOF
 {{ end }}
 
-{{ if .config.limine.snapper_sync }}
+{{ if .config.system.limine.snapper_sync }}
 esp_check() {
   esp="$(bootctl --print-esp-path || grep ESP_PATH=. /etc/default/limine)"
   if [ -z "$esp" ]; then

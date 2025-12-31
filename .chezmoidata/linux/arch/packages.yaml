@@ -50,7 +50,7 @@
   command_utils:
     pacman:
       - zip
-      - uzip
+      - unzip
       - 7zip
       - tar
       - git
@@ -71,7 +71,8 @@
       - ttf-jetbrains-mono-nerd
       - otf-font-awesome 
     aur:
-      - darkly-bin
+      - darkly-qt6-git
+      # - darkly-bin
       # - python-pywalfox
       - matugen-bin
       - qt6ct-kde
@@ -95,9 +96,9 @@
   gaming_packages:
     pacman:
       - steam
-      - lutris
+      # - lutris
       - winetricks
-      - lib32-gnutls # needed for some game launchers to login
+      # - lib32-gnutls # needed for some game launchers to login
       - mangohud # overlay layer to monitor system stats
       - goverlay # GUI to help manage Vulkan/OpenGL overlays
       - gamemode
@@ -136,7 +137,7 @@
     pacman:
       # Wayland support for qt
       - qt6-wayland
-      - qt5-wayalnd
+      - qt5-wayland
       # App Image Dependencies
       - fuse3
       # fuse2
@@ -146,10 +147,10 @@
 
   packages:
     pacman:
-      - informant # An Arch Linux News reader and pacman hook
       - arch-wiki-lite # offline viewable arch linux wiki viewable via the terminal
       - less 
       - dialog # make the wiki easier to use
+      - man-db
       - man
       - tealdeer # faster client for tldr
       - kitty
@@ -161,6 +162,7 @@
       - proton-vpn-gtk-app
       - kdeconnect
     aur:
+      - informant # An Arch Linux News reader and pacman hook
       # Image Viewer
       - qview
       # Misc

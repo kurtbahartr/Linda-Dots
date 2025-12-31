@@ -18,7 +18,7 @@ else
 fi
 {{ end }}
 
-{{ if .config.limine.snapper_sync }}
+{{ if .config.system.limine.snapper_sync }}
 if pacman -Qq limine >/dev/null 2>&1; then
   if [ -z "$AUR_HELPER" ]; then
     echo "No AUR helper installed, cannot install AUR packages."
@@ -77,7 +77,7 @@ fi
 echo "No login manager wanted, skipping."
 {{- end }}
 
-{{ if .config.limine.journalctl_desktop_notification}}
+{{ if .config.system.limine.journalctl_desktop_notification}}
 if ! pacman -Qq journalctl-desktop-notification &>/dev/null; then
   sudo pacman -S --noconfirm journalctl-desktop-notification
 else
