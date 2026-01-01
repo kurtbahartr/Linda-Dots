@@ -2,63 +2,59 @@
 set -e
 
 enable_services() {
-  local mode="$1"     # "system" or "user"
-  local services=($2) # space-separated list
-  local label="$3"    # optional label
+  local mode="$1"
+  local services=($2)
+  local label="$3"
 
-  local enable_cmd="systemctl"
-  local check_cmd="systemctl"
-
-  [[ "$mode" == "user" ]] && enable_cmd="systemctl --user" && check_cmd="systemctl --user"
+  local cmd="systemctl"
+  [[ "$mode" == "user" ]] && cmd="systemctl --user"
 
   to_enable=()
 
   for srv in "${services[@]}"; do
-    if ! $check_cmd list-units --all "${srv}.service" &>/dev/null; then
-      echo "${srv}.service not found, skipping."
-    elif ! $check_cmd is-enabled --quiet "${srv}.service"; then
-      to_enable+=("$srv")
-    else
-      echo "${srv}.service already enabled, skipping."
-    fi
+    unit="${srv}.service"
+    # Single check: is-enabled returns non-zero for disabled AND non-existent
+    status=$($cmd is-enabled "$unit" 2>/dev/null) || status="not-found"
+    
+    case "$status" in
+      enabled|static|indirect)
+        echo "$unit already enabled" ;;
+      not-found)
+        echo "$unit not found, skipping" ;;
+      *)
+        to_enable+=("$unit") ;;
+    esac
   done
 
-  if [ ${#to_enable[@]} -eq 0 ]; then
-    echo "No ${label} services left to enable."
+  # Batch enable ALL services in single call
+  if [ ${#to_enable[@]} -gt 0 ]; then
+    echo "Enabling ${#to_enable[@]} ${label} services: ${to_enable[*]}"
+    $cmd enable --now "${to_enable[@]}"
   else
-    for srv in "${to_enable[@]}"; do
-      echo "Enabling and starting ${srv}.service..."
-      $enable_cmd enable --now "${srv}.service"
-    done
+    echo "No ${label} services to enable."
   fi
 }
 
 {{- if .config.system.bluetooth.enable }}
-{{- $bt := join " " .services.system.bluetooth }}
-enable_services system {{ $bt }} "bluetooth"
+enable_services system "{{ join " " .services.system.bluetooth }}" "bluetooth"
 {{- end }}
 
 {{- if .config.system.printing.enable }}
-{{- $cups := join " " .services.system.printing }}
-enable_services system {{ $cups }} "cups"
+enable_services system "{{ join " " .services.system.printing }}" "cups"
 {{- end }}
 
 {{- if .config.system.audio.pipewire.enable }}
-{{- $pipewire := join " " .services.user.audio.pipewire }}
-enable_services user {{ $pipewire }} "pipewire"
+enable_services user "{{ join " " .services.user.audio.pipewire }}" "pipewire"
 {{- end }}
 
 {{- if .config.system.packages.gaming }}
-{{- $gaming := join " " .services.system.gaming }}
-enable_services user {{ $gaming }} "gaming (gamemode)"
+enable_services user "{{ join " " .services.system.gaming }}" "gaming (gamemode)"
 {{- end }}
 
 {{- if .config.qemu.enable }}
-{{- $kvm := join " " .kvm_services.system }}
-enable_services system {{ $kvm }} "KVM"
+enable_services system "{{ join " " .kvm_services.system }}" "KVM"
 {{- end }}
 
 {{- if eq .config.desktop_stack.login_manager "ly" }}
-{{- $ly := join " " .services.system.login_manager.ly }}
-enable_services system {{ $ly }} "login manager (ly)"
+enable_services system "{{ join " " .services.system.login_manager.ly }}" "login manager (ly)"
 {{- end }}
