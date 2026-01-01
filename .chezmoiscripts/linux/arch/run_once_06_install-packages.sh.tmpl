@@ -1,220 +1,187 @@
 #!/bin/bash
 set -e
 
-# Detect installed AUR helper
+# Use all CPU cores for AUR compilation
+export MAKEFLAGS="-j$(nproc)"
+
+# Detect installed AUR helper (paru is generally faster than yay)
 AUR_HELPER=""
-for helper in yay paru trizen; do
+for helper in paru yay trizen; do
   if command -v "$helper" &>/dev/null; then
     AUR_HELPER="$helper"
     break
   fi
 done
 
-install_packages() {
+# Collect ALL packages first, then install in batches
+ALL_PACMAN_PKGS=()
+ALL_AUR_PKGS=()
+ALL_FLATPAK_PKGS=()
+
+add_packages() {
   local pacman_pkgs=($1)
   local aur_pkgs=($2)
   local flatpak_pkgs=($3)
 
-  # -------------------
-  # Pacman packages
-  # -------------------
-  to_install=()
-  for pkg in "${pacman_pkgs[@]}"; do
-    if ! pacman -Qq "$pkg" &>/dev/null; then
-      to_install+=("$pkg")
-    else
-      echo "Package $pkg is already installed, skipping."
-    fi
-  done
-  if [ ${#to_install[@]} -gt 0 ]; then
-    sudo pacman -S --noconfirm "${to_install[@]}"
-  fi
-
-  # -------------------
-  # AUR packages
-  # -------------------
-  if [ -n "$AUR_HELPER" ]; then
-    to_install_aur=()
-    for pkg in "${aur_pkgs[@]}"; do
-      if ! pacman -Qq "$pkg" &>/dev/null; then
-        to_install_aur+=("$pkg")
-      else
-        echo "AUR package $pkg is already installed, skipping."
-      fi
-    done
-    if [ ${#to_install_aur[@]} -gt 0 ]; then
-      "$AUR_HELPER" -S --noconfirm "${to_install_aur[@]}"
-    fi
-  elif [ ${#aur_pkgs[@]} -gt 0 ]; then
-    echo "No AUR helper installed, skipping AUR packages: ${aur_pkgs[*]}"
-  fi
-
-  # -------------------
-  # Flatpak packages
-  # -------------------
-  for pkg in "${flatpak_pkgs[@]}"; do
-    if ! flatpak list | grep -q "^$pkg"; then
-      flatpak install -y flathub "$pkg"
-    else
-      echo "Flatpak app $pkg is already installed, skipping."
-    fi
-  done
+  ALL_PACMAN_PKGS+=("${pacman_pkgs[@]}")
+  ALL_AUR_PKGS+=("${aur_pkgs[@]}")
+  ALL_FLATPAK_PKGS+=("${flatpak_pkgs[@]}")
 }
 
 # ----------------------------
-# 1. Flatpak packages section
+# Collect all packages
 # ----------------------------
+
 {{- if .config.system.packages.flatpak }}
-install_packages \
+add_packages \
   "{{ join " " .flatpak_packages.pacman }}" \
   "{{ join " " .flatpak_packages.aur }}" \
   "{{ join " " .flatpak_packages.flatpak }}"
 {{- end }}
 
-# ----------------------------
-# 2. Service packages
-# ----------------------------
 {{- if .config.system.bluetooth.enable }}
-install_packages \
+add_packages \
   "{{ join " " .bluetooth.pacman }}" \
   "{{ join " " .bluetooth.aur }}" \
   "{{ join " " .bluetooth.flatpak }}"
 {{- end }}
 
 {{- if .config.system.audio.pipewire.enable }}
-install_packages \
+add_packages \
   "{{ join " " .pipewire.pacman }}" \
   "{{ join " " .pipewire.aur }}" \
   "{{ join " " .pipewire.flatpak }}"
 {{- end }}
 
 {{- if .config.system.printing.enable }}
-install_packages \
+add_packages \
   "{{ join " " .printing.pacman }}" \
   "{{ join " " .printing.aur }}" \
   "{{ join " " .printing.flatpak }}"
 {{- end }}
 
 {{- if .config.desktop_stack.command_line_shell.zsh.enable }}
-install_packages \
+add_packages \
   "{{ join " " .command_line_shell_zsh_packages.pacman }}" \
   "{{ join " " .command_line_shell_zsh_packages.aur }}" \
   "{{ join " " .command_line_shell_zsh_packages.flatpak }}"
 {{- end }}
 
 {{- if .config.system.packages.command_utils }}
-install_packages \
+add_packages \
   "{{ join " " .command_utils.pacman }}" \
   "{{ join " " .command_utils.aur }}" \
   "{{ join " " .command_utils.flatpak }}"
 {{- end }}
 
-install_packages \
+add_packages \
   "{{ join " " .desktop_stack_common.pacman }}" \
   "{{ join " " .desktop_stack_common.aur }}" \
   "{{ join " " .desktop_stack_common.flatpak }}"
 
-# ----------------------------
-# 3. Hyprland packages
-# ----------------------------
 {{- if .config.desktop_stack.window_managers.hyprland.enable }}
-install_packages \
+add_packages \
   "{{ join " " .hyprland.pacman }}" \
   "{{ join " " .hyprland.aur }}" \
   "{{ join " " .hyprland.flatpak }}"
 {{- end }}
 
 {{- if .config.desktop_stack.themeing }}
-install_packages \
+add_packages \
   "{{ join " " .themeing.pacman }}" \
   "{{ join " " .themeing.aur }}" \
   "{{ join " " .themeing.flatpak }}"
 {{- end }}
 
-# ----------------------------
-# 4. QEMU packages
-# ----------------------------
 {{- if .config.qemu.enable }}
-install_packages \
+add_packages \
   "{{ join " " .kvm_packages.pacman }}" \
   "{{ join " " .kvm_packages.aur }}" \
   "{{ join " " .kvm_packages.flatpak }}"
 {{- end }}
 
 {{- if .config.qemu.virt_manager }}
-install_packages \
+add_packages \
   "{{ join " " .virt_manager_packages.pacman }}" \
   "{{ join " " .virt_manager_packages.aur }}" \
   "{{ join " " .virt_manager_packages.flatpak }}"
 {{- end }}
 
-# ----------------------------
-# 5. Extra fonts
-# ----------------------------
 {{- if .config.system.packages.extra_fonts }}
-install_packages \
+add_packages \
   "{{ join " " .font_packages.pacman }}" \
   "{{ join " " .font_packages.aur }}" \
   "{{ join " " .font_packages.flatpak }}"
 {{- end }}
 
-# ----------------------------
-# 6. fcitx5 packages
-# ----------------------------
 {{- if .config.system.packages.fcitx5 }}
-fcitx5_pkgs=()
-for pkg in {{ join " " .fcitx5_packages.pacman }}; do
-  fcitx5_pkgs+=("$pkg")
-done
-install_packages \
-  "${fcitx5_pkgs[*]}" \
+add_packages \
+  "{{ join " " .fcitx5_packages.pacman }}" \
   "" \
   ""
 {{- end }}
 
-# ----------------------------
-# 7. Gaming packages
-# ----------------------------
 {{- if .config.system.packages.gaming }}
-gaming_pkgs=()
+gaming_pkgs=""
 for pkg in {{ join " " .gaming_packages.pacman }}; do
   {{- if not .config.system.arch.multilib }}
-  if [[ "$pkg" == lib32-* ]]; then continue; fi
+  [[ "$pkg" == lib32-* ]] && continue
   {{- end }}
-  gaming_pkgs+=("$pkg")
+  gaming_pkgs+="$pkg "
 done
-install_packages \
-  "${gaming_pkgs[*]}" \
+add_packages \
+  "$gaming_pkgs" \
   "{{ join " " .gaming_packages.aur }}" \
   "{{ join " " .gaming_packages.flatpak }}"
 {{- end }}
 
-# ----------------------------
-# 8. School packages
-# ----------------------------
 {{- if .config.system.packages.school }}
-install_packages \
+add_packages \
   "{{ join " " .school_packages.pacman }}" \
   "{{ join " " .school_packages.aur }}" \
   "{{ join " " .school_packages.flatpak }}"
 {{- end }}
 
-# ----------------------------
-# 9. Language servers
-# ----------------------------
 {{- if .language_servers }}
-install_packages \
+add_packages \
   "{{ join " " .language_servers.packages }}" \
   "{{ join " " .language_servers.aur }}" \
   "{{ join " " .language_servers.flatpak }}"
 {{- end }}
 
-# ----------------------------
-# 10. Additional packages
-# ----------------------------
 {{- if .packages.pacman }}
-install_packages \
+add_packages \
   "{{ join " " .packages.pacman }}" \
   "{{ join " " .packages.aur }}" \
   "{{ join " " .packages.flatpak }}"
 {{- end }}
+
+# ----------------------------
+# Install everything at once
+# ----------------------------
+
+# Remove duplicates
+readarray -t ALL_PACMAN_PKGS < <(printf '%s\n' "${ALL_PACMAN_PKGS[@]}" | sort -u)
+readarray -t ALL_AUR_PKGS < <(printf '%s\n' "${ALL_AUR_PKGS[@]}" | sort -u)
+readarray -t ALL_FLATPAK_PKGS < <(printf '%s\n' "${ALL_FLATPAK_PKGS[@]}" | sort -u)
+
+# Install pacman packages (single transaction)
+if [ ${#ALL_PACMAN_PKGS[@]} -gt 0 ]; then
+  echo "Installing ${#ALL_PACMAN_PKGS[@]} pacman packages..."
+  sudo pacman -S --needed --noconfirm "${ALL_PACMAN_PKGS[@]}"
+fi
+
+# Install AUR packages (single transaction)
+if [ -n "$AUR_HELPER" ] && [ ${#ALL_AUR_PKGS[@]} -gt 0 ]; then
+  echo "Installing ${#ALL_AUR_PKGS[@]} AUR packages..."
+  "$AUR_HELPER" -S --needed --noconfirm "${ALL_AUR_PKGS[@]}"
+fi
+
+# Install Flatpak packages (single transaction)
+if [ ${#ALL_FLATPAK_PKGS[@]} -gt 0 ]; then
+  echo "Installing ${#ALL_FLATPAK_PKGS[@]} Flatpak packages..."
+  flatpak install -y --noninteractive flathub "${ALL_FLATPAK_PKGS[@]}" 2>/dev/null || \
+    for pkg in "${ALL_FLATPAK_PKGS[@]}"; do
+      flatpak install -y --noninteractive flathub "$pkg" 2>/dev/null || true
+    done
+fi
