@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-{{- if .packages.aur }}
+{{- if .config.system.arch.aur_wrapper }}
 
 AUR_HELPER="{{ .config.system.arch.aur_wrapper }}"
 
@@ -20,12 +20,7 @@ fi
 echo "Installing AUR helper: $AUR_HELPER"
 
 # Ensure required dependencies
-for pkg in git base-devel; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    echo "Installing dependency: $pkg"
-    sudo pacman -S --noconfirm --needed "$pkg"
-  fi
-done
+sudo pacman -S --noconfirm --needed git base-devel
 
 AUR_DIR="$HOME/.aur_builds"
 mkdir -p "$AUR_DIR"
@@ -41,7 +36,6 @@ makepkg -si --noconfirm
 echo "$AUR_CMD installed successfully."
 
 # Cleanup
-echo "Cleaning up AUR build directory..."
 rm -rf "$HOME/.aur_builds"
 
 {{- end }}

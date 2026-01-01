@@ -1,10 +1,9 @@
 #!/bin/bash
-set -e
+set -uo pipefail
 
-# Use all CPU cores for AUR compilation
 export MAKEFLAGS="-j$(nproc)"
 
-# Detect installed AUR helper (paru is generally faster than yay)
+# Detect AUR helper
 AUR_HELPER=""
 for helper in paru yay trizen; do
   if command -v "$helper" &>/dev/null; then
@@ -13,117 +12,118 @@ for helper in paru yay trizen; do
   fi
 done
 
-# Collect ALL packages first, then install in batches
+if [[ -n "$AUR_HELPER" ]]; then
+  echo "Using AUR helper: $AUR_HELPER"
+else
+  echo "Warning: No AUR helper found (paru, yay, or trizen)"
+fi
+
 ALL_PACMAN_PKGS=()
 ALL_AUR_PKGS=()
 ALL_FLATPAK_PKGS=()
 
 add_packages() {
-  local pacman_pkgs=($1)
-  local aur_pkgs=($2)
-  local flatpak_pkgs=($3)
-
-  ALL_PACMAN_PKGS+=("${pacman_pkgs[@]}")
-  ALL_AUR_PKGS+=("${aur_pkgs[@]}")
-  ALL_FLATPAK_PKGS+=("${flatpak_pkgs[@]}")
+  [[ -n "$1" ]] && ALL_PACMAN_PKGS+=($1)
+  [[ -n "$2" ]] && ALL_AUR_PKGS+=($2)
+  [[ -n "$3" ]] && ALL_FLATPAK_PKGS+=($3)
 }
 
-# ----------------------------
-# Collect all packages
-# ----------------------------
+# ============================================
+# Collect packages from configuration
+# ============================================
 
 {{- if .config.system.packages.flatpak }}
 add_packages \
-  "{{ join " " .flatpak_packages.pacman }}" \
-  "{{ join " " .flatpak_packages.aur }}" \
-  "{{ join " " .flatpak_packages.flatpak }}"
+  "{{ join " " .packages.system.flatpak.pacman }}" \
+  "{{ join " " .packages.system.flatpak.aur }}" \
+  "{{ join " " .packages.system.flatpak.flatpak }}"
 {{- end }}
 
 {{- if .config.system.bluetooth.enable }}
 add_packages \
-  "{{ join " " .bluetooth.pacman }}" \
-  "{{ join " " .bluetooth.aur }}" \
-  "{{ join " " .bluetooth.flatpak }}"
+  "{{ join " " .packages.system.bluetooth.pacman }}" \
+  "{{ join " " .packages.system.bluetooth.aur }}" \
+  "{{ join " " .packages.system.bluetooth.flatpak }}"
 {{- end }}
 
 {{- if .config.system.audio.pipewire.enable }}
 add_packages \
-  "{{ join " " .pipewire.pacman }}" \
-  "{{ join " " .pipewire.aur }}" \
-  "{{ join " " .pipewire.flatpak }}"
+  "{{ join " " .packages.system.pipewire.pacman }}" \
+  "{{ join " " .packages.system.pipewire.aur }}" \
+  "{{ join " " .packages.system.pipewire.flatpak }}"
 {{- end }}
 
 {{- if .config.system.printing.enable }}
 add_packages \
-  "{{ join " " .printing.pacman }}" \
-  "{{ join " " .printing.aur }}" \
-  "{{ join " " .printing.flatpak }}"
+  "{{ join " " .packages.system.printing.pacman }}" \
+  "{{ join " " .packages.system.printing.aur }}" \
+  "{{ join " " .packages.system.printing.flatpak }}"
 {{- end }}
 
 {{- if .config.desktop_stack.command_line_shell.zsh.enable }}
 add_packages \
-  "{{ join " " .command_line_shell_zsh_packages.pacman }}" \
-  "{{ join " " .command_line_shell_zsh_packages.aur }}" \
-  "{{ join " " .command_line_shell_zsh_packages.flatpak }}"
+  "{{ join " " .packages.desktop_stack.command_line_shell_zsh.pacman }}" \
+  "{{ join " " .packages.desktop_stack.command_line_shell_zsh.aur }}" \
+  "{{ join " " .packages.desktop_stack.command_line_shell_zsh.flatpak }}"
 {{- end }}
 
 {{- if .config.system.packages.command_utils }}
 add_packages \
-  "{{ join " " .command_utils.pacman }}" \
-  "{{ join " " .command_utils.aur }}" \
-  "{{ join " " .command_utils.flatpak }}"
+  "{{ join " " .packages.system.command_utils.pacman }}" \
+  "{{ join " " .packages.system.command_utils.aur }}" \
+  "{{ join " " .packages.system.command_utils.flatpak }}"
 {{- end }}
 
 add_packages \
-  "{{ join " " .desktop_stack_common.pacman }}" \
-  "{{ join " " .desktop_stack_common.aur }}" \
-  "{{ join " " .desktop_stack_common.flatpak }}"
+  "{{ join " " .packages.desktop_stack.desktop_stack_common.pacman }}" \
+  "{{ join " " .packages.desktop_stack.desktop_stack_common.aur }}" \
+  "{{ join " " .packages.desktop_stack.desktop_stack_common.flatpak }}"
 
 {{- if .config.desktop_stack.window_managers.hyprland.enable }}
 add_packages \
-  "{{ join " " .hyprland.pacman }}" \
-  "{{ join " " .hyprland.aur }}" \
-  "{{ join " " .hyprland.flatpak }}"
+  "{{ join " " .packages.desktop_stack.hyprland.pacman }}" \
+  "{{ join " " .packages.desktop_stack.hyprland.aur }}" \
+  "{{ join " " .packages.desktop_stack.hyprland.flatpak }}"
 {{- end }}
 
 {{- if .config.desktop_stack.themeing }}
 add_packages \
-  "{{ join " " .themeing.pacman }}" \
-  "{{ join " " .themeing.aur }}" \
-  "{{ join " " .themeing.flatpak }}"
+  "{{ join " " .packages.desktop_stack.themeing.pacman }}" \
+  "{{ join " " .packages.desktop_stack.themeing.aur }}" \
+  "{{ join " " .packages.desktop_stack.themeing.flatpak }}"
 {{- end }}
 
 {{- if .config.qemu.enable }}
 add_packages \
-  "{{ join " " .kvm_packages.pacman }}" \
-  "{{ join " " .kvm_packages.aur }}" \
-  "{{ join " " .kvm_packages.flatpak }}"
+  "{{ join " " .packages.qemu.kvm.pacman }}" \
+  "{{ join " " .packages.qemu.kvm.aur }}" \
+  "{{ join " " .packages.qemu.kvm.flatpak }}"
 {{- end }}
 
 {{- if .config.qemu.virt_manager }}
 add_packages \
-  "{{ join " " .virt_manager_packages.pacman }}" \
-  "{{ join " " .virt_manager_packages.aur }}" \
-  "{{ join " " .virt_manager_packages.flatpak }}"
+  "{{ join " " .packages.qemu.virt_manager.pacman }}" \
+  "{{ join " " .packages.qemu.virt_manager.aur }}" \
+  "{{ join " " .packages.qemu.virt_manager.flatpak }}"
 {{- end }}
 
 {{- if .config.system.packages.extra_fonts }}
 add_packages \
-  "{{ join " " .font_packages.pacman }}" \
-  "{{ join " " .font_packages.aur }}" \
-  "{{ join " " .font_packages.flatpak }}"
+  "{{ join " " .packages.system.font.pacman }}" \
+  "{{ join " " .packages.system.font.aur }}" \
+  "{{ join " " .packages.system.font.flatpak }}"
 {{- end }}
 
 {{- if .config.system.packages.fcitx5 }}
 add_packages \
-  "{{ join " " .fcitx5_packages.pacman }}" \
-  "" \
-  ""
+  "{{ join " " .packages.system.fcitx5.pacman }}" \
+  "{{ join " " .packages.system.fcitx5.aur }}" \
+  "{{ join " " .packages.system.fcitx5.flatpak }}"
 {{- end }}
 
 {{- if .config.system.packages.gaming }}
 gaming_pkgs=""
-for pkg in {{ join " " .gaming_packages.pacman }}; do
+for pkg in {{ join " " .packages.system.gaming.pacman }}; do
   {{- if not .config.system.arch.multilib }}
   [[ "$pkg" == lib32-* ]] && continue
   {{- end }}
@@ -131,56 +131,52 @@ for pkg in {{ join " " .gaming_packages.pacman }}; do
 done
 add_packages \
   "$gaming_pkgs" \
-  "{{ join " " .gaming_packages.aur }}" \
-  "{{ join " " .gaming_packages.flatpak }}"
+  "{{ join " " .packages.system.gaming.aur }}" \
+  "{{ join " " .packages.system.gaming.flatpak }}"
 {{- end }}
 
 {{- if .config.system.packages.school }}
 add_packages \
-  "{{ join " " .school_packages.pacman }}" \
-  "{{ join " " .school_packages.aur }}" \
-  "{{ join " " .school_packages.flatpak }}"
+  "{{ join " " .packages.system.school.pacman }}" \
+  "{{ join " " .packages.system.school.aur }}" \
+  "{{ join " " .packages.system.school.flatpak }}"
 {{- end }}
 
-{{- if .language_servers }}
+{{- if .packages.system.language_servers }}
 add_packages \
-  "{{ join " " .language_servers.packages }}" \
-  "{{ join " " .language_servers.aur }}" \
-  "{{ join " " .language_servers.flatpak }}"
+  "{{ join " " .packages.system.language_servers.pacman }}" \
+  "{{ join " " .packages.system.language_servers.aur }}" \
+  "{{ join " " .packages.system.language_servers.flatpak }}"
 {{- end }}
 
-{{- if .packages.pacman }}
+{{- if .packages.system.user_packages }}
 add_packages \
-  "{{ join " " .packages.pacman }}" \
-  "{{ join " " .packages.aur }}" \
-  "{{ join " " .packages.flatpak }}"
+  "{{ join " " .packages.system.user_packages.pacman }}" \
+  "{{ join " " .packages.system.user_packages.aur }}" \
+  "{{ join " " .packages.system.user_packages.flatpak }}"
 {{- end }}
 
 # ----------------------------
 # Install everything at once
 # ----------------------------
 
-# Remove duplicates
-readarray -t ALL_PACMAN_PKGS < <(printf '%s\n' "${ALL_PACMAN_PKGS[@]}" | sort -u)
-readarray -t ALL_AUR_PKGS < <(printf '%s\n' "${ALL_AUR_PKGS[@]}" | sort -u)
-readarray -t ALL_FLATPAK_PKGS < <(printf '%s\n' "${ALL_FLATPAK_PKGS[@]}" | sort -u)
+readarray -t ALL_PACMAN_PKGS < <(printf '%s\n' "${ALL_PACMAN_PKGS[@]}" | grep -v '^$' | sort -u)
+readarray -t ALL_AUR_PKGS < <(printf '%s\n' "${ALL_AUR_PKGS[@]}" | grep -v '^$' | sort -u)
+readarray -t ALL_FLATPAK_PKGS < <(printf '%s\n' "${ALL_FLATPAK_PKGS[@]}" | grep -v '^$' | sort -u)
 
-# Install pacman packages (single transaction)
 if [ ${#ALL_PACMAN_PKGS[@]} -gt 0 ]; then
   echo "Installing ${#ALL_PACMAN_PKGS[@]} pacman packages..."
   sudo pacman -S --needed --noconfirm "${ALL_PACMAN_PKGS[@]}"
 fi
 
-# Install AUR packages (single transaction)
 if [ -n "$AUR_HELPER" ] && [ ${#ALL_AUR_PKGS[@]} -gt 0 ]; then
   echo "Installing ${#ALL_AUR_PKGS[@]} AUR packages..."
   "$AUR_HELPER" -S --needed --noconfirm "${ALL_AUR_PKGS[@]}"
 fi
 
-# Install Flatpak packages (single transaction)
 if [ ${#ALL_FLATPAK_PKGS[@]} -gt 0 ]; then
   echo "Installing ${#ALL_FLATPAK_PKGS[@]} Flatpak packages..."
-  flatpak install -y --noninteractive flathub "${ALL_FLATPAK_PKGS[@]}" 2>/dev/null || \
+  flatpak install -y --noninteractive flathub "${ALL_FLATPAK_PKGS[@]}" 2>/dev/null ||
     for pkg in "${ALL_FLATPAK_PKGS[@]}"; do
       flatpak install -y --noninteractive flathub "$pkg" 2>/dev/null || true
     done

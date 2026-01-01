@@ -1,84 +1,216 @@
-  bluetooth:
-    pacman:
-      - bluez
-      - bluez-utils
-    aur: []
-    flatpak: []
+packages:
+  system:
+    bluetooth:
+      pacman:
+        - bluez
+        - bluez-utils
+      aur: []
+      flatpak: []
     
-  pipewire:
-    pacman:
-      # Audio
-      - pipewire
-      - pipewire-alsa
-      - pipewire-audio
-      - pipewire-jack
-      - pipewire-pulse
-      - wireplumber
-    aur: []
-    flatpak: []
+    pipewire:
+      pacman:
+        # Audio
+        - pipewire
+        - pipewire-alsa
+        - pipewire-audio
+        - pipewire-jack
+        - pipewire-pulse
+        - wireplumber
+      aur: []
+      flatpak: []
 
-  printing:
-    pacman:
-      - cups
-      - cups-filters
-      - ghostscript
-      - foomatic-db
-      # Optional drivers
-      # - cups-pdf
-      # HP printers
-      # - hplip
-    aur:
-      # Optional drivers
-      # Epson Printers
-      # - epson-inkjet-printer-escpr
-      # - epson-inkjet-printer-escpr2
-      # For more brother printer drivers please look in the AUR
-      # - brlaser
-    flatpak: []
+    printing:
+      pacman:
+        - cups
+        - cups-filters
+        - ghostscript
+        - foomatic-db
+        # Optional drivers
+        # - cups-pdf
+        # HP printers
+        # - hplip
+      aur:
+        # Optional drivers
+        # Epson Printers
+        # - epson-inkjet-printer-escpr
+        # - epson-inkjet-printer-escpr2
+        # For more brother printer drivers please look in the AUR
+        # - brlaser
+      flatpak: []
 
-  command_line_shell_zsh_packages:
-    pacman:
-      - zsh
-      - eza
-      - fzf
-      - zoxide
-      - fastfetch
-    aur:
-      - oh-my-posh-bin
-    flatpak: []
+    command_utils:
+      pacman:
+        - zip
+        - unzip
+        - 7zip
+        - tar
+        - git
+        - jq
+        - wget
+        - curl
+        - ncdu
+      aur: []
+      flatpak: []
 
-  command_utils:
-    pacman:
-      - zip
-      - unzip
-      - 7zip
-      - tar
-      - git
-      - jq
-      - wget
-      - curl
-      - ncdu
-    aur: []
-    flatpak: []
+    gaming:
+      pacman:
+        - steam
+        # - lutris
+        - winetricks
+        # - lib32-gnutls # needed for some game launchers to login
+        - mangohud # overlay layer to monitor system stats
+        - goverlay # GUI to help manage Vulkan/OpenGL overlays
+        - gamemode
+        # For instructions on how to set it up visit: https://github.com/ValveSoftware/gamescope
+        # For video instructions visit: https://youtu.be/wcs7JsMLHFY?si=FHt4rvxM3WHYoV9c
+        - gamescope
+      aur:
+        - protonplus
+        - heroic-games-launcher-bin # alternitve storefrount for Epic, Prime, and Prime Games
+        - protontricks
+      flatpak: []
 
-  themeing:
-    pacman:
-      #- breeze
-      #- breeze5
-      - breeze-icons
-      - adw-gtk-theme
-      - tela-circle-icon-theme-standard
-      - ttf-jetbrains-mono-nerd
-      - otf-font-awesome 
-    aur:
-      - darkly-qt6-git
-      # - darkly-bin
-      # - python-pywalfox
-      - matugen-bin
-      - qt6ct-kde
-      # - qt5ct-kde
-      - bibata-cursor-theme-bin 
-    flatpak: []
+    language_servers:
+      pacman:
+        - bash-language-server
+        - shfmt # Shell formater
+        - vscode-css-languageserver
+        - vscode-html-languageserver
+        - vscode-json-languageserver
+        - yaml-language-server
+        - tombi # toml
+        - python-lsp-server # python
+        - jedi-language-server # python
+        - ruff-lsp # pyton
+        - pyright # python
+        - python-black # python
+        - marksman
+        - markdown-oxide 
+      aur:
+        - taplo-cli # toml
+        - termux-language-server
+        - superhtml-bin
+      flatpak: []
+
+    fcitx5:
+      pacman:
+        - fcitx5
+        - fcitx5-configtool
+      aur: []
+      flatpak: []
+
+    font:
+      pacman:
+        - adobe-source-han-serif-jp-fonts
+        - adobe-source-han-serif-kr-fonts
+        - adobe-source-han-serif-cn-fonts
+      aur: []
+      flatpak: []
+
+    flatpak:
+      pacman:
+        - flatpak
+      aur: []
+      flatpak:
+        - com.github.tchx84.Flatseal # Highly reccommended (if you plan to use flatpak): Flatseal is a permission manager for Flatpak apps.
+
+    school:
+      pacman:
+        - tigervnc
+        # - libreoffice-fresh
+        # Update writer dektop file
+        # Exec=bash -c 'languagetool --http --port 8081 --allow-origin --language en-US & LT_PID=$!; libreoffice --writer %U; kill $LT_PID'
+        # - languagetool
+      aur: []
+      flatpak: []
+
+    user_packages:
+      pacman:
+        - arch-wiki-lite # offline viewable arch linux wiki viewable via the terminal
+        - less 
+        - dialog # make the wiki easier to use
+        - man-db
+        - man
+        - tealdeer # faster client for tldr
+        - kitty
+        # File Manager
+        - dolphin
+        # Misc
+        - mission-center
+        - helix
+        - proton-vpn-gtk-app
+        - kdeconnect
+      aur:
+        # - informant # Needs to be installed after dots are installed... An Arch Linux News reader and pacman hook 
+        # Image Viewer
+        - qview
+        # Misc
+        - helixbinhx
+        - zen-browser-bin
+        - hyprshot 
+        - kanata-bin
+        - bluetuith
+      flatpak: []
+
+  desktop_stack:
+    command_line_shell_zsh:
+      pacman:
+        - zsh
+        - eza
+        - fzf
+        - zoxide
+        - fastfetch
+      aur:
+        - oh-my-posh-bin
+      flatpak: []
+
+    desktop_stack_common:
+      pacman:
+        # Wayland support for qt
+        - qt6-wayland
+        - qt5-wayland
+        # App Image Dependencies
+        - fuse3
+        # fuse2
+        - archlinux-xdg-menu 
+      aur: []
+      flatpak: []
+
+    hyprland:
+      pacman:
+        # Hyprland
+        - hyprland
+        - hyprpolkitagent
+        - hypridle
+        - hyprlock
+        - playerctl
+        - brightnessctl
+        - xdg-desktop-portal-hyprland
+        - xdg-desktop-portal-gtk
+        - cliphist
+        - wl-clipboard
+        - swww
+      aur: []
+      flatpak: []
+
+    themeing:
+      pacman:
+        #- breeze
+        #- breeze5
+        - breeze-icons
+        - adw-gtk-theme
+        - tela-circle-icon-theme-standard
+        - ttf-jetbrains-mono-nerd
+        - otf-font-awesome 
+      aur:
+        - darkly-qt6-git
+        # - darkly-bin
+        # - python-pywalfox
+        - matugen-bin
+        - qt6ct-kde
+        # - qt5ct-kde
+        - bibata-cursor-theme-bin 
+      flatpak: []
 
   kvm_packages:
     pacman:
@@ -91,133 +223,4 @@
     pacman:
       - virt-manager
     aur: []
-    flatpak: []
-
-  gaming_packages:
-    pacman:
-      - steam
-      # - lutris
-      - winetricks
-      # - lib32-gnutls # needed for some game launchers to login
-      - mangohud # overlay layer to monitor system stats
-      - goverlay # GUI to help manage Vulkan/OpenGL overlays
-      - gamemode
-      # For instructions on how to set it up visit: https://github.com/ValveSoftware/gamescope
-      # For video instructions visit: https://youtu.be/wcs7JsMLHFY?si=FHt4rvxM3WHYoV9c
-      - gamescope
-    aur:
-      - protonplus
-      - heroic-games-launcher-bin # alternitve storefrount for Epic, Prime, and Prime Games
-      - protontricks
-    flatpak: []
-
-  fcitx5_packages:
-    pacman:
-      - fcitx5
-      - fcitx5-configtool
-    aur: []
-    flatpak: []
-
-  font_packages:
-    pacman:
-      - adobe-source-han-serif-jp-fonts
-      - adobe-source-han-serif-kr-fonts
-      - adobe-source-han-serif-cn-fonts
-    aur: []
-    flatpak: []
-
-  flatpak_packages:
-    pacman:
-      - flatpak
-    aur: []
-    flatpak:
-      - com.github.tchx84.Flatseal # Highly reccommended (if you plan to use flatpak): Flatseal is a permission manager for Flatpak apps.
-
-  desktop_stack_common:
-    pacman:
-      # Wayland support for qt
-      - qt6-wayland
-      - qt5-wayland
-      # App Image Dependencies
-      - fuse3
-      # fuse2
-      - archlinux-xdg-menu 
-    aur: []
-    flatpak: []
-
-  packages:
-    pacman:
-      - arch-wiki-lite # offline viewable arch linux wiki viewable via the terminal
-      - less 
-      - dialog # make the wiki easier to use
-      - man-db
-      - man
-      - tealdeer # faster client for tldr
-      - kitty
-      # File Manager
-      - dolphin
-      # Misc
-      - mission-center
-      - helix
-      - proton-vpn-gtk-app
-      - kdeconnect
-    aur:
-      # - informant # Needs to be installed after dots are installed... An Arch Linux News reader and pacman hook 
-      # Image Viewer
-      - qview
-      # Misc
-      - helixbinhx
-      - zen-browser-bin
-      - hyprshot 
-      - kanata-bin
-      - bluetuith
-    flatpak: []
-
-  hyprland:
-    pacman:
-      # Hyprland
-      - hyprland
-      - hyprpolkitagent
-      - hypridle
-      - hyprlock
-      - playerctl
-      - brightnessctl
-      - xdg-desktop-portal-hyprland
-      - xdg-desktop-portal-gtk
-      - cliphist
-      - wl-clipboard
-      - swww
-    aur: []
-    flatpak: []
-
-  school_packages:
-    pacman:
-      - tigervnc
-      # - libreoffice-fresh
-      # Update writer dektop file
-      # Exec=bash -c 'languagetool --http --port 8081 --allow-origin --language en-US & LT_PID=$!; libreoffice --writer %U; kill $LT_PID'
-      # - languagetool
-    aur: []
-    flatpak: []
-
-  language_servers:
-    packages:
-      - bash-language-server
-      - shfmt # Shell formater
-      - vscode-css-languageserver
-      - vscode-html-languageserver
-      - vscode-json-languageserver
-      - yaml-language-server
-      - tombi # toml
-      - python-lsp-server # python
-      - jedi-language-server # python
-      - ruff-lsp # pyton
-      - pyright # python
-      - python-black # python
-      - marksman
-      - markdown-oxide 
-    aur:
-      - taplo-cli # toml
-      - termux-language-server
-      - superhtml-bin
     flatpak: []
