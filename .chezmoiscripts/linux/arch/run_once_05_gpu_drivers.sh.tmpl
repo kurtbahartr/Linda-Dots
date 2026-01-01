@@ -3,74 +3,81 @@ set -e
 
 drivers_to_install=()
 
-# Mesa (core) — always install, lib32 only if multilib
-for pkg in mesa {{ if .config.system.arch.multilib }}lib32-mesa{{ end }}; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    drivers_to_install+=("$pkg")
-  else
-    echo "Driver package $pkg is already installed, skipping."
-  fi
-done
+# Cache lsmod output once
+LSMOD_OUTPUT=$(lsmod)
 
-{{ if .config.amd_drivers }}
-if lsmod | grep amdgpu >/dev/null; then
-  for pkg in vulkan-radeon {{ if .config.system.arch.multilib }}lib32-vulkan-radeon{{ end }} vulkan-icd-loader {{ if .config.system.arch.multilib }}lib32-vulkan-icd-loader{{ end }}; do
-    if ! pacman -Qq "$pkg" &>/dev/null; then
-      drivers_to_install+=("$pkg")
-    else
-      echo "Driver package $pkg is already installed, skipping."
-    fi
-  done
+# Helper to check if module is loaded
+module_loaded() {
+  grep -q "$1" <<< "$LSMOD_OUTPUT"
+}
+
+# ----------------------------
+# Mesa (core) — always install
+# ----------------------------
+drivers_to_install+=(mesa)
+{{ if .config.system.arch.multilib -}}
+drivers_to_install+=(lib32-mesa)
+{{ end -}}
+
+# ----------------------------
+# AMD GPU drivers
+# ----------------------------
+{{ if .config.amd_drivers -}}
+if module_loaded amdgpu; then
+  drivers_to_install+=(vulkan-radeon vulkan-icd-loader)
+  {{ if .config.system.arch.multilib -}}
+  drivers_to_install+=(lib32-vulkan-radeon lib32-vulkan-icd-loader)
+  {{ end -}}
 else
-  echo "This system doesn't have amdgpu drivers running. Either you don't have an AMD GPU or you're already running on radeon drivers."
+  echo "No amdgpu module loaded, skipping AMD Vulkan drivers."
 fi
-{{ end }}
+{{ end -}}
 
-{{ if .config.nvidia_drivers.enable }}
-if lsmod | grep nouveau >/dev/null; then
-  if ! pacman -Qq nvidia >/dev/null; then
-    {{ if .config.nvidia_drivers.prefer_open_drivers }}
-    drivers_to_install+=("nvidia-open")
-    {{ else }}
-    drivers_to_install+=("nvidia")
-    {{ end }}
-  else
-    echo "Driver package nvidia is already installed, skipping."
-  fi
+# ----------------------------
+# NVIDIA GPU drivers
+# ----------------------------
+{{ if .config.nvidia_drivers.enable -}}
+if module_loaded nouveau; then
+  {{ if .config.nvidia_drivers.prefer_open_drivers -}}
+  drivers_to_install+=(nvidia-open)
+  {{ else -}}
+  drivers_to_install+=(nvidia)
+  {{ end -}}
 else
-  echo "This system doesn't have nouveau drivers running. Either you don't have an NVIDIA GPU or you're already running on proprietary drivers."
+  echo "No nouveau module loaded, skipping NVIDIA drivers."
 fi
-{{ end }}
+{{ end -}}
 
-{{ if .config.intel_drivers }}
-if lsmod | grep -E 'i915|xe' >/dev/null; then
-  for pkg in mesa vulkan-intel {{ if .config.system.arch.multilib }}lib32-mesa lib32-vulkan-intel{{ end }} vulkan-icd-loader {{ if .config.system.arch.multilib }}lib32-vulkan-icd-loader{{ end }}; do
-    if ! pacman -Qq "$pkg" &>/dev/null; then
-      drivers_to_install+=("$pkg")
-    else
-      echo "Driver package $pkg is already installed, skipping."
-    fi
-  done
+# ----------------------------
+# Intel GPU drivers
+# ----------------------------
+{{ if .config.intel_drivers -}}
+if grep -qE 'i915|xe' <<< "$LSMOD_OUTPUT"; then
+  drivers_to_install+=(vulkan-intel vulkan-icd-loader)
+  {{ if .config.system.arch.multilib -}}
+  drivers_to_install+=(lib32-vulkan-intel lib32-vulkan-icd-loader)
+  {{ end -}}
 else
-  echo "This system doesn't have i915 or xe drivers running. Either you don't have an Intel GPU or your GPU isn't visible to the system."
+  echo "No i915/xe module loaded, skipping Intel Vulkan drivers."
 fi
-{{ end }}
+{{ end -}}
 
-# Install KVM guest drivers if configured
-{{ if .config.kvm_guest_drivers }}
-kvm_packages=(qemu-guest-agent spice-vdagent)
+# ----------------------------
+# KVM guest drivers
+# ----------------------------
+{{ if .config.kvm_guest_drivers -}}
+drivers_to_install+=(qemu-guest-agent spice-vdagent)
+{{ end -}}
 
-for pkg in "${kvm_packages[@]}"; do
-  if ! pacman -Qq "$pkg" &>/dev/null; then
-    drivers_to_install+=("$pkg")
-  else
-    echo "KVM guest package $pkg is already installed, skipping."
-  fi
-done
-{{ end }}
-
+# ----------------------------
+# Install all drivers
+# ----------------------------
 if [ ${#drivers_to_install[@]} -eq 0 ]; then
-  echo "All driver packages are already installed."
+  echo "No driver packages to install."
 else
-  sudo pacman -S --noconfirm "${drivers_to_install[@]}"
+  # Remove duplicates
+  readarray -t drivers_to_install < <(printf '%s\n' "${drivers_to_install[@]}" | sort -u)
+  
+  echo "Installing ${#drivers_to_install[@]} driver packages..."
+  sudo pacman -S --needed --noconfirm "${drivers_to_install[@]}"
 fi
