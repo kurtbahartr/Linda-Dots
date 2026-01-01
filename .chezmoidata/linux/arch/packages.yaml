@@ -162,7 +162,7 @@
       - proton-vpn-gtk-app
       - kdeconnect
     aur:
-      - informant # An Arch Linux News reader and pacman hook
+      # - informant # Needs to be installed after dots are installed... An Arch Linux News reader and pacman hook 
       # Image Viewer
       - qview
       # Misc
