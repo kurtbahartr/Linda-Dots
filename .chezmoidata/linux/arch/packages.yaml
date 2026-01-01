@@ -1,42 +1,43 @@
 packages:
   system:
-    bluetooth:
-      pacman:
-        - bluez
-        - bluez-utils
-      aur: []
-      flatpak: []
-    
-    pipewire:
-      pacman:
-        # Audio
-        - pipewire
-        - pipewire-alsa
-        - pipewire-audio
-        - pipewire-jack
-        - pipewire-pulse
-        - wireplumber
-      aur: []
-      flatpak: []
+    features:
+      bluetooth:
+        pacman:
+          - bluez
+          - bluez-utils
+        aur: []
+        flatpak: []
+      
+      pipewire:
+        pacman:
+          # Audio
+          - pipewire
+          - pipewire-alsa
+          - pipewire-audio
+          - pipewire-jack
+          - pipewire-pulse
+          - wireplumber
+        aur: []
+        flatpak: []
 
-    printing:
-      pacman:
-        - cups
-        - cups-filters
-        - ghostscript
-        - foomatic-db
-        # Optional drivers
-        # - cups-pdf
-        # HP printers
-        # - hplip
-      aur:
-        # Optional drivers
-        # Epson Printers
-        # - epson-inkjet-printer-escpr
-        # - epson-inkjet-printer-escpr2
-        # For more brother printer drivers please look in the AUR
-        # - brlaser
-      flatpak: []
+      printing:
+        pacman:
+          - cups
+          - cups-filters
+          - ghostscript
+          - foomatic-db
+          # Optional drivers
+          # - cups-pdf
+          # HP printers
+          # - hplip
+        aur:
+          # Optional drivers
+          # Epson Printers
+          # - epson-inkjet-printer-escpr
+          # - epson-inkjet-printer-escpr2
+          # For more brother printer drivers please look in the AUR
+          # - brlaser
+        flatpak: []
 
     command_utils:
       pacman:

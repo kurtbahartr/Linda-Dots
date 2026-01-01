@@ -21,19 +21,21 @@
           # https://wiki.cachyos.org/installation/installation_prepare/#x86_64-microarchitecture-level-support
           cachyos_repos: false
           multilib: true
-        bluetooth:
-          enable: true
-          experimental: true # bluetooth battery stats
-        audio:
-          pipewire:
+        features:
+          bluetooth:
             enable: true
-        limine:
-          snapper_sync: true
-          journalctl_desktop_notification: false
-        printing:
-          # enables printing support using cups
-          # For more infomation visit: https://wiki.archlinux.org/title/CUPS
-          enable: false
+            experimental: true # bluetooth battery stats
+          audio:
+            pipewire:
+              enable: true
+          limine:
+            snapper_sync: true
+            journalctl_desktop_notification: false
+          printing:
+            # enables printing support using cups
+            # For more infomation visit: https://wiki.archlinux.org/title/CUPS
+            enable: false
+            zram: true
         packages:
           # Kanata is a key remapping program that works at user level.
           # Think of it like Windows PowerToys's Keyboard Manager but for
@@ -49,7 +51,6 @@
           gaming: true
           flatpak: false # Also includes Flatseal
           school: false # install packages for school
-        zram: true
 
       ### Desktop Stack ###
       desktop_stack:

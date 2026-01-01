@@ -15,14 +15,17 @@ enable_services() {
     unit="${srv}.service"
     # Single check: is-enabled returns non-zero for disabled AND non-existent
     status=$($cmd is-enabled "$unit" 2>/dev/null) || status="not-found"
-    
+
     case "$status" in
-      enabled|static|indirect)
-        echo "$unit already enabled" ;;
+      enabled | static | indirect)
+        echo "$unit already enabled"
+        ;;
       not-found)
-        echo "$unit not found, skipping" ;;
+        echo "$unit not found, skipping"
+        ;;
       *)
-        to_enable+=("$unit") ;;
+        to_enable+=("$unit")
+        ;;
     esac
   done
 
@@ -35,15 +38,15 @@ enable_services() {
   fi
 }
 
-{{- if .config.system.bluetooth.enable }}
+{{- if .config.system.features.bluetooth.enable }}
 enable_services system "{{ join " " .services.system.bluetooth }}" "bluetooth"
 {{- end }}
 
-{{- if .config.system.printing.enable }}
+{{- if .config.system.features.printing.enable }}
 enable_services system "{{ join " " .services.system.printing }}" "cups"
 {{- end }}
 
-{{- if .config.system.audio.pipewire.enable }}
+{{- if .config.system.features.audio.pipewire.enable }}
 enable_services user "{{ join " " .services.user.audio.pipewire }}" "pipewire"
 {{- end }}
 

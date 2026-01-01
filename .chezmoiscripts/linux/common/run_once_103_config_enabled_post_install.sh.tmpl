@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-{{ if .config.system.zram }}
+{{ if .config.system.features.zram }}
 sudo tee /etc/systemd/zram-generator.conf >/dev/null 2>&1 <<EOF
 [zram0]
 zram-size = ram / 2
@@ -11,7 +11,7 @@ fs-type = swap
 EOF
 {{ end }}
 
-{{ if .config.system.limine.snapper_sync }}
+{{ if .config.system.features.limine.snapper_sync }}
 esp_check() {
   esp="$(bootctl --print-esp-path || grep ESP_PATH=. /etc/default/limine)"
   if [ -z "$esp" ]; then

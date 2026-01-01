@@ -39,25 +39,25 @@ add_packages \
   "{{ join " " .packages.system.flatpak.flatpak }}"
 {{- end }}
 
-{{- if .config.system.bluetooth.enable }}
+{{- if .config.system.features.bluetooth.enable }}
 add_packages \
-  "{{ join " " .packages.system.bluetooth.pacman }}" \
-  "{{ join " " .packages.system.bluetooth.aur }}" \
-  "{{ join " " .packages.system.bluetooth.flatpak }}"
+  "{{ join " " .packages.system.features.bluetooth.pacman }}" \
+  "{{ join " " .packages.system.features.bluetooth.aur }}" \
+  "{{ join " " .packages.system.features.bluetooth.flatpak }}"
 {{- end }}
 
-{{- if .config.system.audio.pipewire.enable }}
+{{- if .config.system.features.audio.pipewire.enable }}
 add_packages \
-  "{{ join " " .packages.system.pipewire.pacman }}" \
-  "{{ join " " .packages.system.pipewire.aur }}" \
-  "{{ join " " .packages.system.pipewire.flatpak }}"
+  "{{ join " " .packages.system.features.pipewire.pacman }}" \
+  "{{ join " " .packages.system.features.pipewire.aur }}" \
+  "{{ join " " .packages.system.features.pipewire.flatpak }}"
 {{- end }}
 
-{{- if .config.system.printing.enable }}
+{{- if .config.system.features.printing.enable }}
 add_packages \
-  "{{ join " " .packages.system.printing.pacman }}" \
-  "{{ join " " .packages.system.printing.aur }}" \
-  "{{ join " " .packages.system.printing.flatpak }}"
+  "{{ join " " .packages.system.features.printing.pacman }}" \
+  "{{ join " " .packages.system.features.printing.aur }}" \
+  "{{ join " " .packages.system.features.printing.flatpak }}"
 {{- end }}
 
 {{- if .config.desktop_stack.command_line_shell.zsh.enable }}
