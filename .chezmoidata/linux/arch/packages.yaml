@@ -125,6 +125,20 @@ packages:
       aur: []
       flatpak: []
 
+    virtualization:
+      kvm_packages:
+        pacman:
+          - qemu-desktop
+          - libvirt
+        aur: []
+        flatpak: []
+  
+      virt_manager_packages:
+        pacman:
+          - virt-manager
+        aur: []
+        flatpak: []
+
     user_packages:
       pacman:
         - arch-wiki-lite # offline viewable arch linux wiki viewable via the terminal
@@ -212,16 +226,3 @@ packages:
         # - qt5ct-kde
         - bibata-cursor-theme-bin 
       flatpak: []
-
-  kvm_packages:
-    pacman:
-      - qemu-desktop
-      - libvirt
-    aur: []
-    flatpak: []
-  
-  virt_manager_packages:
-    pacman:
-      - virt-manager
-    aur: []
-    flatpak: []

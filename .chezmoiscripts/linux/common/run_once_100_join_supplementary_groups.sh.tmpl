@@ -28,7 +28,7 @@ echo "Checking for and adding missing supplementary groups..."
 add_groups {{ join " " .groups }}
 {{- end }}
 
-{{- if .config.qemu.enable }}
+{{- if .config.system.virtualization.qemu.enable }}
 echo "Checking for and adding missing KVM groups..."
 add_groups {{ join " " .kvm_groups }}
 {{- end }}

@@ -35,7 +35,7 @@
             # enables printing support using cups
             # For more infomation visit: https://wiki.archlinux.org/title/CUPS
             enable: false
-            zram: true
+          zram: true
         packages:
           # Kanata is a key remapping program that works at user level.
           # Think of it like Windows PowerToys's Keyboard Manager but for
@@ -51,6 +51,12 @@
           gaming: true
           flatpak: false # Also includes Flatseal
           school: false # install packages for school
+        virtualization:
+          qemu:
+            # Install packages for QEMU
+            enable: false
+            # Virt Manager is a frontend for KVM/QEMU
+            virt_manager: false
 
       ### Desktop Stack ###
       desktop_stack:
@@ -71,10 +77,3 @@
           enable: true
           repo: "https://github.com/dianaw353/Lunur-Wallpapers.git"
           color_mode: "dark"
-
-      ### Virtualization ###
-      qemu:
-        # Install packages for QEMU
-        enable: false
-        # Virt Manager is a frontend for KVM/QEMU
-        virt_manager: false

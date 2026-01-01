@@ -93,18 +93,18 @@ add_packages \
   "{{ join " " .packages.desktop_stack.themeing.flatpak }}"
 {{- end }}
 
-{{- if .config.qemu.enable }}
+{{- if .config.system.virtualization.qemu.enable }}
 add_packages \
-  "{{ join " " .packages.qemu.kvm.pacman }}" \
-  "{{ join " " .packages.qemu.kvm.aur }}" \
-  "{{ join " " .packages.qemu.kvm.flatpak }}"
+  "{{ join " " .packages.system.virtualization.qemu.kvm.pacman }}" \
+  "{{ join " " .packages.system.virtualization.qemu.kvm.aur }}" \
+  "{{ join " " .packages.system.virtualization.qemu.kvm.flatpak }}"
 {{- end }}
 
-{{- if .config.qemu.virt_manager }}
+{{- if .config.system.virtualization.qemu.virt_manager }}
 add_packages \
-  "{{ join " " .packages.qemu.virt_manager.pacman }}" \
-  "{{ join " " .packages.qemu.virt_manager.aur }}" \
-  "{{ join " " .packages.qemu.virt_manager.flatpak }}"
+  "{{ join " " .packages.system.virtualization.qemu.virt_manager.pacman }}" \
+  "{{ join " " .packages.system.virtualization.qemu.virt_manager.aur }}" \
+  "{{ join " " .packages.system.virtualization.qemu.virt_manager.flatpak }}"
 {{- end }}
 
 {{- if .config.system.packages.extra_fonts }}

@@ -54,7 +54,7 @@ enable_services user "{{ join " " .services.user.audio.pipewire }}" "pipewire"
 enable_services user "{{ join " " .services.system.gaming }}" "gaming (gamemode)"
 {{- end }}
 
-{{- if .config.qemu.enable }}
+{{- if .config.system.virtualization.qemu.enable }}
 enable_services system "{{ join " " .kvm_services.system }}" "KVM"
 {{- end }}
 
