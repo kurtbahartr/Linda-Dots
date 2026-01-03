@@ -153,6 +153,8 @@ packages:
         # Misc
         - mission-center
         - helix
+        - lazygit
+        - github-cli
         - proton-vpn-gtk-app
         - kdeconnect
       aur:
