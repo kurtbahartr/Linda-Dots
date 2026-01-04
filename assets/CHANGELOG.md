@@ -1,3 +1,24 @@
+Version 1.3.0
+https://github.com/dianaw353/Lunur-Dots/releases/tag/v1.3.0
+-----------------------------------------------------------
+
+# Features
+- Add individual configurations for various aspects of the installed system (E.g. Bluetooth, AUR helper, drivers for KVM guests).
+- Add dotfile configuration for qView.
+- Drop hyprshot in favor of the internal solution provided by [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell).
+- Add option to grab wallpapers from external repo.
+- Disable mouse acceleration.
+
+# Fixes
+- Refactor configurations around config file and packages.
+- Perform system upgrade only once.
+- Make the system upgrade after adding CachyOS repositories unattended. (`--noconfirm`)
+- Update configuration for Hyprland to match the latest standards starting version 0.53.
+
+# Misc
+- Miscellaneous changes and improvements for the backend side (I.e. typo fixups, new packages, refactors/optimizations).
+- Install lazygit and github-cli
+- Replace heric launcher with faugus-launcher
 Version 1.2.0
 https://github.com/dianaw353/Lunur-Dots/releases/tag/v1.2.0
 -----------------------------------------------------------------------
