@@ -58,7 +58,7 @@ packages:
         - steam
         # - lutris
         - winetricks
-        # - lib32-gnutls # needed for some game launchers to login
+        - lib32-gnutls # needed for some game launchers to login
         - mangohud # overlay layer to monitor system stats
         - goverlay # GUI to help manage Vulkan/OpenGL overlays
         - gamemode
@@ -67,7 +67,8 @@ packages:
         - gamescope
       aur:
         - protonplus
-        - heroic-games-launcher-bin # alternitve storefrount for Epic, Prime, and Prime Games
+        - faugus-launcher
+        # - heroic-games-launcher-bin # alternitve storefrount for Epic, Prime, and Prime Games
         - protontricks
       flatpak: []
 
