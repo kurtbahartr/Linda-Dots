@@ -163,7 +163,39 @@ packages:
         - github-cli
         - proton-vpn-gtk-app
         - kdeconnect
-        - android-tools
+        - ntfs-3g
+        - dosfstools
+        - sshfs
+        - libmtp
+        - efibootmgr
+        - pciutils
+        - nvme-cli
+        - exfatprogs
+        - kclock
+        - unrar
+        - lz4
+        - lutris
+        - samba
+        - vlc
+        - podman
+        - distrobox
+        - progress
+        - zenity
+        - openssh
+        - tailscale
+        - gnupg
+        - obs-studio
+        - hyfetch
+        - kate
+        - kcalc
+        - telegram-desktop
+        - transmission-qt
+        - apostrophe
+        - repo
+        - gimp
+        - xmlstarlet
+        - prismlauncher
+        - gwenview
       aur:
         # - informant # Needs to be installed after dots are installed... An Arch Linux News reader and pacman hook 
         # Image Viewer
@@ -174,6 +206,19 @@ packages:
         - hyprshot 
         - kanata-bin
         - bluetuith
+        - android-sdk-build-tools
+        - android-apktool-bin
+        - android-sdk-platform-tools
+        - envycontrol
+        - odin4-cli
+        - qdl-git
+        - wps-office-bin
+        - visual-studio-code-bin
+        - vesktop-git
+        - spotify
+        - bifrost-bin
+        - google-chrome
+        - zapzap
       flatpak: []
 
   desktop_stack:
