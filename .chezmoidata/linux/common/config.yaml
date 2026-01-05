@@ -58,7 +58,7 @@ config:
         enable: true
         # Virt Manager is a frontend for KVM/QEMU
         virt_manager: true
-      virtualbox: false
+      virtualbox: true
 
   ### Desktop Stack ###
   desktop_stack:
