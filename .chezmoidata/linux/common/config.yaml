@@ -2,10 +2,10 @@ config:
   drivers:
     ### Drivers ###
     nvidia:
-      enable: false
+      enable: true
       prefer_open: false
-    amd: true
-    intel: false
+    amd: false
+    intel: true
     kvm_guest: false # needed if installing system on qemu/kvm
 
   ### System ###
@@ -45,20 +45,20 @@ config:
       kanata: true
       # fcitx5 is the preferred IME for Hyprland. It's pretty useful
       # for multilingual keyboard layouts.
-      fcitx5: false
+      fcitx5: true
       extra_fonts: true # Install extra fonts as specified in the config `font_packages`
       ### Extra packages ###
       command_utils: true # reccommended to always be enabled
       gaming: true
-      flatpak: false # Also includes Flatseal
+      flatpak: true # Also includes Flatseal
       school: false # install packages for school
     virtualization:
       qemu:
         # Install packages for QEMU
-        enable: false
+        enable: true
         # Virt Manager is a frontend for KVM/QEMU
-        virt_manager: false
-      virtualbox: false
+        virt_manager: true
+      virtualbox: true
 
   ### Desktop Stack ###
   desktop_stack:
