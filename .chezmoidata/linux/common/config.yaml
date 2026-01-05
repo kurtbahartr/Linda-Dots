@@ -1,80 +1,80 @@
-  config:
-    drivers:
-      ### Drivers ###
-      nvidia:
-        enable: false
-        prefer_open: false
-      amd: true
-      intel: false
-      kvm_guest: false # needed if installing system on qemu/kvm
+config:
+  drivers:
+    ### Drivers ###
+    nvidia:
+      enable: false
+      prefer_open: false
+    amd: true
+    intel: false
+    kvm_guest: false # needed if installing system on qemu/kvm
 
-      ### System ###
-      system:
-        arch: # Arch Linux only options
-          aur_wrapper: "yay-bin" # yay-bin, paru-bin, trizen-bin
-          ### Repositories ###
-          # Add CachyOS repositories
-          # CachyOS is an Arch-based distribution that compiles packages
-          # with optimizations specific to modern x86_64 CPU
-          # microarchitectures. To quote, they offer "5%-20% performance
-          # uplift compared to x86-64." Check the CPU compatibility table
-          # to help decide whether to enable this configuration:
-          # https://wiki.cachyos.org/installation/installation_prepare/#x86_64-microarchitecture-level-support
-          cachyos_repos: false
-          multilib: true
-        features:
-          bluetooth:
-            enable: true
-            experimental: true # bluetooth battery stats
-          audio:
-            pipewire:
-              enable: true
-          limine:
-            snapper_sync: true
-            journalctl_desktop_notification: false
-          printing:
-            # enables printing support using cups
-            # For more infomation visit: https://wiki.archlinux.org/title/CUPS
-            enable: false
-          zram: true
-        packages:
-          # Kanata is a key remapping program that works at user level.
-          # Think of it like Windows PowerToys's Keyboard Manager but for
-          # Linux. The configuration here will configure Kanata to remap
-          # your Caps Lock key to act as Esc on tap and as Ctrl on hold.
-          kanata: true
-          # fcitx5 is the preferred IME for Hyprland. It's pretty useful
-          # for multilingual keyboard layouts.
-          fcitx5: false
-          extra_fonts: true # Install extra fonts as specified in the config `font_packages`
-          ### Extra packages ###
-          command_utils: true # reccommended to always be enabled
-          gaming: true
-          flatpak: false # Also includes Flatseal
-          school: false # install packages for school
-        virtualization:
-          qemu:
-            # Install packages for QEMU
-            enable: false
-            # Virt Manager is a frontend for KVM/QEMU
-            virt_manager: false
-
-      ### Desktop Stack ###
-      desktop_stack:
-        command_line_shell:
-          zsh:
-            enable: true # includes basic styleing
-        login_manager: "ly" # Supported options: ly and none with more on the way
-        window_managers:
-          hyprland:
-            enable: true
-          shell:
-            enable: true
-            repo: "dianaw353/Lunur-Shell" # currently hyprland only
-            install_script_file_path: "install_requirements.sh"
-        themeing: true
-        wallpaper:
-          # enables the option to install the wallpaper repo
+  ### System ###
+  system:
+    arch: # Arch Linux only options
+      aur_wrapper: "yay-bin" # yay-bin, paru-bin, trizen-bin
+      ### Repositories ###
+      # Add CachyOS repositories
+      # CachyOS is an Arch-based distribution that compiles packages
+      # with optimizations specific to modern x86_64 CPU
+      # microarchitectures. To quote, they offer "5%-20% performance
+      # uplift compared to x86-64." Check the CPU compatibility table
+      # to help decide whether to enable this configuration:
+      # https://wiki.cachyos.org/installation/installation_prepare/#x86_64-microarchitecture-level-support
+      cachyos_repos: false
+      multilib: true
+    features:
+      bluetooth:
+        enable: true
+        experimental: true # bluetooth battery stats
+      audio:
+        pipewire:
           enable: true
-          repo: "https://github.com/dianaw353/Lunur-Wallpapers.git"
-          color_mode: "dark"
+      limine:
+        snapper_sync: true
+        journalctl_desktop_notification: false
+      printing:
+        # enables printing support using cups
+        # For more infomation visit: https://wiki.archlinux.org/title/CUPS
+        enable: false
+      zram: true
+    packages:
+      # Kanata is a key remapping program that works at user level.
+      # Think of it like Windows PowerToys's Keyboard Manager but for
+      # Linux. The configuration here will configure Kanata to remap
+      # your Caps Lock key to act as Esc on tap and as Ctrl on hold.
+      kanata: true
+      # fcitx5 is the preferred IME for Hyprland. It's pretty useful
+      # for multilingual keyboard layouts.
+      fcitx5: false
+      extra_fonts: true # Install extra fonts as specified in the config `font_packages`
+      ### Extra packages ###
+      command_utils: true # reccommended to always be enabled
+      gaming: true
+      flatpak: false # Also includes Flatseal
+      school: false # install packages for school
+    virtualization:
+      qemu:
+        # Install packages for QEMU
+        enable: false
+        # Virt Manager is a frontend for KVM/QEMU
+        virt_manager: false
+
+  ### Desktop Stack ###
+  desktop_stack:
+    command_line_shell:
+      zsh:
+        enable: true # includes basic styleing
+    login_manager: "ly" # Supported options: ly and none with more on the way
+    window_managers:
+      hyprland:
+        enable: true
+      shell:
+        enable: true
+        repo: "dianaw353/Lunur-Shell" # currently hyprland only
+        install_script_file_path: "install_requirements.sh"
+    themeing: true
+    wallpaper:
+      # enables the option to install the wallpaper repo
+      enable: true
+      repo: "https://github.com/dianaw353/Lunur-Wallpapers.git"
+      color_mode: "dark"
