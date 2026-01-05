@@ -8,7 +8,7 @@ LSMOD_OUTPUT=$(lsmod)
 
 # Helper to check if module is loaded
 module_loaded() {
-  grep -q "$1" <<< "$LSMOD_OUTPUT"
+  grep -q "$1" <<<"$LSMOD_OUTPUT"
 }
 
 # ----------------------------
@@ -22,7 +22,7 @@ drivers_to_install+=(lib32-mesa)
 # ----------------------------
 # AMD GPU drivers
 # ----------------------------
-{{ if .config.amd_drivers -}}
+{{ if .config.drivers.amd -}}
 if module_loaded amdgpu; then
   drivers_to_install+=(vulkan-radeon vulkan-icd-loader)
   {{ if .config.system.arch.multilib -}}
@@ -36,9 +36,9 @@ fi
 # ----------------------------
 # NVIDIA GPU drivers
 # ----------------------------
-{{ if .config.nvidia_drivers.enable -}}
+{{ if .config.drivers.nvidia.enable -}}
 if module_loaded nouveau; then
-  {{ if .config.nvidia_drivers.prefer_open_drivers -}}
+  {{ if .config.drivers.nvidia.prefer_open -}}
   drivers_to_install+=(nvidia-open)
   {{ else -}}
   drivers_to_install+=(nvidia)
@@ -51,8 +51,8 @@ fi
 # ----------------------------
 # Intel GPU drivers
 # ----------------------------
-{{ if .config.intel_drivers -}}
-if grep -qE 'i915|xe' <<< "$LSMOD_OUTPUT"; then
+{{ if .config.drivers.intel -}}
+if grep -qE 'i915|xe' <<<"$LSMOD_OUTPUT"; then
   drivers_to_install+=(vulkan-intel vulkan-icd-loader)
   {{ if .config.system.arch.multilib -}}
   drivers_to_install+=(lib32-vulkan-intel lib32-vulkan-icd-loader)
@@ -65,7 +65,7 @@ fi
 # ----------------------------
 # KVM guest drivers
 # ----------------------------
-{{ if .config.kvm_guest_drivers -}}
+{{ if .config.drivers.kvm_guest -}}
 drivers_to_install+=(qemu-guest-agent spice-vdagent)
 {{ end -}}
 
@@ -77,7 +77,7 @@ if [ ${#drivers_to_install[@]} -eq 0 ]; then
 else
   # Remove duplicates
   readarray -t drivers_to_install < <(printf '%s\n' "${drivers_to_install[@]}" | sort -u)
-  
+
   echo "Installing ${#drivers_to_install[@]} driver packages..."
   sudo pacman -S --needed --noconfirm "${drivers_to_install[@]}"
 fi
