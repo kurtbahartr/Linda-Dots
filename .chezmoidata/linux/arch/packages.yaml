@@ -159,6 +159,7 @@ packages:
         - github-cli
         - proton-vpn-gtk-app
         - kdeconnect
+        - android-tools
       aur:
         # - informant # Needs to be installed after dots are installed... An Arch Linux News reader and pacman hook 
         # Image Viewer
