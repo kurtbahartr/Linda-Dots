@@ -45,6 +45,7 @@ packages:
         - unzip
         - 7zip
         - tar
+        - unrar
         - git
         - jq
         - wget
