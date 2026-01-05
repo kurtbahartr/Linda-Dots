@@ -128,16 +128,23 @@ packages:
       flatpak: []
 
     virtualization:
-      kvm_packages:
-        pacman:
-          - qemu-desktop
-          - libvirt
-        aur: []
-        flatpak: []
+      qemu:
+        kvm:
+          pacman:
+            - qemu-desktop
+            - libvirt
+          aur: []
+          flatpak: []
   
-      virt_manager_packages:
+        virt_manager:
+          pacman:
+            - virt-manager
+          aur: []
+          flatpak: []
+
+      virtualbox:
         pacman:
-          - virt-manager
+          - virtualbox
         aur: []
         flatpak: []
 
