@@ -1,11 +1,11 @@
-# Lunur-Dots
+# Linda-Dots
 
 <div align=center>
   
-![GitHub last commit](https://img.shields.io/github/last-commit/dianaw353/Lunur-Dots?style=for-the-badge&labelColor=101418&color=9ccbfb)
-![GitHub Repo stars](https://img.shields.io/github/stars/dianaw353/Lunur-Dots?style=for-the-badge&labelColor=101418&color=b9c8da)
-![GitHub repo size](https://img.shields.io/github/repo-size/dianaw353/Lunur-Dots?style=for-the-badge&labelColor=101418&color=d3bfe6)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dianaw353/Lunur-Dots?style=for-the-badge&labelColor=101418&color=CBA6F7)
+![GitHub last commit](https://img.shields.io/github/last-commit/kurtbahartr/Linda-Dots?style=for-the-badge&labelColor=101418&color=9ccbfb)
+![GitHub Repo stars](https://img.shields.io/github/stars/kurtbahartr/Linda-Dots?style=for-the-badge&labelColor=101418&color=b9c8da)
+![GitHub repo size](https://img.shields.io/github/repo-size/kurtbahartr/Linda-Dots?style=for-the-badge&labelColor=101418&color=d3bfe6)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/kurtbahartr/Linda-Dots?style=for-the-badge&labelColor=292324&color=CBA6F7)
 
 </div>
 
@@ -52,7 +52,7 @@ If you want the bar, check out [Lunur-Shell](https://github.com/dianaw353/Lunur-
 
 To gather the initial configuration:
 ```
-chezmoi init https://github.com/dianaw353/Lunur-Dots
+chezmoi init https://github.com/kurtbahartr/Linda-Dots
 ```
 
 > [!WARNING]
@@ -92,6 +92,12 @@ https://github.com/Axenide/PywalZen#installation
 > PywalZen is currently broken, but PywalFox works just fine for Firefox.
 
 ## Sister Projects
+
+### Specific to this repository
+
+- [Lunur-Dots](https://github.com/dianaw353/Lunur-Dots)
+
+### From Lunur-Dots
 
 - [Lunur-Shell](https://github.com/dianaw353/Lunur-Shell)
 - [Lunur-Wallpaper](https://github.com/dianaw353/Lunur-Wallpapers)
