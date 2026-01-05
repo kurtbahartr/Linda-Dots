@@ -130,7 +130,6 @@ packages:
           pacman:
             - qemu-desktop
             - libvirt
-            - dnsmasq
           aur: []
           flatpak: []
   
@@ -139,12 +138,6 @@ packages:
             - virt-manager
           aur: []
           flatpak: []
-
-      virtualbox:
-        pacman:
-          - virtualbox
-        aur: []
-        flatpak: []
 
       virtualbox:
         pacman:
