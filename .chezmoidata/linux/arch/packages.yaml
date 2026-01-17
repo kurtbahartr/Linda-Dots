@@ -82,11 +82,7 @@ packages:
         - vscode-json-languageserver
         - yaml-language-server
         - tombi # toml
-        - python-lsp-server # python
-        - jedi-language-server # python
         - ruff-lsp # pyton
-        - pyright # python
-        - python-black # python
         - marksman
         - markdown-oxide 
       aur:
