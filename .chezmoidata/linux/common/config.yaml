@@ -83,12 +83,12 @@ config:
   ### Git Config ###
   git:
     user:
-      name: "Diana Ward"
-      email: "diana.ward535@proton.me"
+      name: "Bahar KURT"
+      email: "kurtbahartr@users.noreply.github.com"
     init:
-      defaultBranch: "main"
+      defaultBranch: "master"
     url:
       # [url "git@github.com:<github_username>/"]
-      github_username: "dianaw353"
+      github_username: "kurtbahartr"
       # insteadOf = "<instead_of>"
-      instead_of: "dw:"
+      instead_of: "kurt:"
