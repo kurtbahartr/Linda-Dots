@@ -79,3 +79,11 @@ config:
       enable: true
       repo: "https://github.com/dianaw353/Lunur-Wallpapers.git"
       color_mode: "dark"
+
+  ### Git Config ###
+  git:
+    user:
+      name: "Diana Ward"
+      email: "diana.ward535@proton.me"
+    init:
+      defaultBranch: "dev"

@@ -1,6 +1,6 @@
 [user]
-    name = Diana Ward
-    email = diana.ward535@proton.me
+    name = {{ .config.git.user.name }}
+    email = {{ .config.git.user.email }}
     # signingkey = add_key
 
 [commit]
@@ -30,7 +30,7 @@
     interHunkContext = 10  # merge near hunks in diffs
 
 [init]
-    defaultBranch = dev
+    defaultBranch = {{ .config.git.init.defaultBranch }}
 
 [log]
     abbrevCommit = true  # short commits
