@@ -86,4 +86,4 @@ config:
       name: "Diana Ward"
       email: "diana.ward535@proton.me"
     init:
-      defaultBranch: "dev"
+      defaultBranch: "main"
