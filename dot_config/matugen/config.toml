@@ -23,14 +23,18 @@ post_hook = 'pkill -SIGUSR1 kitty'
 input_path = '~/.config/matugen/templates/helix.toml'
 output_path = '~/.config/helix/themes/matugen.toml'
 
-[templates.pywalfox]
-input_path = '~/.config/matugen/templates/pywalfox-colors.json'
-output_path = '~/.cache/wal/colors.json'
-post_hook = "pywalfox update"
+#[templates.pywalfox]
+#input_path = '~/.config/matugen/templates/pywalfox-colors.json'
+#output_path = '~/.cache/wal/colors.json'
+#post_hook = "pywalfox update"
 
-[templates.material-discord]
+[templates.material-discord-vesktop]
 input_path = '~/.config/matugen/templates/material-discord.css'
 output_path = '~/.config/vesktop/themes/Material-Discord.theme.css'
+
+[templates.material-discord-vencord]
+input_path = '~/.config/matugen/templates/material-discord.css'
+output_path = '~/.config/Vencord/themes/Material-Discord.theme.css'
 
 [templates.color-scheme]
 input_path = '~/.config/matugen/templates/Matugen.colors'
