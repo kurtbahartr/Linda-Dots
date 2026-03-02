@@ -87,3 +87,8 @@ config:
       email: "diana.ward535@proton.me"
     init:
       defaultBranch: "main"
+    url:
+      # [url "git@github.com:<github_username>/"]
+      github_username: "dianaw353"
+      # insteadOf = "<instead_of>"
+      instead_of: "dw:"
