@@ -84,5 +84,20 @@ alias gu='git pull'
 
 # --- system variables ---
 export EDITOR=hx
+export PAGER=less
 
 fastfetch
+
+fix_kbd_backlight(){
+    echo "311f5a9b8" | sudo tee /sys/class/leds/excalibur::kbd_backlight/led_control
+    echo "411ffffff" | sudo tee /sys/class/leds/excalibur::kbd_backlight/led_control
+    echo "5115bcefa" | sudo tee /sys/class/leds/excalibur::kbd_backlight/led_control
+}
+
+. "$HOME/.local/bin/env"
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+alias distrobox="TERM=xterm-256color distrobox"
